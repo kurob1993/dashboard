@@ -1,5 +1,7 @@
 <h1 align="center">APLIKASI DASHBOARD KRAKATAUSTEEL</h1>
-<p align="center">Base On <img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+
+<h3 align="center"> Base On </h3>
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
