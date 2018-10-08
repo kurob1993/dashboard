@@ -1,0 +1,21 @@
+{
+  "total": "0",
+  "rows": [
+    {
+      "id": "1",
+      "parentId": "0",
+      "name": "Computers",
+      "quantity": null,
+      "price": null,
+      "state": "closed"
+    },
+    {
+      "id": "2",
+      "parentId": "0",
+      "name": "Electronics",
+      "quantity": null,
+      "price": null,
+      "state": "closed"
+    }
+  ]
+}
