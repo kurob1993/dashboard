@@ -1,6 +1,6 @@
 <h1 align="center">APLIKASI DASHBOARD KRAKATAUSTEEL</h1>
 
-<h3 align="center"> Base On </h3>
+<h3 align="center"> BASE ON </h3>
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
