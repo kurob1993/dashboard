@@ -29,10 +29,22 @@ class inputDataSdmController extends Controller
     }
     public function upload(Request $request)
     {
-        $rules = [
-            'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
-            'data' => 'required', // ukuran dihitung dalam KB
-        ];
+        
+        if($request->data !== 'mhl'){
+            $rules = [
+                'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
+                'data' => 'required',
+                'tahun' => 'required',
+                'berdasarkan' => 'required',
+            ];
+        }else{
+            $rules = [
+                'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
+                'data' => 'required',
+                'tahun' => 'required',
+            ];
+        }
+        
 
         $customMessages = [
             'max' => 'Ukuran File Lebih dari :max KB',

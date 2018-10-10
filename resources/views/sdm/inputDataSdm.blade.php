@@ -19,6 +19,7 @@
 	});
 
     function dataBerdasarkan(data){
+        
         var url = '';
         switch (data) {
             case 'demografi':
@@ -32,7 +33,7 @@
             default:
                 break;
         }
-
+        $('#berdasarkan').val([]).trigger('change');
         $('#berdasarkan').select2({
             ajax: {
                 url: url,
@@ -51,20 +52,30 @@
 				<span class="fa fa-users"></span>
 				Input Data SDM                
             @endslot
-            @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
-            <form action="{{ url('/sdm/input_demografi/upload') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <form action="{{ url('/sdm/input_data_sdm/upload') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="tahun">Data:</label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="data" id="data" onchange="dataBerdasarkan($(this).val())">
+                        <select class="form-control" name="data" id="data" onchange="dataBerdasarkan($(this).val())" required>
                             <option value=""> - </option>
                             @foreach ($data as $key => $item)
-                                <option value="{{ $key }}">{{ $item }}</option>
+                                @if ($key == old('data'))
+                                    <option value="{{ $key }}" selected>{{ $item }}</option>
+                                @else
+                                    <option value="{{ $key }}">{{ $item }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
@@ -73,10 +84,14 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="tahun">Tahun:</label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="tahun" id="tahun">
+                        <select class="form-control" name="tahun" id="tahun" required>
                             <option value=""> - </option>
                             @for($i=0; $i < 5; $i++) { 
-                                <option value="{{ date('Y')-$i }}">{{ date('Y')-$i }}</option>
+                                @if (date('Y')-$i == old('tahun'))
+                                    <option value="{{ date('Y')-$i }}" selected>{{ date('Y')-$i }}</option>
+                                @else
+                                    <option value="{{ date('Y')-$i }}">{{ date('Y')-$i }}</option>
+                                @endif
                             @endfor
                         </select>
                     </div>
@@ -85,7 +100,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="Berdasarkan">Berdasarkan:</label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="status" id="berdasarkan">
+                        <select class="form-control" name="berdasarkan" id="berdasarkan">
                         </select>
                     </div>
                 </div> 
@@ -93,13 +108,13 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="file">File:</label>
                     <div class="col-sm-10">
-                        <input type="file" name="file" id="fileToUpload" class="form-control" id="file">
+                        <input type="file" name="file" id="fileToUpload" class="form-control" id="file" required>
                     </div>
                 </div>  
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="simpan"></label>
                     <div class="col-sm-10">
-                        <input type="submit" value="Upload" name="submit" class="btn btn-primary" id="simpan">
+                        <input type="submit" value="Upload" name="submit" class="btn btn-primary" id="simpan" required>
                     </div>
                 </div>                       
             </form>

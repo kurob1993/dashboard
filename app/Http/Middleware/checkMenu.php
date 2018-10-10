@@ -17,13 +17,13 @@ class checkMenu
      */
     public function handle($request, Closure $next)
     {
-        $level = $request->session()->get('level');
-        $nik = $request->session()->get('nik');
+        $level      = $request->session()->get('level');
+        $nik        = $request->session()->get('nik');
         $group_menu = new sys_group();
         $data_group = $group_menu::orderBy('group', 'ASC')->get();
 
-        $menu = new sys_menu();
-        $data_menu = $menu::where('nik_access','REGEXP', '[[:<:]]'.$nik.'[[:>:]]')->where('status','Y')->get();
+        $menu       = new sys_menu();
+        $data_menu  = $menu::where('nik_access','REGEXP', '[[:<:]]'.$nik.'[[:>:]]')->where('status','Y')->get();
         // $data_menu = $menu::where('level','like', '%'.$level.'%')->get();
 
         foreach ($data_group as $key => $value) {
