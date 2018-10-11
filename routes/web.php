@@ -115,7 +115,7 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 		// input demografi
 		Route::get('/input_data_sdm', 'inputDataSdmController@index');
 		Route::post('/input_data_sdm/upload', 'inputDataSdmController@upload');
-		Route::get('/input_data_sdm/store/{tahun?}/{status?}', 'inputDataSdmController@store');
+		Route::get('/input_data_sdm/store/{data?}/{tahun?}/{status?}', 'inputDataSdmController@store');
 		Route::get('/input_data_sdm/berdasarkan/{data?}', 'inputDataSdmController@berdasarkan');
 	});
 	
