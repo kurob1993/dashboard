@@ -1,6 +1,6 @@
 <h4 class="text-primary text-center p-5">
     <p>LAPORAN DEMOGRAFI KARYAWAN PT KRAKATAU STEEL</p>
-    <p>JUMLAH KARYAWAN BERDASARKAN GOLONGAN</p>
+    <p>JUMLAH KARYAWAN BERDASARKAN GOLONGAN TAHUN {{ $select_tahun }}</p>
 </h4>
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
@@ -8,7 +8,7 @@
             <tr class="bg-primary">
                 <th rowspan="2" class="text-center text-white">NO</th>
                 <th rowspan="2" class="text-center text-white">GOLONGAN<br>( PT KS INTI )</th>
-                <th rowspan="2" class="text-center text-white">DES 2017</th>
+                <th rowspan="2" class="text-center text-white">DES {{ $tahun_lama }}</th>
                 <th colspan="12" class="text-center text-white">BULAN</th>
             </tr>
             <tr class="bg-primary">

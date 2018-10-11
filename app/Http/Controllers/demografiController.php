@@ -17,6 +17,7 @@ class demografiController extends Controller
     public function index(Request $request)
     {
         $tahun = isset($request->tahun) ? $request->tahun : date('Y');
+        $tahun_lama = isset($request->tahun) ? $request->tahun-1 : date('Y')-1;
     	$data_group             = $request->get('data_group');
         $data_menu              = $request->get('data_menu');
         $session_nik            = $request->session()->get('nik');
@@ -32,6 +33,7 @@ class demografiController extends Controller
 					'demo_pendidikan'=>$data_demoPendidikan,
                     'session_nik'=>$session_nik,
                     'tahun'=>$demoTahun,
+                    'tahun_lama'=>$tahun_lama,
                     'select_tahun'=>$tahun
         		];
         return view('sdm.demografi',$data);
