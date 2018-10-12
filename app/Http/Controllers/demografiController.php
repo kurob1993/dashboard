@@ -24,13 +24,15 @@ class demografiController extends Controller
         $data_demoStatus        = $this->demoStatus($tahun);
         $data_demoGolongan      = $this->demoGolongan($tahun);
         $data_demoPendidikan    = $this->demoPendidikan($tahun);
+        $demoUsia               = $this->demoUsia($tahun);
         $demoTahun              = $this->demoTahun();
-
+        
         $data 	= [ 'data_group' => $data_group, 
 					'data_menu' => $data_menu, 
 					'demo_status'=>$data_demoStatus, 
 					'demo_golongan'=>$data_demoGolongan,
 					'demo_pendidikan'=>$data_demoPendidikan,
+					'demo_usia'=>$demoUsia,
                     'session_nik'=>$session_nik,
                     'tahun'=>$demoTahun,
                     'tahun_lama'=>$tahun_lama,
@@ -51,6 +53,11 @@ class demografiController extends Controller
     public function demoPendidikan($tahun)
     {
         $data = DB::table('demografi')->where('part','pendidikan')->where('tahun',$tahun)->get();
+        return $data;
+    }
+    public function demoUsia($tahun)
+    {
+        $data = DB::table('demografi_usia')->where('tahun',$tahun)->get();
         return $data;
     }
     public function demoTahun()

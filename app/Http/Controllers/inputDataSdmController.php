@@ -114,6 +114,7 @@ class inputDataSdmController extends Controller
                     DB::table('demografi_usia')->where('tahun',$tahun)->where('id',$value['A'])
                     ->update(
                         [ 
+                            'inti' => $value['B'],
                             'range_usia' => htmlentities( $value['C'] ),
                             'gol_a' => $value['D'],
                             'gol_b' => $value['E'],
