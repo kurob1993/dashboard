@@ -29,7 +29,6 @@ class inputDataSdmController extends Controller
                 'data_group' =>$data_group,
                 'data_menu'  => $data_menu,
                 'data'  => $data,
-                'tahun_lama' => $tahun_lama
             ]
         );
     }
@@ -74,23 +73,66 @@ class inputDataSdmController extends Controller
             case 'status':
             case 'golongan':
             case 'pendidikan':
-                $msg = $this->gps($sheetData,$tahun,$status);
+                $msg = $this->demografiGps($sheetData,$tahun,$status);
                 break;
 
             case 'usia':
-                $msg = $this->usia($sheetData,$tahun,$status);
+                $msg = $this->demografiUsia($sheetData,$tahun,$status);
                 break;
             
             default:
                 # code...
                 break;
         }
-        
-        return redirect()->back()->with('message', $msg);
+        return redirect()->back()->with('message',$msg);
     }
-    
+
+    // fungsi unttuk input data demografi berdasarkan usia
+    public function demografiUsia($sheetData,$tahun,$status)
+    {
+        $msg = '';
+        foreach ($sheetData as $key => $value) {
+            if($key > 2){
+                $count = DB::table('demografi_usia')->where('tahun',$tahun)->where('id',$value['A'])->count();
+                if( $count == 0){
+                    DB::table('demografi_usia')->insert(
+                        [ 
+                            'id' => $value['A'],
+                            'tahun' => $tahun,
+                            'inti' => $value['B'],
+                            'range_usia' => htmlentities( $value['C'] ),
+                            'gol_a' => $value['D'],
+                            'gol_b' => $value['E'],
+                            'gol_c' => $value['F'],
+                            'gol_d' => $value['G'],
+                            'gol_e' => $value['H'],
+                            'gol_f' => $value['I'],
+                        ]
+                    );
+                    $msg = "Data berhasil di tambahkan";
+                }else{
+                    DB::table('demografi_usia')->where('tahun',$tahun)->where('id',$value['A'])
+                    ->update(
+                        [ 
+                            'range_usia' => htmlentities( $value['C'] ),
+                            'gol_a' => $value['D'],
+                            'gol_b' => $value['E'],
+                            'gol_c' => $value['F'],
+                            'gol_d' => $value['G'],
+                            'gol_e' => $value['H'],
+                            'gol_f' => $value['I'],
+                        ]
+                    );
+                    $msg = "Data berhasil di update";
+                }
+                
+            }
+        }
+        return $msg;
+    }
+
     // fungsi untuk input data demografi berdasarkan golongan/pendidikan/status
-    public function gps($sheetData,$tahun,$status)
+    public function demografiGps($sheetData,$tahun,$status)
     {
         $msg = '';
         foreach ($sheetData as $key => $value) {
@@ -149,7 +191,7 @@ class inputDataSdmController extends Controller
                     );
                     $msg = "Data berhasil di tambahkan";
                 }
-                
+
             }
             
         }

@@ -53,12 +53,10 @@
 				Input Data SDM                
             @endslot
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
+            @if (\Session::has('message'))
+                <div class="alert alert-success">
                     <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                        <li>{!! \Session::get('message') !!}</li>
                     </ul>
                 </div>
             @endif
