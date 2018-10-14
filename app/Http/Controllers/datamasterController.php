@@ -129,7 +129,7 @@ class datamasterController extends Controller
                     [
                         'tanggal' 	=> date("Y-m-d", strtotime($value->TANGGAL)),
                         'tag_name' 	=> $value->KRITERIA,
-                        'value'		=> $value->JUMLAH
+                        'value'		=> isset($value->JUMLAH) ? $value->JUMLAH : 0,
                     ]
                 );
                 $logg =  'INSERT OK : '.date("Y-m-d", strtotime($value->TANGGAL)).' - '.$value->KRITERIA.' - '.$value->JUMLAH.'<br>';
@@ -154,7 +154,7 @@ class datamasterController extends Controller
                             [
                                 'tanggal' 	=> date("Y-m-d", strtotime($value->TANGGAL)),
                                 'tag_name' 	=> $value->KRITERIA,
-                                'value'		=> $value->JUMLAH
+                                'value'		=> isset($value->JUMLAH) ? $value->JUMLAH : 0,
                             ]
                     );
                     $logg = 'UPDATE OK : '.date("Y-m-d", strtotime($value->TANGGAL)).' - '.$value->KRITERIA.' - '.$value->JUMLAH.'<br>';
