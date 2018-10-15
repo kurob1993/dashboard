@@ -29,7 +29,7 @@
                 <li><a data-toggle="tab" href="#usia">USIA</a></li>
                 <li class="pull-right m-r-10">
                     <form class="form-inline text-center m-t-3" action="" method="get">
-                        <div class="form-group">
+                        <div class="form-group m-l-5">
                             <a data-toggle="tab" href="#" style="color:black">TAHUN : </a>
                             <div class="input-group">
                                 <select class="form-control" name="tahun">

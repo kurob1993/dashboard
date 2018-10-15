@@ -6,8 +6,8 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="bg-primary">
-                <th rowspan="2" class="text-center text-white">NO</th>
-                <th rowspan="2" class="text-center text-white">RANG USIA</th>
+                <th rowspan="2" class="text-center text-white" style="vertical-align : middle;text-align:center;" >NO</th>
+                <th rowspan="2" class="text-center text-white" style="vertical-align : middle;text-align:center;">RANG USIA</th>
                 <th colspan="6" class="text-center text-white">GOLONGAN</th>
             </tr>
             <tr class="bg-primary">
@@ -35,7 +35,7 @@
                 $total_november = 0;
                 $total_desember = 0;
             @endphp
-            <tr>
+            <tr class="bg-info">
                 <td colspan="8">AKTIF</td>
             </tr>
             @foreach($demo_usia as $key => $value)
@@ -53,7 +53,7 @@
                 @endif
             @endforeach
 
-            <tr>
+            <tr class="bg-info">
                 <td colspan="8">Program Transfer Knowledge</td>
             </tr>
             @foreach($demo_usia as $key => $value)
@@ -71,7 +71,7 @@
                 @endif
             @endforeach
 
-            <tr>
+            <tr class="bg-info">
                 <td colspan="8">PKWT</td>
             </tr>
             @foreach($demo_usia as $key => $value)
@@ -89,7 +89,7 @@
                 @endif
             @endforeach
 
-            <tr>
+            <tr class="bg-info">
                 <td colspan="8">Pbt/Png. Ke AP dan PP</td>
             </tr>
             @foreach($demo_usia as $key => $value)
@@ -107,7 +107,7 @@
                 @endif
             @endforeach
 
-            <tr>
+            <tr class="bg-info">
                 <td colspan="8">Pbt/Png. Dari AP dan PP</td>
             </tr>
             @foreach($demo_usia as $key => $value)

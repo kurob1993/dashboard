@@ -6,9 +6,9 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr class="bg-primary">
-                <th rowspan="2" class="text-center text-white">NO</th>
-                <th rowspan="2" class="text-center text-white">GOLONGAN<br>( PT KS INTI )</th>
-                <th rowspan="2" class="text-center text-white">DES {{ $tahun_lama }}</th>
+                <th rowspan="2" class="text-center text-white" style="vertical-align : middle;text-align:center;">NO</th>
+                <th rowspan="2" class="text-center text-white" style="vertical-align : middle;text-align:center;">GOLONGAN<br>( PT KS INTI )</th>
+                <th rowspan="2" class="text-center text-white" style="vertical-align : middle;text-align:center;">DES {{ $tahun_lama }}</th>
                 <th colspan="12" class="text-center text-white">BULAN</th>
             </tr>
             <tr class="bg-primary">
