@@ -15,19 +15,34 @@ class debugController extends Controller
     }
     public function index(Request $request)
     {
-        // for ($i=0; $i < 5; $i++) { 
-        //     echo date('Y')-$i;
-        //     echo '<br>';
-        // }
-
+        for ($i=0; $i < 100; $i++) { 
+            echo $this->numbering()."<br>";
+        }
         
-        // $data = DB::table('demografi')->select('tahun')->groupBy('tahun')->get();
-        // $data = $request->session()->get('name');
-        $data = storage_path();
-        return $data;
-        // return $value;
     }
 
+    public function numbering()
+    {
+        $no     = date('dmY');
+        $count  = DB::table('number')->whereRaw("date_format(tanggal,'%Y-%m')",date('Y-m'))->count();
+
+        if( $count == 0 ){
+            $sec = $no.'00001';
+            DB::table('number')->insert(['number'=>$sec,'tanggal' => date('Y-m-d')]);
+        }else{
+            $char   = 5;
+            $countx = strlen($count+1);
+            $len    = $char-$countx;
+            $sec    = '';
+            for ($i=0; $i < $len; $i++) { 
+                $sec = $sec.'0';
+            }
+            $sec = $no.$sec.($count+1);
+            DB::table('number')->insert(['number'=>$sec,'tanggal' => date('Y-m-d')]);
+        }
+
+        return $count;
+    }
     public function getDireksi($org)
     {
         $ret = DB::table('structdireksi')

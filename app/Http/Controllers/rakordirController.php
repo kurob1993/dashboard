@@ -10,8 +10,8 @@ use Validator;
 class rakordirController extends Controller
 {
    public function __construct ()
-	{
-	   date_default_timezone_set('Asia/Jakarta');
+    {
+       date_default_timezone_set('Asia/Jakarta');
     }
     //menu input rakordir
     public function index(Request $request)
@@ -27,23 +27,24 @@ class rakordirController extends Controller
     }
     public function formInput(Request $request)
     {
-    	$data_group     = $request->get('data_group');
+        $data_group     = $request->get('data_group');
         $data_menu      = $request->get('data_menu');
-    	return view('rakordir.inputFileForm',
-  			[
-  				'data_group'    =>$data_group,
-  				'data_menu'     =>$data_menu
-  			]
+        return view('rakordir.inputFileForm',
+            [
+                'data_group'    =>$data_group,
+                'data_menu'     =>$data_menu
+            ]
         );
     }
     public function upload(Request $request)
     {
         $request->validate([
-            'file'          => ['required','mimes:pdf,PDF','max:5120'],
-            'tanggal'       => 'required|unique:rakordir,date,null,id,agenda_no,'.$request->agenda_no,
-            'no_dokument'   => 'required',
-            'agenda_no'     => 'required|unique:rakordir,agenda_no,null,id,date,'.$request->tanggal,
-            'judul'         => 'required',
+            // 'file' => 'required|mimes:pdf,PDF|max:5120',
+            'file' => 'required',
+            'tanggal' => 'required|unique:rakordir,date,null,id,agenda_no,'.$request->agenda_no,
+            'no_dokument' => 'required',
+            'agenda_no' => 'required|unique:rakordir,agenda_no,null,id,date,'.$request->tanggal,
+            'judul' => 'required',
         ]);
 
         $username      = $request->session()->get('username'); 
@@ -132,9 +133,12 @@ class rakordirController extends Controller
         }
     }
 
-    public function showMateri(Request $request,$tanggal=null)
+    public function showMateri(Request $request)
     {
-        $data = DB::table('rakordir')->where('date',$tanggal)->orWhere('judul','like','%'.$tanggal.'%');
+        
+        $data = DB::table('rakordir')
+            ->where('date','like',"%{$request->cari}%")
+            ->orWhere('judul','like',"%{$request->cari}%")->get();
         return Datatables::of($data)->make(true);
     }
 }
