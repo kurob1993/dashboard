@@ -68,7 +68,7 @@
   </style>
   @yield('style')
   <!-- ================== BEGIN BASE JS ================== -->
-  <script src="{{ asset('') }}public/plugins/pace/pace.min.js"></script>
+  {{-- <script src="{{ asset('') }}public/plugins/pace/pace.min.js"></script> --}}
   <!-- ================== END BASE JS ================== -->
 </head>
 <body>

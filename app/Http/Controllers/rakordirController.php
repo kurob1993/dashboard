@@ -91,56 +91,63 @@ class rakordirController extends Controller
     public function file(Request $request,$tanggal=null)
     {
 
+        // return DB::table('rakordir')->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->get()->dd();
+        // die();
         $data_group     = $request->get('data_group');
         $data_menu      = $request->get('data_menu');
-        $tanggalx        = null;
+        $tanggalx       = null;
+        $perbulan       = false;
+        $pertanggal     = false;
+
         if($tanggal){
-            $tanggalx  = $tanggal;
-            $data = null;
-        }else if($request->cari){
-            $tanggalx  = $request->cari;
-            $data = null;
+            if( strlen($tanggal) > 7 ){
+                $tanggalx  = $tanggal;
+                $data = null;
+            }else{
+                $data = DB::table('rakordir')->whereRaw("date_format(date,'%m-%Y') = '".$tanggal."'")
+                ->groupBy(DB::RAW("date_format(date,'%Y-%m-%d')") )->paginate(12);
+                $pertanggal = true;
+            }
         }else{
-            $data = DB::table('rakordir')->groupBy('date')->paginate(12);
+            if($request->cari){
+                $tanggalx  = $request->cari;
+                $data = null;
+            }else{
+                $data = DB::table('rakordir')->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->paginate(12);
+                $perbulan = true;
+            }
+            
         }
         
+        // die($data);
         return view('rakordir.materi',
             [
                 'data_group' => $data_group,
                 'data_menu'  => $data_menu,
                 'data'       => $data,
-                'tanggal'     => $tanggalx
+                'tanggal'    => $tanggalx,
+                'pertanggal'    => $pertanggal,
+                'perbulan'    => $perbulan,
+
             ]
         );
 
     }
-    public function fileCari(Request $request)
+    public function showMateri(Request $request,$tanggal = null)
     {
-        $data_group     = $request->get('data_group');
-        $data_menu      = $request->get('data_menu');
-        $isi            = null;
-        if($request->cari){
-            $data = DB::table('rakordir')->where('judul','like','%'.$request->cari.'%')->get();
-            $isi  = $request->cari;
-            return view('rakordir.materi',
-                [
-                    'data_group' => $data_group,
-                    'data_menu'  => $data_menu,
-                    'data'       => $data,
-                    'isi'       => $isi
-                ]
-            );
+        $data = [];
+        if(true === strtotime($tanggal) && $request->cari){
+            $data = DB::table('rakordir')
+                    ->where('date','like',"%{$request->cari}%")
+                    ->orWhere('judul','like',"%{$request->cari}%")
+                    ->orWhere('presenter','like',"%{$request->cari}%")
+                    ->orWhere('no_dokument','like',"%{$request->cari}%")
+                    ->get();
         }else{
-            return redirect('rakordir/file');
+            $data = DB::table('rakordir')
+                    ->where('date',date('Y-m-d',strtotime($tanggal)) )->get();
         }
-    }
-
-    public function showMateri(Request $request)
-    {
         
-        $data = DB::table('rakordir')
-            ->where('date','like',"%{$request->cari}%")
-            ->orWhere('judul','like',"%{$request->cari}%")->get();
         return Datatables::of($data)->make(true);
     }
 }

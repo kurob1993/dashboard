@@ -53,6 +53,7 @@
             "ajax": {
                 "url" : "{{ url('rakordir/show_materi/') }}/{{ $tanggal }}",
                 "type" : "POST",
+                "data" : { 'cari' : "{{ $tanggal }}" },
                 "beforeSend": function (request) {
                     request.setRequestHeader("X-CSRF-Token", "{{csrf_token()}}");
                 }
@@ -67,6 +68,7 @@
                 { "data": "date"},
                 { "data": "agenda_no"},
                 { "data": "judul" },
+                { "data": "presenter" },
                 { "data": "file_path" , 
                    render: function ( data, type, row ) {
                     var del = '<a data-toggle="modal" href="#modal-id" class="text-danger" style="margin:0px 2px 2px 0px" onclick="pdf(`'+data+'`)"><i class="fa fa-file-pdf-o fa-2x"></i></a>';
@@ -103,7 +105,8 @@
                 <span class="fa fa-file"></span>
                 Materi Rakordir             
             @endslot
-            @if(!$tanggal)
+
+            @if($perbulan)
             <form class="form-horizontal" action="{{ url('rakordir/file') }}" method="get">
                 <div class="form-group">
                     <div class="col-sm-12">
@@ -120,7 +123,38 @@
                 <div class="panel-body" style="border: 1px solid grey;box-shadow: 2px 2px 1px grey;border-radius: 4px;">
                     @foreach($data as $key => $value)
                         <div class="col-md-2 col-sm-3 col-xs-6 m-t-5 m-b-5"> 
-                            <a href="{{ url('rakordir/file') }}/{{ $value->date }}" style="text-decoration:none" data-toggle="modal" 
+                            <a href="{{ url('rakordir/file') }}/{{ \Carbon\Carbon::parse($value->date)->format('m-Y') }}" style="text-decoration:none" data-toggle="modal" 
+                                href='#modal-id'>
+                                <span class="text-warning">
+                                    <li class="fa fa-folder-open fa-5x m-b-5"></li><br>
+                                    {{ \Carbon\Carbon::parse($value->date)->format('F-Y') }}
+                                </span>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+                {{ $data->links() }}
+            </div>
+            @endif
+
+            @if($pertanggal)
+            <form class="form-horizontal" action="{{ url('rakordir/file') }}" method="get">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <input type="text" name="cari" class="form-control" id="cari" autocomplete="off" value="">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="panel panel-default">
+                <div class="panel-body" style="border: 1px solid grey;box-shadow: 2px 2px 1px grey;border-radius: 4px;">
+                    @foreach($data as $key => $value)
+                        <div class="col-md-2 col-sm-3 col-xs-6 m-t-5 m-b-5"> 
+                            <a href="{{ url('rakordir/file') }}/{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}" style="text-decoration:none" data-toggle="modal" 
                                 href='#modal-id'>
                                 <span class="text-warning">
                                     <li class="fa fa-folder-open fa-5x m-b-5"></li><br>
@@ -133,6 +167,7 @@
                 {{ $data->links() }}
             </div>
             @endif
+
             @if($tanggal)
             <table id="example" class="table table-responsive table-bordered table-hover" style="width:100%">
                 <thead>
@@ -142,6 +177,7 @@
                         <th width=" 10%">TANGGAL</th>
                         <th width=" 12%">AGENDA KE</th>
                         <th>JUDUL</th>
+                        <th>PRESENTASI OLEH</th>
                         <th width="10%">AKSI</th>
                     </tr>
                 </thead>
