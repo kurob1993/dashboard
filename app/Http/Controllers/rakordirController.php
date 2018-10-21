@@ -45,6 +45,7 @@ class rakordirController extends Controller
             'no_dokument' => 'required',
             'agenda_no' => 'required|unique:rakordir,agenda_no,null,id,date,'.$request->tanggal,
             'judul' => 'required',
+            'presenter' => 'required',
         ]);
 
         $username      = $request->session()->get('username'); 
@@ -56,6 +57,7 @@ class rakordirController extends Controller
                     'judul'     => $request->judul,
                     'agenda_no' => $request->agenda_no,
                     'no_dokument' => $request->no_dokument,
+                    'presenter' => $request->presenter,
                 ]
             );
         if($save){

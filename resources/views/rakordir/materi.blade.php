@@ -24,7 +24,6 @@
 @section('script')
 <script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/PDFObject/pdfobject.min.js') }}"></script>
 <script type="text/javascript" src="{{ url('public/plugins/pdfjs/build/pdf.js') }}"></script>
 
 <script type="text/javascript">

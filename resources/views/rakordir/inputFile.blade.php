@@ -24,7 +24,7 @@
 @section('script')
 <script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/PDFObject/pdfobject.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('public/plugins/pdfjs/build/pdf.js') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -55,7 +55,6 @@
             "columns": [
                 {   "data": "agenda_no",
                     render: function ( data, type, row, index) {
-                        console.log(index.row+1);
                         return index.row+1;
                     }
                 },
@@ -63,6 +62,7 @@
                 { "data": "date"},
                 { "data": "agenda_no"},
                 { "data": "judul" },
+                { "data": "presenter" },
                 { "data": "file_path" , 
                    render: function ( data, type, row ) {
                     var del = '<a data-toggle="modal" href="#modal-id" class="text-danger" style="margin:0px 2px 2px 0px" onclick="pdf(`'+data+'`)"><i class="fa fa-file-pdf-o fa-2x"></i></a>';
@@ -74,7 +74,17 @@
 
     });
     function pdf(file) {
-        PDFObject.embed("{{ url('public/storage') }}/"+file, "#example1");
+        var ex = file.substr(-3, 3);
+        var url;
+        var html;
+        if(ex === 'pdf' || ex === 'PDF'){
+            url = "{{ url('public/plugins/pdfjs/web/viewer.html?file=') }}"+"{{ url('/public/storage/') }}/"+file;
+            html = "<iframe src='"+url+"' style='width: 100%; height:600px'></iframe>";
+        }else{
+            url = "{{ url('/public/storage/') }}/"+file;
+            html = "<h5 class='text-center'><a href='"+url+"' target='_blank'>Kilik disini untuk unduh file.</a></h5>"
+        }
+        $('#example1').html(html);
     }
     function openForm() {
         window.location.href = '{{ url('rakordir/form_input') }}';
@@ -100,6 +110,7 @@
                         <th width=" 10%">TANGGAL</th>
                         <th width=" 12%">AGENDA KE</th>
                         <th>JUDUL</th>
+                        <th>PRESENTASI OLEH</th>
                         <th width="10%">AKSI</th>
                     </tr>
                 </thead>

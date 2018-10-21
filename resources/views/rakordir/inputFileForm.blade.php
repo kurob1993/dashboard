@@ -87,6 +87,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label col-sm-2" for="Judul">Presentasi oleh:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="presenter" placeholder="Presentasi oleh" name="presenter" id="judul" value="{{ old('judul') }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="control-label col-sm-2" for="Judul">File:</label>
                     <div class="col-sm-10">
                         <input type="file" class="form-control" id="file" placeholder="File" name="file" id="file" value="{{ old('file') }}" required>
