@@ -90,14 +90,15 @@ class rakordirController extends Controller
     //menu materi rakordir
     public function file(Request $request,$tanggal=null)
     {
-
-        // return DB::table('rakordir')->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->get()->dd();
-        // die();
         $data_group     = $request->get('data_group');
         $data_menu      = $request->get('data_menu');
         $tanggalx       = null;
         $perbulan       = false;
         $pertanggal     = false;
+        $selecTahun     = DB::table('rakordir')
+                            ->orderBy('date','desc')
+                            ->groupBy(DB::RAW("date_format(date,'%Y')") )->get();
+        $tahun          = isset($request->tahun) ? $request->tahun : date('Y');
 
         if($tanggal){
             if( strlen($tanggal) > 7 ){
@@ -109,11 +110,12 @@ class rakordirController extends Controller
                 $pertanggal = true;
             }
         }else{
-            if($request->cari){
+            if(isset($request->cari)){
                 $tanggalx  = $request->cari;
                 $data = null;
-            }else{
-                $data = DB::table('rakordir')->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->paginate(12);
+            }else if($tahun){
+                $data = DB::table('rakordir')->whereRaw("date_format(date,'%Y') = '".$tahun."'")
+                ->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->paginate(12);
                 $perbulan = true;
             }
             
@@ -128,6 +130,8 @@ class rakordirController extends Controller
                 'tanggal'    => $tanggalx,
                 'pertanggal'    => $pertanggal,
                 'perbulan'    => $perbulan,
+                'selecTahun'    => $selecTahun,
+                'tahun'     => $tahun,
 
             ]
         );
@@ -135,8 +139,9 @@ class rakordirController extends Controller
     }
     public function showMateri(Request $request,$tanggal = null)
     {
+        
         $data = [];
-        if(true === strtotime($tanggal) && $request->cari){
+        if(false === strtotime($tanggal) || $request->cari){
             $data = DB::table('rakordir')
                     ->where('date','like',"%{$request->cari}%")
                     ->orWhere('judul','like',"%{$request->cari}%")

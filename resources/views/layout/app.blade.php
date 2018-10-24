@@ -146,7 +146,7 @@
           @foreach ($data_group as $group)
             @if($group->count > 0)
               <li class="has-sub {{ $active == $group->group ?'active':'' }}">
-                <a href="javascript:void(0);">
+                <a href="{{ $group->link?url($group->link):'javascript:void(0);' }}">
                   <span class="caret pull-right"></span>
                   <i class="{{$group->icon}}"></i>
                   <span>{{$group->group}}</span>

@@ -106,19 +106,43 @@
                 Materi Rakordir             
             @endslot
 
-            @if($perbulan)
+            @if($pertanggal || $perbulan)
             <form class="form-horizontal" action="{{ url('rakordir/file') }}" method="get">
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    
+                    <div class="col-sm-6">
+                        <label for="cari">CARI DATA : </label>
                         <div class="input-group">
                             <input type="text" name="cari" class="form-control" id="cari" autocomplete="off" value="">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">Search</button>
+                                <button class="btn btn-primary" type="submit">Cari</button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+                <form>
+                    <div class="col-sm-6">
+                        <label for="tahun"> PILIH TAHUN :</label>
+                        <div class="input-group">
+                            <select name="tahun" id="tahun" class="form-control">
+                                @foreach ($selecTahun as $item)
+                                    @if ( \Carbon\Carbon::parse($item->date)->format('Y') == $tahun)
+                                        <option selected value="{{ \Carbon\Carbon::parse($item->date)->format('Y') }}"> {{ \Carbon\Carbon::parse($item->date)->format('Y') }} </option>
+                                    @else
+                                        <option value="{{ \Carbon\Carbon::parse($item->date)->format('Y') }}"> {{ \Carbon\Carbon::parse($item->date)->format('Y') }} </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">Pilih</button>
                             </span>
                         </div>
                     </div>
                 </div>
             </form>
+            @endif
+
+            @if($perbulan)
             <div class="panel panel-default">
                 <div class="panel-body" style="border: 1px solid grey;box-shadow: 2px 2px 1px grey;border-radius: 4px;">
                     @foreach($data as $key => $value)
@@ -138,18 +162,6 @@
             @endif
 
             @if($pertanggal)
-            <form class="form-horizontal" action="{{ url('rakordir/file') }}" method="get">
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="input-group">
-                            <input type="text" name="cari" class="form-control" id="cari" autocomplete="off" value="">
-                            <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">Search</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </form>
             <div class="panel panel-default">
                 <div class="panel-body" style="border: 1px solid grey;box-shadow: 2px 2px 1px grey;border-radius: 4px;">
                     @foreach($data as $key => $value)
@@ -158,7 +170,7 @@
                                 href='#modal-id'>
                                 <span class="text-warning">
                                     <li class="fa fa-folder-open fa-5x m-b-5"></li><br>
-                                    {{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}
+                                    {{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}
                                 </span>
                             </a>
                         </div>
