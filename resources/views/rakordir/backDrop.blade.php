@@ -7,6 +7,12 @@
 @section('style')
 <link href="{{ url('public/plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
 <style type="text/css">
+
+@font-face {
+    font-family: OceanSansStd;
+    src: url("{{ url('/public/fonts/OceanSansStd-BoldExt.otf') }}");
+}
+
 @media (min-width: 768px) {
   .modal-xl {
     width: 90%;
@@ -77,7 +83,7 @@
                             }else{
                                 fa = 'fa-file-text-o';
                             }
-                            del += '<a data-toggle="modal" href="#modal-id" class="text-danger m-r-5" '+
+                            del += '<a data-toggle="modal" href="#modal-id" class="text-danger" '+
                                         'style="margin:0px 2px 2px 0px" onclick="pdf(`'+data[index]+'`)">'+
                                     '<i class="fa '+fa+' fa-2x"></i>'+
                                     '</a>';
@@ -111,39 +117,47 @@
 </script>
 @endsection
 @section('content')
-    <h1 class="page-header">Dashboard Operation Excellence </h1>
-    <section id="content">
-        @component('component.panel')
-            @slot('title')
-                <span class="fa fa-file"></span>
-                Materi Rakordir 
-
-                <button class="btn btn-primary btn-sm" onclick="openForm()">Tambah</button>            
-            @endslot
-            
-            <table id="example" class="table table-responsive table-bordered table-hover" style="width:100%">
-                <thead>
-                    <tr>
-                        <th width="5%">#</th>
-                        <th width=" 20%">NO DOKUMENT</th>
-                        <th width=" 10%">TANGGAL</th>
-                        <th width=" 12%">AGENDA KE</th>
-                        <th>JUDUL</th>
-                        <th>PRESENTASI OLEH</th>
-                        <th width="15%">FILE</th>
-                    </tr>
-                </thead>
-            </table>
-
-        @endcomponent
-    </section>
-    <div class="modal fade" id="modal-id">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div id="example1"></div>
+    <section id="content" style="">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="text-center">
+                    <img src="{{ url('public/img/krakatausteel-logo.png') }}" alt="logo ks" width="200px" >
+                </div>
+                <div class="text-center m-t-15" style="background-color : red;font-family: OceanSansStd;border-radius: 4px;">
+                    <span style="color: white;font-size:18px">RAPAT KOORDINASI DIREKSI PT KRAKATAUSTEEL (PERSERO) Tbk.</span>
+                </div>
+                <div class="text-center m-b-15 m-t-15">
+                    <span style="color: black;font-size:22px;font-family: OceanSansStd;">MEETING SCHEDULE</span>
+                </div>
+                <div class="">
+                    <table class="table" style="width:100%;color: black;font-size:13px;border-top:1px solid #e2e7eb;">
+                        <thead>
+                            <tr>
+                                <th width="10%">NO</th>
+                                <th>TIME</th>
+                                <th>AGENDA</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $item->agenda_no }}</td>
+                                    <td>{{ $item->mulai }} - {{ $item->keluar }}</td>
+                                    <td>{{ $item->judul }}</td>
+                                    <td>
+                                        <a href="{{ url('rakordir/file') }}/{{ $item->date }}" class="fa fa-arrow-right fa-lg"></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-5" style="background-color : blue;font-family: OceanSansStd;border-radius: 4px;">
+                    <h4 style="color: white;"> {{ $lastDate }}</h4>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 use Validator;
+use Carbon\Carbon;
 
 class rakordirController extends Controller
 {
    public function __construct ()
     {
        date_default_timezone_set('Asia/Jakarta');
+       setlocale(LC_ALL, 'IND');
     }
     //menu input rakordir
     public function index(Request $request)
@@ -22,6 +24,22 @@ class rakordirController extends Controller
             [
                 'data_group'    =>$data_group,
                 'data_menu'     =>$data_menu
+            ]
+        );
+    }
+    public function backdrop(Request $request)
+    {
+        $data_group     = $request->get('data_group');
+        $data_menu      = $request->get('data_menu');
+        $lastDate       = DB::table('rakordir')->orderBy('date','desc')->take(1)->get();
+        $lastDate       = isset($lastDate[0]->date) ? $lastDate[0]->date : NULL;
+        $data           = DB::table('rakordir')->where('date',$lastDate)->orderBy('mulai','asc')->get();
+        return view('rakordir.backDrop',
+            [
+                'data_group'    =>$data_group,
+                'data_menu'     =>$data_menu,
+                'data'          =>$data,
+                'lastDate'      => strftime("%A, %d %B %Y",strtotime($lastDate))
             ]
         );
     }
@@ -54,6 +72,8 @@ class rakordirController extends Controller
                 [
                     'username'  => $username,
                     'date'      => $request->tanggal,
+                    'mulai'     => $request->jam_mulai .":". $request->menit_mulai,
+                    'keluar'    => $request->jam_keluar .":". $request->menit_keluar,
                     'judul'     => $request->judul,
                     'agenda_no' => $request->agenda_no,
                     'no_dokument' => $request->no_dokument,
@@ -61,11 +81,13 @@ class rakordirController extends Controller
                 ]
             );
         if($save){
-
-            $uploadedFile  = $request->file('file'); 
-            $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'.date('Y-m-d') );
-            $realName      = $request->file->getClientOriginalName();
-
+            $path = NULL;
+            $realName = NUll;
+            foreach ($request->file as $key => $value) {            
+                $uploadedFile  = $value; 
+                $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no ) . ";" .$path;
+                $realName      = $value->getClientOriginalName() . ";" .$realName;
+            }
             $update = DB::table('rakordir')
             ->where('date',$request->tanggal)
             ->where('agenda_no',$request->agenda_no)
@@ -83,7 +105,24 @@ class rakordirController extends Controller
     public function showUpload(Request $request)
     {
         $username      = $request->session()->get('username');
-        $data = DB::table('rakordir')->where('username',$username);
+        $data = DB::table('rakordir')->where('username',$username)->get();
+        $ret = [];
+        foreach ($data as $key => $value) {
+            array_push($ret,[
+                'username'=>$value->username,
+                'file_name'=>$value->file_name,
+                'file_path'=>explode(';',$value->file_path),
+                'date'=>date('d-m-Y',strtotime($value->date)) . " <br> ".$value->mulai. " - " . $value->keluar,
+                'mulai'=>$value->mulai,
+                'keluar'=>$value->keluar,
+                'tempat'=>$value->tempat,
+                'judul'=>$value->judul,
+                'no_dokument'=>$value->no_dokument,
+                'agenda_no'=>$value->agenda_no,
+                'presenter'=>$value->presenter,
+            ]);
+        }
+        $data = collect($ret);
         return Datatables::of($data)->make(true);
     }
     
@@ -141,6 +180,7 @@ class rakordirController extends Controller
     {
         
         $data = [];
+        $ret  = [];
         if(false === strtotime($tanggal) || $request->cari){
             $data = DB::table('rakordir')
                     ->where('date','like',"%{$request->cari}%")
@@ -152,7 +192,24 @@ class rakordirController extends Controller
             $data = DB::table('rakordir')
                     ->where('date',date('Y-m-d',strtotime($tanggal)) )->get();
         }
-        
+
+        foreach ($data as $key => $value) {
+            array_push($ret,[
+                'username'=>$value->username,
+                'file_name'=>$value->file_name,
+                'file_path'=>explode(';',$value->file_path),
+                'date'=>date('d-m-Y',strtotime($value->date)) . " <br> ".$value->mulai. " - " . $value->keluar,
+                'mulai'=>$value->mulai,
+                'keluar'=>$value->keluar,
+                'tempat'=>$value->tempat,
+                'judul'=>$value->judul,
+                'no_dokument'=>$value->no_dokument,
+                'agenda_no'=>$value->agenda_no,
+                'presenter'=>$value->presenter,
+            ]);
+        }
+        $data = collect($ret);
         return Datatables::of($data)->make(true);
+
     }
 }

@@ -134,10 +134,8 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 
 	// rakordir
 	Route::prefix('rakordir')->group(function () {
-		Route::get('/',function () {
-			return redirect('/rakordir/input_file');
-		});
 		//menu input rakordir
+		Route::get('/', 'rakordirController@backdrop');
 		Route::get('input_file', 'rakordirController@index');
 		Route::get('form_input', 'rakordirController@formInput');
 		Route::post('show_upload', 'rakordirController@showUpload');

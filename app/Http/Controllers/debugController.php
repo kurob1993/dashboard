@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Sinergi\BrowserDetector\Browser;
 use Sinergi\BrowserDetector\Language;
+use Yajra\Datatables\Facades\Datatables;
 
 class debugController extends Controller
 {
@@ -15,9 +16,31 @@ class debugController extends Controller
     }
     public function index(Request $request)
     {
-        for ($i=0; $i < 100; $i++) { 
-            echo $this->numbering()."<br>";
-        }
+        // for ($i=0; $i < 100; $i++) { 
+        //     echo $this->numbering()."<br>";
+        // }
+        // $username      = $request->session()->get('username');
+        // $data = DB::table('rakordir')->where('username',$username)->get();
+        // $ret = [];
+        // foreach ($data as $key => $value) {
+        //     array_push($ret,[
+        //         'username'=>$value->username,
+        //         'file_name'=>$value->file_name,
+        //         'file_path'=>explode(';',$value->file_path),
+        //         'date'=>$value->date,
+        //         'mulai'=>$value->mulai,
+        //         'keluar'=>$value->keluar,
+        //         'tempat'=>$value->tempat,
+        //         'judul'=>$value->judul,
+        //         'no_dokument'=>$value->no_dokument,
+        //         'agenda_no'=>$value->agenda_no,
+        //         'presenter'=>$value->presenter,
+        //     ]);
+        // }
+        
+        $data = DB::table('rakordir')->orderBy('date','desc')->take(1)->get();
+        return dd($data[0]->date);
+
         
     }
 

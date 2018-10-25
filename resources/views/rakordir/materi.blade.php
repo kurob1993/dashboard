@@ -41,8 +41,10 @@
             // "sDom": 'tipr', 
             "language": {
                 "search": "Cari:",
-                "lengthMenu": "Buka _MENU_ ",
-                "info": "Buka _START_ s.d _END_ dari _TOTAL_ data",
+                "lengthMenu": "",
+                // "lengthMenu": "Buka _MENU_ ",
+                "info": "",
+                // "info": "Buka _START_ s.d _END_ dari _TOTAL_ data",
                 "paginate": {
                     "first":      "Pertama",
                     "last":       "Terakhir",
@@ -71,7 +73,26 @@
                 { "data": "presenter" },
                 { "data": "file_path" , 
                    render: function ( data, type, row ) {
-                    var del = '<a data-toggle="modal" href="#modal-id" class="text-danger" style="margin:0px 2px 2px 0px" onclick="pdf(`'+data+'`)"><i class="fa fa-file-pdf-o fa-2x"></i></a>';
+                    var del = '';
+                    var ex;
+                    var fa;
+                    for (let index = 0; index < data.length; index++) {
+                        
+                        if(data[index]){
+                            ex = data[index].substr(-3, 3);
+                            if(ex === 'pdf' || ex === 'PDF'){
+                                fa = 'fa-file-pdf-o';
+                            }else{
+                                fa = 'fa-file-text-o';
+                            }
+                            del += '<a data-toggle="modal" href="#modal-id" class="text-danger m-r-5" '+
+                                        'style="margin:0px 2px 2px 0px" onclick="pdf(`'+data[index]+'`)">'+
+                                    '<i class="fa '+fa+' fa-2x"></i>'+
+                                    '</a>';
+                            console.log(data[index]);
+                            
+                        }
+                    }
                     return del;
                   }
                 }
@@ -166,7 +187,7 @@
                 <div class="panel-body" style="border: 1px solid grey;box-shadow: 2px 2px 1px grey;border-radius: 4px;">
                     @foreach($data as $key => $value)
                         <div class="col-md-2 col-sm-3 col-xs-6 m-t-5 m-b-5"> 
-                            <a href="{{ url('rakordir/file') }}/{{ \Carbon\Carbon::parse($value->date)->format('d-m-Y') }}" style="text-decoration:none" data-toggle="modal" 
+                            <a href="{{ url('rakordir/file') }}/{{ \Carbon\Carbon::parse($value->date)->format('Y-m-d') }}" style="text-decoration:none" data-toggle="modal" 
                                 href='#modal-id'>
                                 <span class="text-warning">
                                     <li class="fa fa-folder-open fa-5x m-b-5"></li><br>
@@ -190,7 +211,7 @@
                         <th width=" 12%">AGENDA KE</th>
                         <th>JUDUL</th>
                         <th>PRESENTASI OLEH</th>
-                        <th width="10%">AKSI</th>
+                        <th width="15%">FILE</th>
                     </tr>
                 </thead>
             </table>
