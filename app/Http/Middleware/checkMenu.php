@@ -20,7 +20,7 @@ class checkMenu
         $level      = $request->session()->get('level');
         $nik        = $request->session()->get('nik');
         $group_menu = new sys_group();
-        $data_group = $group_menu::orderBy('group', 'ASC')->get();
+        $data_group = $group_menu::orderBy('order', 'ASC')->get();
 
         $menu       = new sys_menu();
         $data_menu  = $menu::where('nik_access','REGEXP', '[[:<:]]'.$nik.'[[:>:]]')->where('status','Y')->get();
