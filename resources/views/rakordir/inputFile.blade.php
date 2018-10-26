@@ -34,6 +34,7 @@
                initComplete: function(){
                   $("div.toolbar").html('<button class="btn btn-primary" onclick="openForm()">Tambah</button>');           
                },
+            "order": [[ 2, "desc" ]],
             "responsive": true,
             "processing": true,
             "serverSide": true,
