@@ -138,8 +138,11 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 		Route::get('/', 'rakordirController@backdrop');
 		Route::get('input_file', 'rakordirController@index');
 		Route::get('form_input', 'rakordirController@formInput');
+		Route::get('form_edit/{tanggal?}/{agenda?}', 'rakordirController@formEdit');
 		Route::post('show_upload', 'rakordirController@showUpload');
 		Route::post('upload', 'rakordirController@upload');
+		Route::post('edit', 'rakordirController@edit');
+		Route::get('hapus/{tanggal?}/{agenda?}', 'rakordirController@hapus');
 
 		//menu materi rakordie
 		Route::get('file/{tanggal?}', 'rakordirController@file');

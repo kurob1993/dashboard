@@ -105,11 +105,11 @@
                 <div class="form-group">
                     <label class="control-label col-md-2" for="Judul">Jam:</label>
                     <div class="col-md-10">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="input-group">
-                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="" name="jam_mulai" required/>
-                                <span class="input-group-btn" style="width:0px;"></span>
-                                <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_mulai" required/>
+                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="" name="jam_mulai" required>
+                                <span class="input-group-addon" id="basic-addon1">:</span>
+                                <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_mulai" required>
                             </div>
                         </div>
 
@@ -117,13 +117,14 @@
                             <input type="text" class="form-control text-center" value="s.d" readonly/>
                         </div>
                         
-                        <div class="col-md-2 m-l-0">
+                        <div class="col-md-3">
                             <div class="input-group">
-                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="" name="jam_keluar" required/>
-                                <span class="input-group-btn" style="width:0px;"></span>
-                                <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_keluar" required/>
+                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="" name="jam_keluar" required>
+                                <span class="input-group-addon" id="basic-addon1">:</span>
+                                <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_keluar" required>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
 
