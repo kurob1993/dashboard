@@ -22,15 +22,15 @@
             autoclose: true,
         });
 
-        document.querySelectorAll('input[type=number]')
-        .forEach(e => e.oninput = () => {
-            // Always 2 digits
-            if (e.value.length >= 2) e.value = e.value.slice(0, 2);
-            // 0 on the left (doesn't work on FF)
-            if (e.value.length === 1) e.value = '0' + e.value;
-            // Avoiding letters on FF
-            if (!e.value) e.value = '00';
-        });
+        // document.querySelectorAll('input[type=number]')
+        // .forEach(e => e.oninput = () => {
+        //     // Always 2 digits
+        //     if (e.value.length >= 2) e.value = e.value.slice(0, 2);
+        //     // 0 on the left (doesn't work on FF)
+        //     if (e.value.length === 1) e.value = '0' + e.value;
+        //     // Avoiding letters on FF
+        //     if (!e.value) e.value = '00';
+        // });
 
     });
     function back() {
@@ -174,7 +174,7 @@
                         <div class="col-md-10">
                             @foreach ($item['file_name'] as $key => $itemx)
                                 @if ($itemx)
-                                    <div class="col-md-3 file{{ $key+1 }}">
+                                    <div class="col-md-12 m-b-5 file{{ $key+1 }}">
                                         <div class="input-group inputGroup{{ $key+1 }}">
                                             <input type="text" readonly class="form-control" value="{{ $itemx }}" required>
                                             <span class="input-group-btn">

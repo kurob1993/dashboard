@@ -27,6 +27,7 @@ class rakordirController extends Controller
             ]
         );
     }
+    //back drop rakordir
     public function backdrop(Request $request)
     {
         $data_group     = $request->get('data_group');
@@ -43,14 +44,102 @@ class rakordirController extends Controller
             ]
         );
     }
+    // form input
     public function formInput(Request $request)
     {
         $data_group     = $request->get('data_group');
         $data_menu      = $request->get('data_menu');
+        $dateLastInput  = session()->get('dateLastInput') !== NULL ? session()->get('dateLastInput') : NULL ;
         return view('rakordir.inputFileForm',
             [
-                'data_group'    =>$data_group,
-                'data_menu'     =>$data_menu
+                'data_group'    => $data_group,
+                'data_menu'     => $data_menu,
+                'dateLastInput'  => $dateLastInput
+            ]
+        );
+    }
+    //menu materi rakordir
+    public function file(Request $request,$tanggal=null,$backdrop=null)
+    {
+        $data_group     = $request->get('data_group');
+        $data_menu      = $request->get('data_menu');
+        $tanggalx       = null;
+        $cari           = null;
+        $perbulan       = false;
+        $pertanggal     = false;
+        $selecTahun     = DB::table('rakordir')
+                            ->orderBy('date','desc')
+                            ->groupBy(DB::RAW("date_format(date,'%Y')") )->get();
+        $tahun          = isset($request->tahun) ? $request->tahun : date('Y');
+
+        if($tanggal){
+            if( strlen($tanggal) > 7 ){
+                $tanggalx  = $tanggal;
+                $data = null;
+            }else{
+                $data = DB::table('rakordir')->whereRaw("date_format(date,'%m-%Y') = '".$tanggal."'")
+                ->groupBy(DB::RAW("date_format(date,'%Y-%m-%d')") )->paginate(12);
+                $pertanggal = true;
+            }
+        }else{
+            if(isset($request->cari)){
+                $cari  = $request->cari;
+                $tanggalx  = '-';
+                $data = null;
+            }else if($tahun){
+                $data = DB::table('rakordir')->whereRaw("date_format(date,'%Y') = '".$tahun."'")
+                ->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->paginate(12);
+                $perbulan = true;
+            }
+            
+        }
+        
+        // die($data);
+        return view('rakordir.materi',
+            [
+                'data_group' => $data_group,
+                'data_menu'  => $data_menu,
+                'data'       => $data,
+                'tanggal'    => $tanggalx,
+                'pertanggal'    => $pertanggal,
+                'perbulan'    => $perbulan,
+                'selecTahun'    => $selecTahun,
+                'tahun'     => $tahun,
+                'backdrop' => $backdrop,
+                'cari'       =>$cari
+
+            ]
+        );
+
+    }
+    // form edit data rakordir
+    public function formEdit(Request $request,$tanggal = NULL, $agenda = NULL)
+    {
+        $ret  = [];
+        $data = DB::table('rakordir')->where('date',$tanggal)->where('agenda_no',$agenda)->get();
+        foreach ($data as $key => $value) {
+            array_push($ret,[
+                'username'=>$value->username,
+                'file_name'=>$this->getFileName($value->date,$value->agenda_no),
+                'file_path'=>$this->getFilePath($value->date,$value->agenda_no),
+                'date'=>$value->date,
+                'mulai'=>explode(':',$value->mulai),
+                'keluar'=>explode(':',$value->keluar),
+                'tempat'=>$value->tempat,
+                'judul'=>$value->judul,
+                'no_dokument'=>$value->no_dokument,
+                'agenda_no'=>$value->agenda_no,
+                'presenter'=>$value->presenter,
+            ]);
+        }
+        $ret = collect($ret);
+        $data_group     = $request->get('data_group');
+        $data_menu      = $request->get('data_menu');
+        return view('rakordir.editFileForm',
+            [
+                'data_group'    => $data_group,
+                'data_menu'     => $data_menu,
+                'data'          => $ret
             ]
         );
     }
@@ -58,7 +147,7 @@ class rakordirController extends Controller
     {
         $request->validate([
             // 'file' => 'required|mimes:pdf,PDF|max:5120',
-            'file' => 'required',
+            // 'file' => 'required',
             'tanggal' => 'required|unique:rakordir,date,null,id,agenda_no,'.$request->agenda_no,
             'no_dokument' => 'required',
             'agenda_no' => 'required|unique:rakordir,agenda_no,null,id,date,'.$request->tanggal,
@@ -81,20 +170,23 @@ class rakordirController extends Controller
                 ]
             );
         if($save){
-            foreach ($request->file as $key => $value) {            
-                $uploadedFile  = $value; 
-                $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
-                $realName      = $value->getClientOriginalName();
-                $update = DB::table('rakordir_file')
-                    ->insert(
-                        [
-                            'date'      => $request->tanggal,
-                            'agenda_no' => $request->agenda_no,
-                            'file_name' => $realName,
-                            'file_path' => str_replace("public/","",$path),
-                        ]
-                    );
+            if($request->file){
+                foreach ($request->file as $key => $value) {            
+                    $uploadedFile  = $value; 
+                    $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
+                    $realName      = $value->getClientOriginalName();
+                    $update = DB::table('rakordir_file')
+                        ->insert(
+                            [
+                                'date'      => $request->tanggal,
+                                'agenda_no' => $request->agenda_no,
+                                'file_name' => $realName,
+                                'file_path' => str_replace("public/","",$path),
+                            ]
+                        );
+                }
             }
+            session(['dateLastInput' => $request->tanggal]);
             return redirect('/rakordir/input_file');
         }
         return Redirect::back()->withErrors(['msg', 'Error']);
@@ -126,9 +218,9 @@ class rakordirController extends Controller
     }
     public function showUpload(Request $request)
     {
-        $username      = $request->session()->get('username');
-        $data = DB::table('rakordir')->where('username',$username)->get();
-        $ret = [];
+        $username   = $request->session()->get('username');
+        $data       = DB::table('rakordir')->where('username',$username)->get();
+        $ret        = [];
         foreach ($data as $key => $value) {
             array_push($ret,[
                 'username'=>$value->username,
@@ -148,65 +240,14 @@ class rakordirController extends Controller
         $data = collect($ret);
         return Datatables::of($data)->make(true);
     }
-    
-    //menu materi rakordir
-    public function file(Request $request,$tanggal=null)
-    {
-        $data_group     = $request->get('data_group');
-        $data_menu      = $request->get('data_menu');
-        $tanggalx       = null;
-        $perbulan       = false;
-        $pertanggal     = false;
-        $selecTahun     = DB::table('rakordir')
-                            ->orderBy('date','desc')
-                            ->groupBy(DB::RAW("date_format(date,'%Y')") )->get();
-        $tahun          = isset($request->tahun) ? $request->tahun : date('Y');
 
-        if($tanggal){
-            if( strlen($tanggal) > 7 ){
-                $tanggalx  = $tanggal;
-                $data = null;
-            }else{
-                $data = DB::table('rakordir')->whereRaw("date_format(date,'%m-%Y') = '".$tanggal."'")
-                ->groupBy(DB::RAW("date_format(date,'%Y-%m-%d')") )->paginate(12);
-                $pertanggal = true;
-            }
-        }else{
-            if(isset($request->cari)){
-                $tanggalx  = $request->cari;
-                $data = null;
-            }else if($tahun){
-                $data = DB::table('rakordir')->whereRaw("date_format(date,'%Y') = '".$tahun."'")
-                ->groupBy(DB::RAW("date_format(date,'%Y-%m')") )->paginate(12);
-                $perbulan = true;
-            }
-            
-        }
-        
-        // die($data);
-        return view('rakordir.materi',
-            [
-                'data_group' => $data_group,
-                'data_menu'  => $data_menu,
-                'data'       => $data,
-                'tanggal'    => $tanggalx,
-                'pertanggal'    => $pertanggal,
-                'perbulan'    => $perbulan,
-                'selecTahun'    => $selecTahun,
-                'tahun'     => $tahun,
-
-            ]
-        );
-
-    }
     public function showMateri(Request $request,$tanggal = null)
     {
-        
         $data = [];
         $ret  = [];
-        if(false === strtotime($tanggal) || $request->cari){
+        if(false === strtotime($tanggal) && $request->cari){
             $data = DB::table('rakordir')
-                    ->where('date','like',"%{$request->cari}%")
+                    ->where(DB::RAW("date_format(date,'%d-%m-%Y')"),"like","%{$request->cari}%")
                     ->orWhere('judul','like',"%{$request->cari}%")
                     ->orWhere('presenter','like',"%{$request->cari}%")
                     ->orWhere('no_dokument','like',"%{$request->cari}%")
@@ -214,6 +255,7 @@ class rakordirController extends Controller
         }else{
             $data = DB::table('rakordir')
                     ->where('date',date('Y-m-d',strtotime($tanggal)) )->get();
+            
         }
 
         foreach ($data as $key => $value) {
@@ -235,36 +277,7 @@ class rakordirController extends Controller
         return Datatables::of($data)->make(true);
 
     }
-    public function formEdit(Request $request,$tanggal = NULL, $agenda = NULL)
-    {
-        $ret  = [];
-        $data = DB::table('rakordir')->where('date',$tanggal)->where('agenda_no',$agenda)->get();
-        foreach ($data as $key => $value) {
-            array_push($ret,[
-                'username'=>$value->username,
-                'file_name'=>$this->getFileName($value->date,$value->agenda_no),
-                'file_path'=>$this->getFilePath($value->date,$value->agenda_no),
-                'date'=>$value->date,
-                'mulai'=>explode(':',$value->mulai),
-                'keluar'=>explode(':',$value->keluar),
-                'tempat'=>$value->tempat,
-                'judul'=>$value->judul,
-                'no_dokument'=>$value->no_dokument,
-                'agenda_no'=>$value->agenda_no,
-                'presenter'=>$value->presenter,
-            ]);
-        }
-        $ret = collect($ret);
-        $data_group     = $request->get('data_group');
-        $data_menu      = $request->get('data_menu');
-        return view('rakordir.editFileForm',
-            [
-                'data_group'    => $data_group,
-                'data_menu'     => $data_menu,
-                'data'          => $ret
-            ]
-        );
-    }
+    
     public function remove_element($array,$value) {
         if(($key = array_search($value,$array)) !== false) {
               unset($array[$key]);
@@ -279,39 +292,34 @@ class rakordirController extends Controller
         ->where('date',$request->tanggal_val)
         ->update(
             [
-                'username'  => $username,
-                'date'      => $request->tanggal,
-                'mulai'     => $request->jam_mulai .":". $request->menit_mulai,
-                'keluar'    => $request->jam_keluar .":". $request->menit_keluar,
-                'judul'     => $request->judul,
-                'agenda_no' => $request->agenda_no,
-                'no_dokument' => $request->no_dokument,
-                'presenter' => $request->presenter,
+                'username'      => $username,
+                'date'          => $request->tanggal,
+                'mulai'         => $request->jam_mulai .":". $request->menit_mulai,
+                'keluar'        => $request->jam_keluar .":". $request->menit_keluar,
+                'judul'         => $request->judul,
+                'agenda_no'     => $request->agenda_no,
+                'no_dokument'   => $request->no_dokument,
+                'presenter'     => $request->presenter,
             ]
         );
-        if(isset($request->oldNameFile)){
-            foreach ($request->oldNameFile as $key => $value) {
-                DB::table('rakordir_file')
-                    ->where('agenda_no',$request->agenda_no_val)
-                    ->where('date',$request->tanggal_val)
-                    ->where('file_name',$value)
-                    ->delete();
-            }
-        }
-        if(isset($request->file)){
+        if(isset($request->oldNameFile) && isset($request->file)){
             foreach ($request->file as $key => $value) {            
                 $uploadedFile  = $value; 
                 $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
                 $realName      = $value->getClientOriginalName();
+                $nameFile      = $request->oldNameFile[$key];
                 $update = DB::table('rakordir_file')
-                    ->insert(
-                        [
-                            'date'      => $request->tanggal_val,
-                            'agenda_no' => $request->agenda_no_val,
-                            'file_name' => $realName,
-                            'file_path' => str_replace("public/","",$path),
-                        ]
-                    );
+                ->where('agenda_no',$request->agenda_no_val)
+                ->where('date',$request->tanggal_val)
+                ->where('file_name',$nameFile)
+                ->update(
+                    [
+                        'date'      => $request->tanggal_val,
+                        'agenda_no' => $request->agenda_no_val,
+                        'file_name' => $realName,
+                        'file_path' => str_replace("public/","",$path),
+                    ]
+                );
             }
         }
         return redirect('/rakordir/input_file');

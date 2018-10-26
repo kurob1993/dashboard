@@ -145,7 +145,7 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 		Route::get('hapus/{tanggal?}/{agenda?}', 'rakordirController@hapus');
 
 		//menu materi rakordie
-		Route::get('file/{tanggal?}', 'rakordirController@file');
+		Route::get('file/{tanggal?}/{backdrop?}', 'rakordirController@file');
 		Route::post('show_materi/{tanggal?}', 'rakordirController@showMateri');
 	});
 

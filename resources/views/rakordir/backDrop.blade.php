@@ -136,7 +136,7 @@
                                 <th width="10%">NO</th>
                                 <th>TIME</th>
                                 <th>AGENDA</th>
-                                <th></th>
+                                <th>MATERI</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,7 +146,7 @@
                                     <td>{{ $item->mulai }} - {{ $item->keluar }}</td>
                                     <td>{{ $item->judul }}</td>
                                     <td>
-                                        <a href="{{ url('rakordir/file') }}/{{ $item->date }}" class="fa fa-arrow-right fa-lg"></a>
+                                        <a href="{{ url('rakordir/file') }}/{{ $item->date }}/backdrop" class="fa fa-arrow-right fa-lg"></a>
                                     </td>
                                 </tr>
                             @endforeach

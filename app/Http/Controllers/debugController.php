@@ -38,16 +38,19 @@ class debugController extends Controller
         //     ]);
         // }
         
-        $data = DB::table('rakordir_file')
-            ->where('date','2018-10-26')
-            ->where('agenda_no','1')
-            ->get();
-        $file = [];
-        foreach ($data as $key => $value) {
-            array_push($file,$value->file_path);
-        }
-        return dd($file);
-
+        // $data = DB::table('rakordir_file')
+        //     ->where('date','2018-10-26')
+        //     ->where('agenda_no','1')
+        //     ->get();
+        // $file = [];
+        // foreach ($data as $key => $value) {
+        //     array_push($file,$value->file_path);
+        // }
+        // return dd($file);
+        // $date           = DB::table('rakordir')->orderBy('date','desc')->limit(1)->get();
+        // dd($date);
+        
+        var_dump(session()->get('dateLastInput'));
         
     }
 

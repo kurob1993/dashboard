@@ -72,9 +72,9 @@
                 { "data": "file_path" , 
                    render: function ( data, type, row ) {
                     var del = '';
-                    var ex;
-                    var fa;
-                    for (let index = 0; index < data.length; index++) {
+                    var ex = '';
+                    var fa = '';
+                    for (var index = 0; index < data.length; index++) {
                         
                         if(data[index]){
                             ex = data[index].substr(-3, 3);

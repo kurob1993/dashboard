@@ -55,7 +55,7 @@
             "ajax": {
                 "url" : "{{ url('rakordir/show_materi/') }}/{{ $tanggal }}",
                 "type" : "POST",
-                "data" : { 'cari' : "{{ $tanggal }}" },
+                "data" : { 'cari' : "{{ $cari }}" },
                 "beforeSend": function (request) {
                     request.setRequestHeader("X-CSRF-Token", "{{csrf_token()}}");
                 }
@@ -101,7 +101,13 @@
 
     });
     function back() {
-        window.location.href="{{ url('rakordir/file') }}";
+        var backdrop = "{{ $backdrop }}";
+        if(backdrop){
+            window.location.href="{{ url('rakordir/') }}";
+        }else{
+            window.location.href="{{ url('rakordir/file') }}";
+        }
+        
     }
     function pdf(file) {
         var ex = file.substr(-3, 3);

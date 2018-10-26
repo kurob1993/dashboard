@@ -21,16 +21,15 @@
             format: 'yyyy-mm-dd',
             autoclose: true,
         });
-
-        document.querySelectorAll('input[type=number]')
-        .forEach(e => e.oninput = () => {
-            // Always 2 digits
-            if (e.value.length >= 2) e.value = e.value.slice(0, 2);
-            // 0 on the left (doesn't work on FF)
-            if (e.value.length === 1) e.value = '0' + e.value;
-            // Avoiding letters on FF
-            if (!e.value) e.value = '00';
-        });
+        // document.querySelectorAll('input[type=number]')
+        // .forEach(e => e.oninput = () => {
+        //     // Always 2 digits
+        //     if (e.value.length >= 2) e.value = e.value.slice(0, 2);
+        //     // 0 on the left (doesn't work on FF)
+        //     if (e.value.length === 1) e.value = '0' + e.value;
+        //     // Avoiding letters on FF
+        //     if (!e.value) e.value = '00';
+        // });
 
     });
     function back() {
@@ -39,7 +38,7 @@
     function addFile(){
         var index = parseInt($('#index').val());
         var newIndex = $('#index').val(index+1);
-        var file = '<div class="col-md-3"><input type="file" class="form-control m-b-5" id="file'+newIndex+'" placeholder="File" name="file[]" value=""></div>';
+        var file = '<div class="col-md-9"><input type="file" class="form-control m-b-5" id="file'+newIndex+'" placeholder="File" name="file[]" value=""></div>';
         $('.addfile').append(file);
 
     }
@@ -70,7 +69,7 @@
                     <label class="control-label col-md-2" for="Judul">Tanggal:</label>
                     <div class="col-md-10">
                         <div class="col-md-12">
-                            <input type="text" name="tanggal" placeholder="Tanggal" class="form-control" id="tanggal" autocomplete="off" value="{{ old('tanggal') }}" required>
+                            <input type="text" name="tanggal" placeholder="Tanggal" class="form-control" id="tanggal" autocomplete="off" value="{{ old('tanggal', $dateLastInput) }}" required>
                         </div>
                     </div>
                 </div>
@@ -107,7 +106,7 @@
                     <div class="col-md-10">
                         <div class="col-md-3">
                             <div class="input-group">
-                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="" name="jam_mulai" required>
+                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="00" name="jam_mulai" required>
                                 <span class="input-group-addon" id="basic-addon1">:</span>
                                 <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_mulai" required>
                             </div>
@@ -119,7 +118,7 @@
                         
                         <div class="col-md-3">
                             <div class="input-group">
-                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="" name="jam_keluar" required>
+                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="00" name="jam_keluar" required>
                                 <span class="input-group-addon" id="basic-addon1">:</span>
                                 <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_keluar" required>
                             </div>
@@ -149,8 +148,8 @@
                 <div class="form-group file">
                     <label class="control-label col-md-2" for="Judul">File:</label>
                     <div class="col-md-10">
-                        <div class="col-md-3">
-                            <input type="file" class="form-control m-b-5" id="file1" placeholder="File" name="file[]" value="" required>
+                        <div class="col-md-9">
+                            <input type="file" class="form-control m-b-5" id="file1" placeholder="File" name="file[]" value="">
                         </div>
                         <div class="addfile"></div>
                         <div class="col-md-3">
