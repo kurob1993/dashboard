@@ -86,9 +86,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-2" for="Judul">Agenda Ke:</label>
                     <div class="col-md-10">
-                        <div class="col-md-12">
+                        <div class="col-md-5">
                             <select class="form-control" required name="agenda_no">
-                                <option value=""> Agenda Ke </option>
+                                <option value=""> .: Pilih Agenda :. </option>
                                 @for ($i=0; $i < 10 ; $i++)
                                     @if( old('agenda_no') == $i+1 )
                                         <option value="{{ $i+1 }}" selected> {{ $i+1 }} </option>
@@ -103,12 +103,12 @@
 
                 <div class="form-group">
                     <label class="control-label col-md-2" for="Judul">Jam:</label>
-                    <div class="col-md-10">
-                        <div class="col-md-3">
+                    <div class="col-md-8">
+                        <div class="col-md-4">
                             <div class="input-group">
-                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="00" name="jam_mulai" required>
+                                <input type="text" maxlength="2" class="form-control"  value="" name="jam_mulai" required>
                                 <span class="input-group-addon" id="basic-addon1">:</span>
-                                <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_mulai" required>
+                                <input type="text" maxlength="2" class="form-control"  value="" name="menit_mulai" required>
                             </div>
                         </div>
 
@@ -116,14 +116,13 @@
                             <input type="text" class="form-control text-center" value="s.d" readonly/>
                         </div>
                         
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="input-group">
-                                <input type="number" min="0" max="23" class="form-control" placeholder="00" value="00" name="jam_keluar" required>
+                                <input type="text" maxlength="2" class="form-control"  value="" name="jam_keluar" required>
                                 <span class="input-group-addon" id="basic-addon1">:</span>
-                                <input type="number" min="0" max="59" class="form-control" placeholder="00" value="00" name="menit_keluar" required>
+                                <input type="text" maxlength="2" class="form-control"  value="" name="menit_keluar" required>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
 

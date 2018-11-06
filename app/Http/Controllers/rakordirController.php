@@ -33,13 +33,16 @@ class rakordirController extends Controller
         $data_group     = $request->get('data_group');
         $data_menu      = $request->get('data_menu');
         $lastDate       = DB::table('rakordir')->orderBy('date','desc')->take(1)->get();
-        $lastDate       = isset($lastDate[0]->date) ? $lastDate[0]->date : NULL;
-        $data           = DB::table('rakordir')->where('date',$lastDate)->orderBy('mulai','asc')->get();
+        $lastDate       = isset($lastDate[0]->date) ? $lastDate[0]->date : date('Y-m-d');
+        $data           = DB::table('rakordir')->where('date',$lastDate)->orderBy('agenda_no','asc')->get();
+        $file           = DB::table('rakordir_file')->where('date',$lastDate)->orderBy('agenda_no','asc')->get();
+
         return view('rakordir.backDrop',
             [
-                'data_group'    =>$data_group,
-                'data_menu'     =>$data_menu,
-                'data'          =>$data,
+                'data_group'    => $data_group,
+                'data_menu'     => $data_menu,
+                'data'          => $data,
+                'files'          => $file,
                 'lastDate'      => strftime("%A, %d %B %Y",strtotime($lastDate))
             ]
         );
@@ -146,8 +149,6 @@ class rakordirController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            // 'file' => 'required|mimes:pdf,PDF|max:5120',
-            // 'file' => 'required',
             'tanggal' => 'required|unique:rakordir,date,null,id,agenda_no,'.$request->agenda_no,
             'no_dokument' => 'required',
             'agenda_no' => 'required|unique:rakordir,agenda_no,null,id,date,'.$request->tanggal,
@@ -171,7 +172,7 @@ class rakordirController extends Controller
             );
         if($save){
             if($request->file){
-                foreach ($request->file as $key => $value) {            
+                foreach ($request->file as $key => $value) { 
                     $uploadedFile  = $value; 
                     $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
                     $realName      = $value->getClientOriginalName();
@@ -313,6 +314,22 @@ class rakordirController extends Controller
                 ->where('date',$request->tanggal_val)
                 ->where('file_name',$nameFile)
                 ->update(
+                    [
+                        'date'      => $request->tanggal_val,
+                        'agenda_no' => $request->agenda_no_val,
+                        'file_name' => $realName,
+                        'file_path' => str_replace("public/","",$path),
+                    ]
+                );
+            }
+        }else if( isset($request->file) ){
+            foreach ($request->file as $key => $value) {            
+                $uploadedFile  = $value; 
+                $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
+                $realName      = $value->getClientOriginalName();
+                $nameFile      = $request->oldNameFile[$key];
+                $update = DB::table('rakordir_file')
+                ->insert(
                     [
                         'date'      => $request->tanggal_val,
                         'agenda_no' => $request->agenda_no_val,

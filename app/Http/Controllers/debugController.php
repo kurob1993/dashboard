@@ -50,10 +50,65 @@ class debugController extends Controller
         // $date           = DB::table('rakordir')->orderBy('date','desc')->limit(1)->get();
         // dd($date);
         
-        var_dump(session()->get('dateLastInput'));
+        // var_dump(session()->get('dateLastInput'));
+        
+        // $lastDate       = DB::table('rakordir')->orderBy('date','desc')->take(1)->get();
+        // $lastDate       = isset($lastDate[0]->date) ? $lastDate[0]->date : date('Y-m-d');
+
+        // $data = DB::table('rakordir')
+        //         ->leftJoin('rakordir_file', function ($join) {
+        //             $join->on('rakordir.agenda_no', '=', 'rakordir_file.agenda_no')
+        //                 ->on('rakordir.date', '=', 'rakordir_file.date');
+        //         })
+        //         ->select('rakordir.date','rakordir.agenda_no','rakordir.mulai','rakordir.keluar','rakordir_file.file_path')
+        //         ->where('rakordir.date',$lastDate)
+        //         ->orderBy('rakordir.agenda_no','asc')
+        //         ->get();
+        // return dd($data);
+
+        echo $this->getWeekday('2018-12-05');
         
     }
+    public function getWeekday($date) {
+        $date = date('w', strtotime($date));
+        $ret = " - ";
+        switch ($date) {
+            case 0:
+            $ret = 'Minggu';
+                break;
+            
+            case 1:
+            $ret = 'Senin';
+                break;
+            
+            case 2:
+            $ret = 'Selasa';
+                break;
+            
+            case 3:
+            $ret = 'Rabu';
+                break;
+            
+            case 4:
+            $ret = 'Kamis';
+                break;
+            
+            case 5:
+            $ret = 'jumat';
+                break;
 
+            case 6:
+            $ret = 'Sabtu';
+                break;
+            
+            default:
+                $ret = ' -- ';
+                break;
+        }
+        return $ret;
+    }
+    
+    
     public function numbering()
     {
         $no     = date('dmY');

@@ -82,15 +82,17 @@
                             ex = data[index].substr(-3, 3);
                             if(ex === 'pdf' || ex === 'PDF'){
                                 fa = 'fa-file-pdf-o';
-                            }else{
-                                fa = 'fa-file-text-o';
-                            }
-                            del += '<a data-toggle="modal" href="#modal-id" class="text-danger m-r-5" '+
+                                del += '<a data-toggle="modal" href="#modal-id" class="text-danger m-r-5" '+
                                         'style="margin:0px 2px 2px 0px" onclick="pdf(`'+data[index]+'`)">'+
                                     '<i class="fa '+fa+' fa-2x"></i>'+
                                     '</a>';
-                            console.log(data[index]);
-                            
+                            }else{
+                                fa = 'fa-file-text-o';
+                                url = "{{ url('/public/storage/') }}/"+data[index];
+                                del += '<a href="'+url+'" target="_blank" class="text-danger m-r-5" style="margin:0px 2px 2px 0px">'+
+                                    '<i class="fa '+fa+' fa-2x"></i>'+
+                                    '</a>';
+                            }
                         }
                     }
                     return del;
@@ -115,7 +117,7 @@
         var html;
         if(ex === 'pdf' || ex === 'PDF'){
             url = "{{ url('public/plugins/pdfjs/web/viewer.html?file=') }}"+"{{ url('/public/storage/') }}/"+file;
-            html = "<iframe src='"+url+"' style='width: 100%; height:600px'></iframe>";
+            html = "<iframe src='"+url+"' style='width: 100%; height:80vh'></iframe>";
         }else{
             url = "{{ url('/public/storage/') }}/"+file;
             html = "<h5 class='text-center'><a href='"+url+"' target='_blank'>Kilik disini untuk unduh file.</a></h5>"
@@ -224,9 +226,14 @@
             @endif
         @endcomponent
     </section>
+    
     <div class="modal fade" id="modal-id">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">-</h4>
+                </div>
                 <div class="modal-body">
                     <div id="example1"></div>
                 </div>

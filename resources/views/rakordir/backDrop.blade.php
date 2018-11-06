@@ -124,7 +124,7 @@
                     <img src="{{ url('public/img/krakatausteel-logo.png') }}" alt="logo ks" width="200px" >
                 </div>
                 <div class="text-center m-t-15" style="background-color : red;font-family: OceanSansStd;border-radius: 4px;">
-                    <span style="color: white;font-size:18px">RAPAT KOORDINASI DIREKSI PT KRAKATAUSTEEL (PERSERO) Tbk.</span>
+                    <span style="color: white;font-size:18px">RAPAT KOORDINASI DIREKSI PT KRAKATAU STEEL (PERSERO) Tbk.</span>
                 </div>
                 <div class="text-center m-b-15 m-t-15">
                     <span style="color: black;font-size:22px;font-family: OceanSansStd;">MEETING SCHEDULE</span>
@@ -146,7 +146,15 @@
                                     <td>{{ $item->mulai }} - {{ $item->keluar }}</td>
                                     <td>{{ $item->judul }}</td>
                                     <td>
-                                        <a href="{{ url('rakordir/file') }}/{{ $item->date }}/backdrop" class="fa fa-arrow-right fa-lg"></a>
+                                        @foreach ($files as $file)
+                                            @if($file->agenda_no == $item->agenda_no && $file->date == $item->date)
+                                                @if(substr($file->file_name,-3,3) == 'pdf')
+                                                <a title="{{ $file->file_name }}" href="{{ url('public/storage') }}/{{ $file->file_path }}" target="_blank" class="fa fa-file-pdf-o fa-lg m-r-5"></a>
+                                                @else
+                                                <a title="{{ $file->file_name }}" href="{{ url('public/storage') }}/{{ $file->file_path }}" target="_blank" class="fa fa-file-text-o fa-lg m-r-5"></a>
+                                                @endif
+                                            @endif
+                                        @endforeach
                                     </td>
                                 </tr>
                             @endforeach

@@ -60,7 +60,7 @@
             $('.file'+x).append(file);
             $('.inputGroup'+x).hide();
         }else{
-            file = '<div class="col-md-3"><input type="file" class="form-control m-b-5" id="file'+newIndex+'" placeholder="File" name="file[]" value=""></div>';
+            file = '<div class="col-md-8"><input type="file" class="form-control m-b-5" id="file'+newIndex+'" placeholder="File" name="file[]" value=""></div>';
             $('.addfile').append(file);
         }
     }
@@ -110,9 +110,9 @@
                         <label class="control-label col-md-2" for="Judul">Agenda Ke:</label>
                         <input type="hidden" name="agenda_no_val" class="form-control" value="{{ $item['agenda_no'] }}">
                         <div class="col-md-10">
-                            <div class="col-md-12">
+                            <div class="col-md-5">
                                 <select class="form-control" required name="agenda_no">
-                                    <option value=""> Agenda Ke </option>
+                                    <option value=""> .: Pilih Agenda :. </option>
                                     @for ($i=0; $i < 10 ; $i++)
                                         @if( $item['agenda_no'] == $i+1 )
                                             <option value="{{ $i+1 }}" selected> {{ $i+1 }} </option>
@@ -127,30 +127,29 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-2" for="Judul">Jam:</label>
-                        <div class="col-md-10">
-                            <div class="col-md-3">
+                        <div class="col-md-8">
+                            <div class="col-md-4">
                                 <div class="input-group">
-                                    <input type="number" min="0" max="23" class="form-control" placeholder="00" value="{{ $item['mulai'][0] }}" name="jam_mulai" required>
+                                    <input type="text" maxlength="2" class="form-control"  value="{{ $item['mulai'][0] }}" name="jam_mulai" required>
                                     <span class="input-group-addon" id="basic-addon1">:</span>
-                                    <input type="number" min="0" max="59" class="form-control" placeholder="00" value="{{ $item['mulai'][1] }}" name="menit_mulai" required>
+                                    <input type="text" maxlength="2" class="form-control"  value="{{ $item['mulai'][1] }}" name="menit_mulai" required>
                                 </div>
                             </div>
-
+    
                             <div class="col-md-2">
                                 <input type="text" class="form-control text-center" value="s.d" readonly/>
                             </div>
                             
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="input-group">
-                                    <input type="number" min="0" max="23" class="form-control" placeholder="00" value="{{ $item['keluar'][0] }}" name="jam_keluar" required>
+                                    <input type="text" maxlength="2" class="form-control"  value="{{ $item['keluar'][0] }}" name="jam_keluar" required>
                                     <span class="input-group-addon" id="basic-addon1">:</span>
-                                    <input type="number" min="0" max="59" class="form-control" placeholder="00" value="{{ $item['keluar'][1] }}" name="menit_keluar" required>
+                                    <input type="text" maxlength="2" class="form-control"  value="{{ $item['keluar'][1] }}" name="menit_keluar" required>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
                         <label class="control-label col-md-2" for="Judul">Judul:</label>
                         <div class="col-md-10">
@@ -186,12 +185,12 @@
                             @endforeach
                             
                             <div class="addfile"></div>
-                            {{-- <div class="col-md-3">
+                            <div class="col-md-3">
                                 <button type="button" class="btn btn-primary m-b-5" onclick="addFile()"> 
                                     <i class="fa fa-plus"></i>
-                                    Tambah File
+                                    File Materi
                                 </button>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
 
