@@ -106,9 +106,9 @@
                     <div class="col-md-8">
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" maxlength="2" class="form-control"  value="" name="jam_mulai" required>
+                                <input type="text" maxlength="2" class="form-control"  value="{{ old('jam_mulai') }}" name="jam_mulai" required>
                                 <span class="input-group-addon" id="basic-addon1">:</span>
-                                <input type="text" maxlength="2" class="form-control"  value="" name="menit_mulai" required>
+                                <input type="text" maxlength="2" class="form-control"  value="{{ old('menit_mulai') }}" name="menit_mulai" required>
                             </div>
                         </div>
 
@@ -118,9 +118,9 @@
                         
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="text" maxlength="2" class="form-control"  value="" name="jam_keluar" required>
+                                <input type="text" maxlength="2" class="form-control"  value="{{ old('jam_keluar') }}" name="jam_keluar" required>
                                 <span class="input-group-addon" id="basic-addon1">:</span>
-                                <input type="text" maxlength="2" class="form-control"  value="" name="menit_keluar" required>
+                                <input type="text" maxlength="2" class="form-control"  value="{{ old('menit_keluar') }}" name="menit_keluar" required>
                             </div>
                         </div>
                     </div>
