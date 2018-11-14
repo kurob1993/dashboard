@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Facades\Datatables;
 use Validator;
 use Carbon\Carbon;
+use App\rakordir;
 
 class rakordirController extends Controller
 {
@@ -220,25 +221,11 @@ class rakordirController extends Controller
     public function showUpload(Request $request)
     {
         $username   = $request->session()->get('username');
-        $data       = DB::table('rakordir')->where('username',$username)->get();
-        $ret        = [];
-        foreach ($data as $key => $value) {
-            array_push($ret,[
-                'username'=>$value->username,
-                'file_name'=>$value->file_name,
-                'file_path'=>$this->getFilePath($value->date,$value->agenda_no),
-                'date'=>date('d-m-Y',strtotime($value->date)) . " <br> ".$value->mulai. " - " . $value->keluar,
-                'tanggal'=>$value->date,
-                'mulai'=>$value->mulai,
-                'keluar'=>$value->keluar,
-                'tempat'=>$value->tempat,
-                'judul'=>$value->judul,
-                'no_dokument'=>$value->no_dokument,
-                'agenda_no'=>$value->agenda_no,
-                'presenter'=>$value->presenter,
-            ]);
-        }
-        $data = collect($ret);
+        $data = rakordir::with('rakordirFiles')
+        ->orderBy('date','desc')
+        ->orderBy('mulai','asc')
+        ->get();
+
         return Datatables::of($data)->make(true);
     }
 
@@ -262,7 +249,6 @@ class rakordirController extends Controller
         foreach ($data as $key => $value) {
             array_push($ret,[
                 'username'=>$value->username,
-                'file_name'=>$value->file_name,
                 'file_path'=>$this->getFilePath($value->date,$value->agenda_no),
                 'date'=>date('d-m-Y',strtotime($value->date)) . " <br> ".$value->mulai. " - " . $value->keluar,
                 'mulai'=>$value->mulai,
@@ -343,6 +329,7 @@ class rakordirController extends Controller
     }
     public function hapus($tanggal = NULL, $agenda = NULL)
     {
+        $tanggal = isset($tanggal) ? date('Y-m-d',strtotime($tanggal)) : NULL;
         $data1 = DB::table('rakordir')
         ->where('agenda_no',$agenda)
         ->where('date',$tanggal)
@@ -352,6 +339,7 @@ class rakordirController extends Controller
         ->where('agenda_no',$agenda)
         ->where('date',$tanggal)
         ->delete();
+        
         if($data1 && $data2){
             return ['msg' => 'success'];
         }
