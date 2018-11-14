@@ -34,7 +34,7 @@
                initComplete: function(){
                   $("div.toolbar").html('<button class="btn btn-primary" onclick="openForm()">Tambah</button>');           
                },
-            "order": [[ 2, "desc" ]],
+            // "order": [[ 2, "desc" ]],
             "responsive": true,
             "processing": true,
             "serverSide": true,
@@ -66,19 +66,21 @@
                     }
                 },
                 { "data": "no_dokument"},
-                { "data": "date"},
+                { "data": "datetime"},
                 { "data": "agenda_no"},
                 { "data": "judul" },
                 { "data": "presenter" },
-                { "data": "file_path" , 
+                { "data": "agenda_no" , 
                    render: function ( data, type, row ) {
                     var del = '';
                     var ex = '';
                     var fa = '';
+                    var data = row.rakordir_files;
+                    console.log(row['jam']);
                     for (var index = 0; index < data.length; index++) {
                         
                         if(data[index]){
-                            ex = data[index].substr(-3, 3);
+                            ex = data[index].file_path.substr(-3, 3);
                             if(ex === 'pdf' || ex === 'PDF'){
                                 fa = 'fa-file-pdf-o';
                                 del += '<a data-toggle="modal" href="#modal-id" class="text-danger m-r-5" '+
@@ -98,21 +100,21 @@
                     return del;
                   }
                 },
-                { "data": "agenda_no" , 
-                    render: function ( data, type, row ) {
+                { "data": "date" , 
+                    render: function ( data, type, row ) {                        
                         $('[data-toggle="tooltip"]').tooltip();
-                        var url  = "{{ url('/rakordir/form_edit') }}/"+row.tanggal+"/"+row.agenda_no;
-                        var tanggal = row.tanggal;
-                        var agenda_no = row.agenda_no;
+                        var url  = "{{ url('/rakordir/form_edit') }}/"+row.date+"/"+row.agenda_no;
+                        var tanggal = String(row.date).replace(/-/g, "");
+                        var agenda_no = String(row.agenda_no);
 
                         var fa   = 'fa-pencil-square-o';
                         var edit = '<a href="'+url+'" class="text-success m-r-5" data-toggle="tooltip" title=" Edit " style="margin:0px 2px 2px 0px">'+
                                         '<i class="fa '+fa+' fa-2x"></i>'+
                                     '</a>'; 
-                        var heapus = '<a onclick="hapus(`'+tanggal+'`,`'+agenda_no+'`)" class="text-danger m-r-10" data-toggle="tooltip" title=" Hapus " style="margin:0px 2px 2px 0px">'+
+                        var hapus = '<a onclick="hapus('+tanggal+','+agenda_no+')" class="text-danger m-r-10" data-toggle="tooltip" title=" Hapus " style="margin:0px 2px 2px 0px">'+
                                         '<i class="fa fa-times fa-2x"></i>'+
                                     '</a>'; 
-                        return edit+heapus;
+                        return edit+hapus;
                   }
                 }
             ]
@@ -127,11 +129,7 @@
                     location.reload();
                 }
             });
-        } else {
-            
-        }
-
-        
+        }        
     }
     function pdf(file) {
         var ex = file.substr(-3, 3);
