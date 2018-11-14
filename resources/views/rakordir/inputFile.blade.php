@@ -76,7 +76,6 @@
                     var ex = '';
                     var fa = '';
                     var data = row.rakordir_files;
-                    console.log(row['jam']);
                     for (var index = 0; index < data.length; index++) {
                         
                         if(data[index]){
@@ -84,12 +83,12 @@
                             if(ex === 'pdf' || ex === 'PDF'){
                                 fa = 'fa-file-pdf-o';
                                 del += '<a data-toggle="modal" href="#modal-id" class="text-danger m-r-5" '+
-                                        'style="margin:0px 2px 2px 0px" onclick="pdf(`'+data[index]+'`)">'+
+                                        'style="margin:0px 2px 2px 0px" onclick="pdf(`'+data[index].file_path+'`)">'+
                                     '<i class="fa '+fa+' fa-2x"></i>'+
                                     '</a>';
                             }else{
                                 fa = 'fa-file-text-o';
-                                url = "{{ url('/public/storage/') }}/"+data[index];
+                                url = "{{ url('/public/storage/') }}/"+data[index].file_path;
                                 del += '<a href="'+url+'" target="_blank" class="text-danger m-r-5" style="margin:0px 2px 2px 0px">'+
                                     '<i class="fa '+fa+' fa-2x"></i>'+
                                     '</a>';
