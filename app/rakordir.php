@@ -17,7 +17,13 @@ class rakordir extends Model
     }
     public function getDateTimeAttribute()
     {
-        $date = date('d-m-Y',strtotime($this->date));
+        $date = date('Y-m-d',strtotime($this->date));
         return "{$date} <br> {$this->mulai} : {$this->keluar}";
+    }
+    public function scopeFindByDateTime($query, $p)
+    {
+        return $query->where('date',"like","%{$p}%")
+                ->orWhere('mulai','like',"%{$p}%")
+                ->orWhere('keluar','like',"%{$p}%");
     }
 }

@@ -110,7 +110,7 @@ class rakordirController extends Controller
                 'selecTahun'    => $selecTahun,
                 'tahun'     => $tahun,
                 'backdrop' => $backdrop,
-                'cari'       =>$cari
+                'cari'       => $cari
 
             ]
         );
@@ -175,7 +175,8 @@ class rakordirController extends Controller
             if($request->file){
                 foreach ($request->file as $key => $value) { 
                     $uploadedFile  = $value; 
-                    $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
+                    $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
+                
                     $realName      = $value->getClientOriginalName();
                     $update = DB::table('rakordir_file')
                         ->insert(
@@ -220,12 +221,7 @@ class rakordirController extends Controller
     }
     public function showUpload(Request $request)
     {
-        $username   = $request->session()->get('username');
-        $data = rakordir::with('rakordirFiles')
-        ->orderBy('date','desc')
-        ->orderBy('mulai','asc')
-        ->get();
-
+        $data = rakordir::with('rakordirFiles')->orderBy('date','desc')->orderBy('agenda_no','asc')->get();
         return Datatables::of($data)->make(true);
     }
 
@@ -233,36 +229,28 @@ class rakordirController extends Controller
     {
         $data = [];
         $ret  = [];
+        // dd(strtotime($tanggal));
         if(false === strtotime($tanggal) && $request->cari){
-            $data = DB::table('rakordir')
-                    ->where(DB::RAW("date_format(date,'%d-%m-%Y')"),"like","%{$request->cari}%")
+
+            $data = rakordir::with('rakordirFiles')
+                    ->findByDateTime($request->cari)
                     ->orWhere('judul','like',"%{$request->cari}%")
                     ->orWhere('presenter','like',"%{$request->cari}%")
                     ->orWhere('no_dokument','like',"%{$request->cari}%")
+                    ->orderBy('date','desc')
+                    ->orderBy('mulai','asc')
                     ->get();
         }else{
-            $data = DB::table('rakordir')
-                    ->where('date',date('Y-m-d',strtotime($tanggal)) )->get();
+
+            $data = rakordir::with('rakordirFiles')
+                    ->where('date',date('Y-m-d',strtotime($tanggal)) )
+                    ->orderBy('date','desc')
+                    ->orderBy('mulai','asc')
+                    ->get();
             
         }
 
-        foreach ($data as $key => $value) {
-            array_push($ret,[
-                'username'=>$value->username,
-                'file_path'=>$this->getFilePath($value->date,$value->agenda_no),
-                'date'=>date('d-m-Y',strtotime($value->date)) . " <br> ".$value->mulai. " - " . $value->keluar,
-                'mulai'=>$value->mulai,
-                'keluar'=>$value->keluar,
-                'tempat'=>$value->tempat,
-                'judul'=>$value->judul,
-                'no_dokument'=>$value->no_dokument,
-                'agenda_no'=>$value->agenda_no,
-                'presenter'=>$value->presenter,
-            ]);
-        }
-        $data = collect($ret);
         return Datatables::of($data)->make(true);
-
     }
     
     public function remove_element($array,$value) {
@@ -292,7 +280,8 @@ class rakordirController extends Controller
         if(isset($request->oldNameFile) && isset($request->file)){
             foreach ($request->file as $key => $value) {            
                 $uploadedFile  = $value; 
-                $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
+                $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
+                
                 $realName      = $value->getClientOriginalName();
                 $nameFile      = $request->oldNameFile[$key];
                 $update = DB::table('rakordir_file')
@@ -311,7 +300,7 @@ class rakordirController extends Controller
         }else if( isset($request->file) ){
             foreach ($request->file as $key => $value) {            
                 $uploadedFile  = $value; 
-                $path          = $uploadedFile->store( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no );
+                $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
                 $realName      = $value->getClientOriginalName();
                 $nameFile      = $request->oldNameFile[$key];
                 $update = DB::table('rakordir_file')

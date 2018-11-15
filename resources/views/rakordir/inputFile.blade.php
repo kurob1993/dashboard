@@ -38,6 +38,10 @@
             "responsive": true,
             "processing": true,
             "serverSide": true,
+            "columnDefs": [ {
+                "targets": 0,
+                "orderable": false
+            } ],
             // "sDom": 'tipr', 
             "language": {
                 "search": "Cari:",
