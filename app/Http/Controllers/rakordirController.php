@@ -238,14 +238,14 @@ class rakordirController extends Controller
                     ->orWhere('presenter','like',"%{$request->cari}%")
                     ->orWhere('no_dokument','like',"%{$request->cari}%")
                     ->orderBy('date','desc')
-                    ->orderBy('mulai','asc')
+                    ->orderBy('agenda_no','asc')
                     ->get();
         }else{
 
             $data = rakordir::with('rakordirFiles')
                     ->where('date',date('Y-m-d',strtotime($tanggal)) )
                     ->orderBy('date','desc')
-                    ->orderBy('mulai','asc')
+                    ->orderBy('agenda_no','asc')
                     ->get();
             
         }
@@ -260,59 +260,64 @@ class rakordirController extends Controller
     }
     public function edit(Request $request)
     {
-        $username      = $request->session()->get('username'); 
-
-        $save = DB::table('rakordir')
-        ->where('agenda_no',$request->agenda_no_val)
-        ->where('date',$request->tanggal_val)
-        ->update(
-            [
-                'username'      => $username,
-                'date'          => $request->tanggal,
-                'mulai'         => $request->jam_mulai .":". $request->menit_mulai,
-                'keluar'        => $request->jam_keluar .":". $request->menit_keluar,
-                'judul'         => $request->judul,
-                'agenda_no'     => $request->agenda_no,
-                'no_dokument'   => $request->no_dokument,
-                'presenter'     => $request->presenter,
-            ]
-        );
-        if(isset($request->oldNameFile) && isset($request->file)){
-            foreach ($request->file as $key => $value) {            
-                $uploadedFile  = $value; 
-                $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
-                
-                $realName      = $value->getClientOriginalName();
-                $nameFile      = $request->oldNameFile[$key];
-                $update = DB::table('rakordir_file')
-                ->where('agenda_no',$request->agenda_no_val)
-                ->where('date',$request->tanggal_val)
-                ->where('file_name',$nameFile)
-                ->update(
-                    [
-                        'date'      => $request->tanggal_val,
-                        'agenda_no' => $request->agenda_no_val,
-                        'file_name' => $realName,
-                        'file_path' => str_replace("public/","",$path),
-                    ]
-                );
+        //date new, date old, agenda new, agenda old
+        $count = rakordir::findAgendaExist($request->tanggal,$request->tanggal_val,$request->agenda_no,$request->agenda_no_val);
+        if($count == 0 ){
+            $username  = $request->session()->get('username');
+            $save      = DB::table('rakordir')
+            ->where('agenda_no',$request->agenda_no_val)
+            ->where('date',$request->tanggal_val)
+            ->update(
+                [
+                    'username'      => $username,
+                    'date'          => $request->tanggal,
+                    'mulai'         => $request->jam_mulai .":". $request->menit_mulai,
+                    'keluar'        => $request->jam_keluar .":". $request->menit_keluar,
+                    'judul'         => $request->judul,
+                    'agenda_no'     => $request->agenda_no,
+                    'no_dokument'   => $request->no_dokument,
+                    'presenter'     => $request->presenter,
+                ]
+            );
+            if(isset($request->oldNameFile) && isset($request->file)){
+                foreach ($request->file as $key => $value) {            
+                    $uploadedFile  = $value;
+                    $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
+                    
+                    $realName      = $value->getClientOriginalName();
+                    $nameFile      = $request->oldNameFile[$key];
+                    $update = DB::table('rakordir_file')
+                    ->where('agenda_no',$request->agenda_no_val)
+                    ->where('date',$request->tanggal_val)
+                    ->where('file_name',$nameFile)
+                    ->update(
+                        [
+                            'date'      => $request->tanggal_val,
+                            'agenda_no' => $request->agenda_no_val,
+                            'file_name' => $realName,
+                            'file_path' => str_replace("public/","",$path),
+                        ]
+                    );
+                }
+            }else if( isset($request->file) ){
+                foreach ($request->file as $key => $value) {            
+                    $uploadedFile  = $value; 
+                    $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
+                    $realName      = $value->getClientOriginalName();
+                    $nameFile      = $request->oldNameFile[$key];
+                    $update = DB::table('rakordir_file')
+                    ->insert(
+                        [
+                            'date'      => $request->tanggal_val,
+                            'agenda_no' => $request->agenda_no_val,
+                            'file_name' => $realName,
+                            'file_path' => str_replace("public/","",$path),
+                        ]
+                    );
+                }
             }
-        }else if( isset($request->file) ){
-            foreach ($request->file as $key => $value) {            
-                $uploadedFile  = $value; 
-                $path          = $uploadedFile->storeAs( 'public/files/rakordir/'.$username.'/'. $request->tanggal .'/'.$request->agenda_no, $value->getClientOriginalName() );
-                $realName      = $value->getClientOriginalName();
-                $nameFile      = $request->oldNameFile[$key];
-                $update = DB::table('rakordir_file')
-                ->insert(
-                    [
-                        'date'      => $request->tanggal_val,
-                        'agenda_no' => $request->agenda_no_val,
-                        'file_name' => $realName,
-                        'file_path' => str_replace("public/","",$path),
-                    ]
-                );
-            }
+        }else{
+            return redirect()->back()->withErrors(['Data tidak bisa di rubah dikarenakan Tanggal dan No Agenda tersebut sudah ada']);
         }
         return redirect('/rakordir/input_file');
     }
