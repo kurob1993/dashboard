@@ -17,13 +17,22 @@ class rakordir extends Model
     }
     public function getDateTimeAttribute()
     {
-        $date = date('Y-m-d',strtotime($this->date));
-        return "{$date} <br> {$this->mulai} : {$this->keluar}";
+        $date = date('d-m-Y',strtotime($this->date));
+        return "{$date} <br> {$this->mulai} - {$this->keluar}";
     }
     public function scopeFindByDateTime($query, $p)
     {
         return $query->where('date',"like","%{$p}%")
                 ->orWhere('mulai','like',"%{$p}%")
                 ->orWhere('keluar','like',"%{$p}%");
+    }
+    public function scopeFindAgendaExist($query, $date, $date_old, $agenda_no, $agenda_old)
+    {
+        // $find = $query->where('date',"{$date}")->where('agenda_no',"{$agenda_no}")->first();
+        $find = '';
+        if( !($date_old == $date && $agenda_old == $agenda_no) ){
+            $find = $query->where('date',"{$date}")->where('agenda_no',"{$agenda_no}")->count();
+        }
+        return $find;
     }
 }
