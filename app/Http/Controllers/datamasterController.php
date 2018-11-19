@@ -318,7 +318,7 @@ class datamasterController extends Controller
     }
     public function tulisfile($tabel, $teks, $lsupdate)
     {
-        $now		    = strtotime(substr($lsupdate, 0, 8));
+        $now	    = strtotime(substr($lsupdate, 0, 8));
         $kemarin    = date("Y-m-d", strtotime('-1 day', $now));
         $lastupdate = $kemarin;
         $lastuptime = substr($lsupdate, 8, 2).':00:00';
