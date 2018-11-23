@@ -181,7 +181,7 @@ class invoiceController extends Controller
     {
         $RKAP    = DB::table('target_rkap')->where('BULAN',$month)->where('TAHUN',$year)->get();
         if($RKAP){
-            return $RKAP[0]->$tag_name/$lastDay;
+            return $RKAP[0]->$tag_name;
         }
     }
 
