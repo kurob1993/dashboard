@@ -159,19 +159,19 @@ class invoiceController extends Controller
         return $ret;
     }
     public function lastUpdate($tanggal) {
-        $count = DB::table('kontribusi_margin')
-        ->where('tanggal',$tanggal)
+        $count = DB::table('invoice')
+        ->where('billing_date',$tanggal)
         ->orderBy('datefile','DESC')
         ->limit(1)->count();
 
         $ret = "";
         if($count == 0){
-            $ret = DB::table('kontribusi_margin')
-            ->orderBy('tanggal','DESC')
+            $ret = DB::table('invoice')
+            ->orderBy('billing_date','DESC')
             ->limit(1)->get();
         }else{
-            $ret = DB::table('kontribusi_margin')
-            ->where('tanggal',$tanggal)
+            $ret = DB::table('invoice')
+            ->where('billing_date',$tanggal)
             ->orderBy('datefile','DESC')
             ->limit(1)->get();
         }
@@ -187,82 +187,82 @@ class invoiceController extends Controller
 
     public function nilaiInvoice($tag_name,$first,$tangal)
     {
-        $ret = DB::table('kontribusi_margin');
+        $ret = DB::table('invoice');
 
         switch ($tag_name) {
             case 'DOM_HRT':
-                return $ret->where( DB::RAW('left(matrial,1)'),'H' )
-                            ->where( DB::RAW('right(matrial,1)'),'T' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'H' )
+                            ->where( DB::RAW('right(material,1)'),'T' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('invoice_value_usd');
                 break;
                 
             case 'DOM_HRC':
-                return $ret->where( DB::RAW('left(matrial,1)'),'H' )
-                            ->where( DB::RAW('right(matrial,1)'),'<>','T' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'H' )
+                            ->where( DB::RAW('right(material,1)'),'<>','T' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('invoice_value_usd');
                 break;
 
             case 'DOM_HRPO':
-                return $ret->where( DB::RAW('left(matrial,1)'),'P' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'P' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('invoice_value_usd');
                 break;
 
             case 'DOM_CRC':
-                return $ret->whereIn( DB::RAW('left(matrial,1)'),['C','F'] )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('sales_value_usd');
+                return $ret->whereIn( DB::RAW('left(material,1)'),['C','F'] )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('invoice_value_usd');
                 break;
 
             case 'DOM_WR':
-                return $ret->where( DB::RAW('left(matrial,1)'),'W' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'W' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('invoice_value_usd');
                 break;
                 
             case 'EKS_HRC':
-                return $ret->where( DB::RAW('left(matrial,1)'),'H' )
-                            ->where( DB::RAW('right(matrial,1)'),'<>','T' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'H' )
+                            ->where( DB::RAW('right(material,1)'),'<>','T' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('invoice_value_usd');
                 break;
 
             case 'EKS_HRPO':
-                return $ret->where( DB::RAW('left(matrial,1)'),'P' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'P' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('invoice_value_usd');
                 break;
 
             case 'EKS_CRC':
-                return $ret->whereIn( DB::RAW('left(matrial,1)'),['C','F'] )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('sales_value_usd');
+                return $ret->whereIn( DB::RAW('left(material,1)'),['C','F'] )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('invoice_value_usd');
                 break;
 
             case 'EKS_WR':
-                return $ret->where( DB::RAW('left(matrial,1)'),'W' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('sales_value_usd');
+                return $ret->where( DB::RAW('left(material,1)'),'W' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('invoice_value_usd');
                 break;
             
             default:
@@ -272,87 +272,193 @@ class invoiceController extends Controller
     }
     public function tonInvoice($tag_name,$first,$tangal)
     {
-        $ret = DB::table('kontribusi_margin');
+        $ret = DB::table('invoice');
 
         switch ($tag_name) {
             case 'DOM_HRT':
-                return $ret->where( DB::RAW('left(matrial,1)'),'H' )
-                            ->where( DB::RAW('right(matrial,1)'),'T' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('quantity');
+                return $ret->where( DB::RAW('left(material,1)'),'H' )
+                            ->where( DB::RAW('right(material,1)'),'T' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('net_weight');
                 break;
                 
             case 'DOM_HRC':
-                return $ret->where( DB::RAW('left(matrial,1)'),'H' )
-                            ->where( DB::RAW('right(matrial,1)'),'<>','T' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('quantity');
+                return $ret->where( DB::RAW('left(material,1)'),'H' )
+                            ->where( DB::RAW('right(material,1)'),'<>','T' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('net_weight');
                 break;
 
             case 'DOM_HRPO':
-                return $ret->where( DB::RAW('left(matrial,1)'),'P' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('quantity');
+                return $ret->where( DB::RAW('left(material,1)'),'P' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('net_weight');
                 break;
 
             case 'DOM_CRC':
-                return $ret->whereIn( DB::RAW('left(matrial,1)'),['C','F'] )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('quantity');
+                return $ret->whereIn( DB::RAW('left(material,1)'),['C','F'] )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('net_weight');
                 break;
 
             case 'DOM_WR':
-                return $ret ->where( DB::RAW('left(matrial,1)'),'W' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','D0')
-                            ->sum('quantity');
+                return $ret ->where( DB::RAW('left(material,1)'),'W' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','D0')
+                            ->sum('net_weight');
                 break;
 
             case 'EKS_HRC':
-                return $ret->where( DB::RAW('left(matrial,1)'),'H' )
-                            ->where( DB::RAW('right(matrial,1)'),'<>','T' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('quantity');
+                return $ret->where( DB::RAW('left(material,1)'),'H' )
+                            ->where( DB::RAW('right(material,1)'),'<>','T' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('net_weight');
                 break;
 
             case 'EKS_HRPO':
-                return $ret->where( DB::RAW('left(matrial,1)'),'P' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('quantity');
+                return $ret->where( DB::RAW('left(material,1)'),'P' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('net_weight');
                 break;
 
             case 'EKS_CRC':
-                return $ret->whereIn( DB::RAW('left(matrial,1)'),['C','F'] )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('quantity');
+                return $ret->whereIn( DB::RAW('left(material,1)'),['C','F'] )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('net_weight');
                 break;
 
             case 'EKS_WR':
-                return $ret ->where( DB::RAW('left(matrial,1)'),'W' )
-                            ->where( 'tanggal','>=',$first )
-                            ->where( 'tanggal','<=',$tangal )
-                            ->where('dist','E0')
-                            ->sum('quantity');
+                return $ret ->where( DB::RAW('left(material,1)'),'W' )
+                            ->where( 'billing_date','>=',$first )
+                            ->where( 'billing_date','<=',$tangal )
+                            ->where('dist_channel','E0')
+                            ->sum('net_weight');
                 break;
             
             default:
                 # code...
                 break;
         }
+    }
+    public function getFiles()
+    {
+        //server
+        // $readdir = "/mnt/winnt/";
+        // $movedir = "/mnt/winnt/archive/";
+
+        //local
+        $readdir = './public/uploads/';
+        $movedir = "./public/uploads/archive/";
+        
+        $arfile  = scandir($readdir);
+        foreach ($arfile as $arsip) {
+            if ($arsip!='.' && $arsip!='..') {
+                $prefix=explode('_', $arsip);
+                $kode = array('invoice');
+                if (in_array(strtolower($prefix[0]), $kode)) {
+
+                    $file_handle = fopen($readdir.$arsip, "rb");
+                    $i = 1;
+
+                    while (!feof($file_handle)) {
+                        $line_of_text = fgets($file_handle);
+                        if ($i>1) {
+                            if (strlen($line_of_text)>0) {
+                                $hsl = $this->tulisfile(strtolower($prefix[0]), $line_of_text, $prefix[1]);
+                            }
+                        }
+                        $i++;
+                    }
+                    fclose($file_handle);
+                    copy($readdir.$arsip, $movedir.$arsip);
+                    $tr = DB::table('log_down')->insert(
+                        [
+                            'isinya'  => 'Proses Download File '.$arsip,
+                            'stat'    => '1'
+                        ]
+                    );
+                    unlink($readdir.$arsip);
+                }
+            }
+        }
+        set_time_limit(60);
+    }
+    public function convert($value=NULL)
+    {
+      isset($value) ? $ret = trim($value) : $ret = NULL;
+      if (substr($ret, -1)=='-') { 
+        $ret = trim(substr($ret, -1)).trim(substr($ret, 0, strlen($ret)-1)); 
+      }
+      return $ret;
+    }
+    public function toNumber($teks)
+    {
+        $hsl	= str_replace(".", "", $teks);
+        $ret	= str_replace(",", ".", $hsl);
+
+        return $ret;
+    }
+    public function tulisfile($tabel, $teks, $dateOnFile)
+    {
+        $date		= strtotime(substr($dateOnFile, 0, 8));
+        $tanggal    = date("Y-m-d", $date);
+
+        $delimiter = "|";
+        $splitcontents = explode($delimiter, $teks);
+        
+        $val0 = $this->convert($splitcontents[0]);
+        $val1 = $this->convert($splitcontents[1]);
+        $val2 = $this->convert($splitcontents[2]);
+        $val3 = $this->convert($splitcontents[3]);
+        $val4 = $this->convert($splitcontents[4]);
+        $val5 = $this->convert($splitcontents[5]);
+        $val6 = $this->convert($splitcontents[6]);
+        $val7 = $this->convert($splitcontents[7]);
+        $val8 = $this->convert($splitcontents[8]);
+        $val9 = $this->convert($splitcontents[9]);
+
+        $val10 = $this->convert($splitcontents[10]);
+        $val11 = $this->convert($splitcontents[11]);
+        $val12 = $this->convert($splitcontents[12]);
+        $val13 = $this->convert($splitcontents[13]);
+        $val14 = $this->convert($splitcontents[14]);
+        $val15 = $this->convert($splitcontents[15]);
+        $val16 = $this->convert($splitcontents[16]);
+
+        DB::table('invoice')->insert([
+            'material' => $val0,
+            'description' => $val1,
+            'sales_value_rp' => $this->toNumber($val2),
+            'sales_value_usd' => $this->toNumber($val3),
+            'billing_date' => date("Y-m-d", strtotime($val4)),
+            'billing_number' => $val5,
+            'net_weight' => $this->toNumber($val6),
+            'uom' => $val7,
+            'dist_channel' => $val8,
+            'invoice_value_rp' => $this->toNumber($val9),
+            'dp_value_rp' => $this->toNumber($val10),
+            'ppn_value_rp' => $this->toNumber($val11),
+            'pph_value_rp' => $this->toNumber($val12),
+            'invoice_value_usd' => $this->toNumber($val13),
+            'dp_value_usd' => $this->toNumber($val14),
+            'ppn_value_usd' => $this->toNumber($val15),
+            'pph_value_usd' => $this->toNumber($val16),
+            'datefile' => $tanggal,
+        ]);
     }
 }

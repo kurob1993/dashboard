@@ -67,13 +67,6 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 		Route::post('/realisasi_foh/show', 'realisasiFohController@show');
 	});
 
-	//invoice
-	Route::prefix('invoice')->group(function () {
-		Route::get('/', 'invoiceController@index');
-		Route::get('/show', 'invoiceController@show');
-	});
-	
-
 	//detail produksi
 	Route::prefix('last_prod')->group(function () {
 	    Route::get('/', 'lastProdController@index');
@@ -149,6 +142,18 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 		Route::post('show_materi/{tanggal?}', 'rakordirController@showMateri');
 	});
 
+	//invoice
+	Route::prefix('invoice')->group(function () {
+		Route::get('/', 'invoiceController@index');
+		Route::get('show', 'invoiceController@show');
+	});
+
+	// new budget project
+	Route::prefix('budget_project')->group(function () {
+		Route::get('/', 'budgetProjectController@index');
+		Route::post('show', 'budgetProjectController@show');
+	});
+
 });
 
 Route::get('/data_produk', 'homeController@data_produk');
@@ -186,5 +191,12 @@ Route::get('/test/lc', 'datamasterController@kalkulasi_hurangLC');
 Route::get('/test/saldo_bank', 'datamasterController@kalkulasi_saldoBank');
 Route::get('/transfer/{tgl?}', 'datamasterController@transfer');
 
+//ambil data invoice
+Route::get('invoice/getfiles', 'invoiceController@getFiles');
+
+//ambil data budget
+Route::get('budget_project/getfiles', 'budgetProjectController@getFiles');
+
 
 Route::get('/debug', 'debugController@index');
+Route::post('/debug/upload', 'debugController@upload');
