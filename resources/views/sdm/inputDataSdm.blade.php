@@ -19,15 +19,21 @@
 	});
 
     function dataBerdasarkan(data){
-        
+        $('#inputBerdasarkan').html('');
+        var berdasarkan = ' @include('sdm.formBerdasarkan') ';
         var url = '';
         switch (data) {
             case 'demografi':
+                $('#inputBerdasarkan').append(berdasarkan);
                 url = "{{ url('/sdm/input_data_sdm/berdasarkan/demografi') }}";
                 break;
         
             case 'kpi':
+                $('#inputBerdasarkan').append(berdasarkan);
                 url = "{{ url('/sdm/input_data_sdm/berdasarkan/kpi') }}";
+                break;
+
+            case 'mhl':
                 break;
         
             default:
@@ -53,6 +59,16 @@
 				Input Data SDM                
             @endslot
 
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            
             @if (\Session::has('message'))
                 <div class="alert alert-success">
                     <ul>
@@ -95,13 +111,7 @@
                     </div>
                 </div>  
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="Berdasarkan">Berdasarkan:</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="berdasarkan" id="berdasarkan">
-                        </select>
-                    </div>
-                </div> 
+                <div id="inputBerdasarkan"></div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="file">File:</label>
