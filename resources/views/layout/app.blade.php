@@ -116,7 +116,7 @@
     <!-- begin #sidebar -->
     <div id="sidebar" class="sidebar">
       <!-- begin sidebar scrollbar -->
-      <div data-scrollbar="true" data-height="100%">
+      <div data-scrollbar="true" data-height="700px">
         <!-- begin sidebar user -->
         <ul class="nav">
           <li class="nav-profile">
