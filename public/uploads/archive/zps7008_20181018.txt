@@ -1,0 +1,180 @@
+Level|WBS Element|Description|IM Position|IM Budget Overall|WBS Budget Overall|Act. Payment TOTAL|Available Overall|Progress Overall (%)
+   1|I-3009-11-001|Blast Furnace|111111-PK05-1401003|7.966.130.024.636|7.966.130.024.636|5.102.873.332.843|2.863.256.691.793|64
+   1|I-3009-11-005|Proyek HSM #2|112007-PK05-1401003|6.249.521.792.249|5.859.942.869.249|3.140.699.795.437|2.719.243.073.812|54
+   1|I-2009-11-002|Revitalisasi SSP I|113001-PK05-1401003|917.287.448.830|909.012.448.830|36.352.636.860|872.659.811.970|4
+   1|I-3016-11-003|Push Pull Pickling Line & Reversing Mill|113401-PK05-1401004|142.165.638.000|664.164.833.137|98.000.000|664.066.833.137|0
+   1|I-3009-11-003|Integrated Steel Mill (JV)|112006-PK05-1401003|615.002.962.894|615.002.962.894|5.577.893.790|609.425.069.104|1
+   1|I-2009-11-001|Revitalisasi DRP|112801-PK05-1401003|602.797.010.317|561.411.890.317|121.593.747.314|439.818.143.003|22
+   1|I-5014-11-001|Pengadaan Lahan Pabrik Baja Terpadu #2|112401-PK05-1401002|200.000.000|209.997.624.000|0|209.997.624.000|0
+   1|I-2017-11-001|Revitalisasi HSM|113301-PK05-1401004|152.211.003.949|120.520.623.300|0|120.520.623.300|0
+   1|I-3009-11-002|Modernisasi SSP II|113022-PK05-1401004|60.639.000.000|60.639.000.000|15.089.081.110|45.549.918.890|25
+   1|I-1011-11-003|MES|112003-PK05-1401007|72.640.125.674|56.640.125.674|0|56.640.125.674|0
+   1|I-5011-11-002|Pemb. Pabrik Kapur II|112631-PK05-1401003|55.750.000.000|54.800.000.000|0|54.800.000.000|0
+   1|I-4016-11-015|UPGRADING SISTEM OTOMASI CTCM TAHAP I (1|113401-PK05-1401004|142.165.638.000|49.300.000.000|28.314.877.682|20.985.122.318|57
+   1|I-2016-11-002|Revitalisasi BSP|113201-PK05-1401004|64.601.000.000|47.348.000.000|0|47.348.000.000|0
+   1|I-3009-11-006|Tension Leveler|113401-PK05-1401004|142.165.638.000|46.461.719.507|52.957.800|46.408.761.707|0
+   1|I-5013-11-003|Pengadaan Mesin Gerinda Baru HSM|113301-PK05-1401004|152.211.003.949|36.106.316.704|32.515.045.500|3.591.271.204|90
+   1|I-4010-11-025|Penambahan Peningkatan Tanah Kubangsari|111554-PK05-1401001|34.500.000.000|34.000.000.000|0|34.000.000.000|0
+   1|I-3016-11-002|Implementasi Tekn. Surface Defect Det.|113401-PK05-1401004|142.165.638.000|31.233.300.000|0|31.233.300.000|0
+   1|I-3016-11-001|Implementasi Tekn. Hot Roll Oil di HSM#1|113301-PK05-1401004|152.211.003.949|30.167.592.000|0|30.167.592.000|0
+   1|I-4011-11-003|Riset Pembangunan Dormitory|112104-PK05-1401003|25.000.000.000|25.000.000.000|0|25.000.000.000|0
+   1|I-4016-11-007|IT Disaster Recovery Centre|112201-PK05-1401008|0|24.919.423.000|0|24.919.423.000|0
+   1|I-4010-11-013|Relokasi kantor PBS / PPBS (area Hyl-3)|112801-PK05-1401003|602.797.010.317|23.365.920.000|642.041.828|22.723.878.172|3
+   1|I-4011-11-005|Revitalisasi Pabrik Gas Industri|112641-PK05-1401004|40.308.460.643|22.500.000.000|0|22.500.000.000|0
+   1|I-4010-11-007|Horizontal Boring & Milling Machine|112621-PK05-1401004|21.000.000.000|21.000.000.000|0|21.000.000.000|0
+   1|I-4011-11-011|Rekondisi Compresor Oxygen|112641-PK05-1401004|40.308.460.643|17.808.460.643|17.766.372.225|42.088.418|100
+   1|I-4016-11-016|Pembangunan Gudang 26|112523-PK05-1401003|54.829.689.000|17.490.777.936|13.729.391.765|3.761.386.171|78
+   1|I-4015-11-010|Pembangunan Energy Control Center|112631-PK05-1401003|55.750.000.000|16.560.700.000|16.560.000.000|700.000|100
+   1|I-1012-11-001|Implementasi Paralel Curr &Data Conv SAP|112003-PK05-1401007|72.640.125.674|16.000.000.000|0|16.000.000.000|0
+   1|I-4018-11-038|Upgrade control PLC dan drive TPM|113401-PK05-1401004|142.165.638.000|16.000.000.000|0|16.000.000.000|0
+   1|I-4010-11-012|Pemb. Gudang & Mat. Handling DRI ex MJIS|112801-PK05-1401003|602.797.010.317|13.020.000.000|0|13.020.000.000|0
+   1|I-4011-11-009|Gudang Produk Otomotif|112523-PK05-1401003|54.829.689.000|9.500.000.000|0|9.500.000.000|0
+   1|I-1011-11-001|Stabilisasi & Enhancement SAP|112201-PK05-1401007|9.471.000.000|9.471.000.000|0|9.471.000.000|0
+   1|I-4011-11-014|Penggantian Control System EAF 4 BSP|113105-PK05-1401004|9.000.000.000|9.000.000.000|0|9.000.000.000|0
+   1|I-4015-11-009|Penambahan Boiler 1 unit Kap. 23 ton|113401-PK05-1401004|142.165.638.000|8.000.000.000|7.191.500.000|808.500.000|90
+   1|I-4011-11-012|Pembangunan Work Shop V Khusus Segment|113001-PK05-1401003|917.287.448.830|7.875.000.000|3.479.815.594|4.395.184.406|44
+   1|I-4017-11-014|Pembuatn Jalan Beton HSM-CRM & Pertg PPC|111555-PK05-1401002|9.469.280.000|7.336.368.000|4.500.650.000|2.835.718.000|61
+   1|I-4011-11-002|Pembangunan Mesin Briquette Fines Sponge|112801-PK05-1401004|9.335.916.403|7.335.916.403|6.610.435.012|725.481.391|90
+   1|I-4016-11-005|Pembetonan Jl Area Plant  pertigaan PGI|111555-PK05-1401002|9.469.280.000|7.310.687.737|4.786.000.000|2.524.687.737|65
+   1|I-4012-11-012|Pemasangan Boiler di CRM|113441-PK05-1401004|14.871.435.000|7.000.000.000|0|7.000.000.000|0
+   1|I-4011-11-013|Pembangunan Gudang Wire Rod Mill|112523-PK05-1401003|54.829.689.000|5.329.689.000|0|5.329.689.000|0
+   1|I-4011-11-001|Penambahan Atap N1 Yard PPBLD|113401-PK05-1401003|5.136.400.000|5.136.400.000|0|5.136.400.000|0
+   1|I-4016-11-010|Pengerasan Jalan Area Gudang Luar Slab|112511-PK05-1401002|0|5.000.000.000|4.340.000.000|660.000.000|87
+   1|I-2009-11-004|Revitalisasi HSM|113301-PK05-1401003|7.419.600.000|4.919.600.000|0|4.919.600.000|0
+   1|I-4012-11-001|Penambahan Pengatapan Slab Handling SSP2|113022-PK05-1401003|7.823.351.654|4.750.000.000|2.525.000.000|2.225.000.000|53
+   1|I-4016-11-009|Pemb.TPS Limbah B3 baru untuk Slag BFC|112508-PK05-1401002|0|4.735.000.000|4.506.000.000|229.000.000|95
+   1|I-4010-11-020|Wielded Pipe Machine|113401-PK05-1401004|142.165.638.000|4.500.000.000|0|4.500.000.000|0
+   1|I-4016-11-006|Pelebaran Jlan Hot Metal Area Plant Site|111555-PK05-1401002|9.469.280.000|3.711.154.000|3.528.000.000|183.154.000|95
+   1|I-4014-11-001|Pengadaan Kompresor CRM|113441-PK05-1401004|14.871.435.000|3.271.435.000|3.271.435.000|0|100
+   1|I-4010-11-014|Timbangan transaksi DRI dan produksi PBS|112801-PK05-1401003|602.797.010.317|3.075.200.000|0|3.075.200.000|0
+   1|I-2009-11-003|Revitalisasi SSP II|113022-PK05-1401003|7.823.351.654|3.073.351.654|3.073.352.600|946-|100
+   1|I-4014-11-002|Pengadaan Chiller Dehumidity CRM|113441-PK05-1401004|14.871.435.000|2.400.000.000|2.309.783.000|90.217.000|96
+   1|I-4015-11-011|Pengadaan 1 unit Kompressor 2000 NM3/H|113401-PK05-1401004|142.165.638.000|2.300.000.000|1.840.000.000|460.000.000|80
+   1|I-4015-11-004|Lev. tnh area gd.I,II,Drainse & saluran|112801-PK05-1401002|250.000.000|2.225.000.000|0|2.225.000.000|0
+   1|I-4011-11-015|Pengadaan System Hydrolik EAF 4 BSP|113106-PK05-1401004|2.200.000.000|2.200.000.000|0|2.200.000.000|0
+   1|I-4010-11-021|Filter Press (Screening Limbah) - CRM|113441-PK05-1401004|14.871.435.000|2.200.000.000|0|2.200.000.000|0
+   1|I-3009-11-004|Peningkatan Kapasitas HSM 3,5 MTPY|111403-PK05-1401004|2.032.088.000|2.032.088.000|0|2.032.088.000|0
+   1|I-4011-11-006|Pembangunan Shot Blasting Plant|112002-PK05-1401004|2.018.500.000|2.018.500.000|0|2.018.500.000|0
+   1|I-4018-11-024|Pengg Instrment & Sist.Kontrl Dmint Plan|112801-PK05-1401004|9.335.916.403|2.000.000.000|0|2.000.000.000|0
+   1|I-4016-11-017|Impl.Proses Bisnis Tolling dg PTKNSS MES|112201-PK05-1401008|0|1.966.126.250|1.286.100.000|680.026.250|65
+   1|I-4010-11-022|Pengadaan Panel Breaker|112624-PK05-1401004|1.900.000.000|1.900.000.000|1.691.442.000|208.558.000|89
+   1|I-4011-11-016|Penggantian Foil Pack WTP HSM|113351-PK05-1401003|1.600.000.000|1.600.000.000|1.425.000.000|175.000.000|89
+   1|I-4010-11-010|Psg Atap 153F1 & Pto Rktr Eks Modul 3/4|112801-PK05-1401003|602.797.010.317|1.474.000.000|0|1.474.000.000|0
+   1|I-4017-11-005|Peng. Timbangan Cap. > 60 T (Pos Billet)|111816-PK05-1401008|0|1.087.000.000|0|1.087.000.000|0
+   1|I-4016-11-001|Renovasi Gedung Pusat Dokumen(Arsip)|111101-PK05-1401003|0|974.195.829|860.000.000|114.195.829|88
+   1|I-4018-11-013|Perluasan Gedung Lab Kalibrasi|112631-PK05-1401003|55.750.000.000|950.000.000|0|950.000.000|0
+   1|I-1013-11-001|Implementasi SAP Tax Parallel Currency|111603-PK05-1401007|930.600.000|930.600.000|916.548.000|14.052.000|98
+   1|I-4017-11-007|Pemb. TPS baru u/ Limbah BFC|112508-PK05-1401002|0|923.000.000|0|923.000.000|0
+   1|I-4018-11-001|Pemb. Lanjutan Ged. Document Center|111110-PK05-1401003|5.901.480.000|901.480.000|0|901.480.000|0
+   1|I-4010-11-005|Peng & Pemsngan Opacity&Dust Monitoring|112508-PK05-1401003|800.000.000|800.000.000|0|800.000.000|0
+   1|I-4017-11-015|Pemb. Pos P3K dan Pos & Garasi FireTruck|112508-PK05-1401003|800.000.000|799.658.245|0|799.658.245|0
+   1|I-4013-11-001|Pembetonan Jalan Gudang 17|112523-PK05-1401002|0|750.000.000|0|750.000.000|0
+   1|I-4010-11-004|Renovasi Masjid Al-Muhajirin|112504-PK05-1401003|742.000.000|742.000.000|0|742.000.000|0
+   1|I-4011-11-004|Pagar batas Tanah Billet - PT. IMPI|111554-PK05-1401002|537.500.000|537.500.000|0|537.500.000|0
+   1|I-4012-11-011|Pembangunan Gedung Head Office|111562-PK05-1401003|505.800.000|505.800.000|0|505.800.000|0
+   1|I-4010-11-002|Sertifikasi Tanah|111554-PK05-1401001|34.500.000.000|500.000.000|0|500.000.000|0
+   1|I-4018-11-012|Pembtn Tank Gravel Filter Sist. Filt.bsn|112631-PK05-1401004|400.000.000|400.000.000|0|400.000.000|0
+   1|I-4015-11-007|Pembangunan Kantor RTS HSM|113301-PK05-1401003|7.419.600.000|304.000.000|271.500.000|32.500.000|89
+   1|I-4012-11-010|Soil test dan tofografi lahan Petrochemi|112401-PK05-1401002|200.000.000|100.000.000|0|100.000.000|0
+   1|I-4012-11-009|Soil test dan tofografi lahan L. Product|112401-PK05-1401002|200.000.000|100.000.000|0|100.000.000|0
+   1|I-4016-11-013|Pembangunan Sanitasi Switch House AEI|113301-PK05-1401003|7.419.600.000|87.575.000|0|87.575.000|0
+   1|I-4016-11-008|Enhancement dan Stabilisasi MES FlatProd||0|0|0|0|0
+   1|I-4016-11-004|Perb.Jalan dg Cor Beton di Jl.KH Santani||0|0|0|0|0
+   1|I-4016-11-003|Pemb.Pondasi Pagar Bts Tnh Jl.Raya Anyer||0|0|0|0|0
+   1|I-4016-11-002|Fire Protection(Arsip)||0|0|0|0|0
+   1|I-5011-11-003|Project Management Office||0|0|0|0|0
+   1|I-5013-11-005|Konsultan L Prod Business Optimalization||0|0|0|0|0
+   1|I-5013-11-004|Penanggulangan Banjir Ciwandan||0|0|0|0|0
+   1|I-5013-11-002|Pemasangan Hot Scarfing||0|0|0|0|0
+   1|I-4016-11-011|Pemb.Gudang 25 B sebelah Barat CO2013||0|0|0|0|0
+   1|I-5013-11-001|Pemasangan Tension Leveller||0|0|0|0|0
+   1|I-5012-11-001|Pengadaan Lahan||0|0|0|0|0
+   1|I-4016-11-012|CCTV di area Material Handling||0|0|0|0|0
+   1|I-0001-14|Perbaikan CCM1&2 SSP Pasca Gagal Casting||0|0|0|0|0
+   1|I-2016-11-001|Revitalisasi SSP-II||0|0|0|0|0
+   1|I-1011-11-002|Otomasi Proses||0|0|0|0|0
+   1|I-4018-11-009|Pemb Jln Gudang 17||0|0|0|0|0
+   1|I-4018-11-008|Pemb Jln beton area plant site (PGI-BFC)||0|0|0|0|0
+   1|I-4018-11-007|Pemb Jln beton area plant site (HSM-CRM)||0|0|0|0|0
+   1|I-4018-11-006|Pemb Jln beton area plant site (Hot Mtl)||0|0|0|0|0
+   1|I-4018-11-005|Pos WRM||0|0|0|0|0
+   1|I-4018-11-004|Pembuatan Ruangan Pusat Pantau CCTV||0|0|0|0|0
+   1|I-4018-11-003|Pos area pabrik DR||0|0|0|0|0
+   1|I-4018-11-002|Pemasangan Fire Protection 5 Lantai||0|0|0|0|0
+   1|I-4017-11-013|Recuperator Walking Beam Furnace||0|0|0|0|0
+   1|I-4017-11-012|Rekondsi Contrl Sys. Demin Counter+pH CM||0|0|0|0|0
+   1|I-4017-11-011|Pembangunan Yard Coke||0|0|0|0|0
+   1|I-4017-11-010|Perluasan Gedung Lab Kalibrasi||0|0|0|0|0
+   1|I-4017-11-009|Pembangunan Gudang 25A|112523-PK05-1401003|54.829.689.000|0|0|0|0
+   1|I-4017-11-008|Pemb. Pos & Garasi Fire Truck|112508-PK05-1401003|800.000.000|0|0|0|0
+   1|I-4017-11-006|Pembangunan 1 unit Pos P3K|112508-PK05-1401003|800.000.000|0|0|0|0
+   1|I-4017-11-004|Renovasi Gedung MPC WRM||0|0|0|0|0
+   1|I-4017-11-003|Renovasi Gedung MPC BSP||0|0|0|0|0
+   1|I-4017-11-002|Pembuatan Ruangan Pusat Pantau CCTV||0|0|0|0|0
+   1|I-4017-11-001|Pembuatan Pos Penjagaan||0|0|0|0|0
+   1|I-4016-11-014|Sentralisasi Pulpit HSPM||0|0|0|0|0
+   1|I-5011-11-001|Push Pull Pickling||0|0|0|0|0
+   1|I-4010-11-017|Pemasangan Header Coolant + Mill mate M5||0|0|0|0|0
+   1|I-4010-11-016|Pembangunan Kantor Shift Mekanik SL||0|0|0|0|0
+   1|I-4010-11-015|Control Room HSM||0|0|0|0|0
+   1|I-4010-11-011|Pembangunan Fines Pellet & Fines Spons||0|0|0|0|0
+   1|I-4010-11-009|Zero Waste||0|0|0|0|0
+   1|I-4010-11-008|Pembangunan Gedung Rektek||0|0|0|0|0
+   1|I-4010-11-006|Gudang Tertutup Wire Rod||0|0|0|0|0
+   1|I-4010-11-003|Pembangunan Ruang Personel NDT||0|0|0|0|0
+   1|I-4010-11-001|Pemb. Gedung ADB Baru di Area Plant II||0|0|0|0|0
+   1|I-3016-11-004|Revamping EAF BSP For Hot Metal||0|0|0|0|0
+   1|I-3009-11-300-0-02|Jasa Penilaian Lahan Kosong untuk JV|112006-PK05-1401003|615.002.962.894|0|0|0|0
+   1|I-4015-11-008|Relokasi Toilet Swits House Finishing||0|0|0|0|0
+   1|I-4015-11-006|Pembangunan Gudang 25B||0|0|0|0|0
+   1|I-4015-11-005|Relokasi Ctrl House, Panel Operasi &MCC||0|0|0|0|0
+   1|I-4015-11-003|Pengurugan, pemdtn, pembetonan Gd 25,26||0|0|0|0|0
+   1|I-4015-11-002|Rekondisi Gudang Slab yang Lama||0|0|0|0|0
+   1|I-4015-11-001|Enhancement dan Stabilitas MES||0|0|0|0|0
+   1|I-4013-11-003|Dedusting System Rotary Kiln||0|0|0|0|0
+   1|I-4013-11-002|Pengembangan Gedung Dinas PBI||0|0|0|0|0
+   1|I-4012-11-015|Pembangunan Interface Gudang 12 dan 25||0|0|0|0|0
+   1|I-4012-11-014|Rek.Gas Heater DR Plant Hyl III (Batal)||0|0|0|0|0
+   1|I-4012-11-013|Implementasi Paralel Curr &Data Conv SAP||0|0|0|0|0
+   1|I-4012-11-008|Implementasi Pemanfaatan EAF Dust||0|0|0|0|0
+   1|I-4012-11-007|Pemasangan Pipa H2 & N2 dari PGI ke CRM||0|0|0|0|0
+   1|I-4012-11-006|Batal (ex Mesin Gerinda)||0|0|0|0|0
+   1|I-4012-11-005|Pemb. Gudang Tertutup Coil 25 B||0|0|0|0|0
+   1|I-4012-11-004|Pemb. Drainage Area MH ke Saluran Induk||0|0|0|0|0
+   1|I-4012-11-003|Pengaspalan Jalan Akses ke Gedung Hyl II||0|0|0|0|0
+   1|I-4012-11-002|Jalan dan Drainage terbuka PBS||0|0|0|0|0
+   1|I-4011-11-010|Batal (ex Tension Leveller)||0|0|0|0|0
+   1|I-4011-11-008|Pengadaan Mesin Screen Scrap||0|0|0|0|0
+   1|I-4011-11-007|Perbaikan Gedung PPC dan EDP||0|0|0|0|0
+   1|I-4018-11-040|Pemb. Kembali & Penataan Ulang Gd.Tekngi|111110-PK05-1401003|5.901.480.000|0|0|0|0
+   1|I-4018-11-039|Upgrade kapasitas overhead crane S L||0|0|0|0|0
+   1|I-4018-11-037|Pengg side trimmer with online mon & Scr|113401-PK05-1401004|142.165.638.000|0|0|0|0
+   1|I-4018-11-036|Penggantian Shear Knife Grinding Machine||0|0|0|0|0
+   1|I-4018-11-035|Pembelian Recuperator RHF 2||0|0|0|0|0
+   1|I-4018-11-034|Upgrade Sist Lub.Spindle RM (Mek HSM)||0|0|0|0|0
+   1|I-4018-11-033|UPGRADE CONTROL MAIN DRIVE ROUGHING (AEI||0|0|0|0|0
+   1|I-4018-11-032|UPGRADE CONTROL CRANE 618 (RTS)||0|0|0|0|0
+   1|I-4018-11-031|Upgrade Banding Machine KOHAN HSPM (SL &||0|0|0|0|0
+   1|I-4018-11-030|REVAMP CONTROL WIDTH GAUGE COILER (AEI H||0|0|0|0|0
+   1|I-4018-11-029|Upgrade Hard Stamping Machine SL - I (SL||0|0|0|0|0
+   1|I-4018-11-028|Perb strktr lantai Beton Area SL &WIP||0|0|0|0|0
+   1|I-4018-11-027|Sentralisasi Pulpit HSPM (SL&WIP)||0|0|0|0|0
+   1|I-4018-11-026|Perpjgn C-Hook Upgrade Ctrl Simatic S7||0|0|0|0|0
+   1|I-4018-11-025|Pembtn Gud Kapur diarea Gud 2 DRP||0|0|0|0|0
+   1|I-4018-11-023|Pembuatan Drainage Area CB IV (Barat & U||0|0|0|0|0
+   1|I-4018-11-022|Demolisi Bang.Utara Ctrl House & Rek.R.C||0|0|0|0|0
+   1|I-4018-11-021|Pembangunan Rest Room (2x3) di GF||0|0|0|0|0
+   1|I-4018-11-020|Pembangunan Work Shop Site||0|0|0|0|0
+   1|I-4018-11-019|Pembangunan Toilet area COP||0|0|0|0|0
+   1|I-4018-11-018|Pembangunan Keramik Coal Tower||0|0|0|0|0
+   1|I-4018-11-017|Pembangunan Emergency Coke Wharf||0|0|0|0|0
+   1|I-4018-11-016|Pembangunan Area Parkir||0|0|0|0|0
+   1|I-4018-11-015|Pembangunan Pagar COP||0|0|0|0|0
+   1|I-4018-11-014|Pembangunan Mesjid BFC||0|0|0|0|0
+   1|I-4018-11-011|Pembangunan Gudang 25A||0|0|0|0|0
+   1|I-4018-11-010|Renovasi Gedung MPC BSP||0|0|0|0|0
+   1|I-4010-11-027|Pembangunan Fasilitas Roll Forming PPBLD||0|0|0|0|0
+   1|I-4010-11-024|Penambahan Peningkatan Tanah Kubangsari||0|0|0|0|0
+   1|I-4010-11-023|Pembangunan Dormitory||0|0|0|0|0
+   1|I-4010-11-019|Penambahan Tanki HCL||0|0|0|0|0
+   1|I-4010-11-018|Pembangunan Tension Leveler||0|0|0|0|0
