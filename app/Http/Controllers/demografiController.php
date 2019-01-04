@@ -16,15 +16,15 @@ class demografiController extends Controller
     }
     public function index(Request $request)
     {
-        $tahun = isset($request->tahun) ? $request->tahun : date('Y');
-        $tahun_lama = isset($request->tahun) ? $request->tahun-1 : date('Y')-1;
+        $select_tahun           = isset($request->tahun) ? $request->tahun : $this->SelectTahun();
+        $tahun_lama             = isset($request->tahun) ? $request->tahun-1 : date('Y')-1;
     	$data_group             = $request->get('data_group');
         $data_menu              = $request->get('data_menu');
         $session_nik            = $request->session()->get('nik');
-        $data_demoStatus        = $this->demoStatus($tahun);
-        $data_demoGolongan      = $this->demoGolongan($tahun);
-        $data_demoPendidikan    = $this->demoPendidikan($tahun);
-        $demoUsia               = $this->demoUsia($tahun);
+        $data_demoStatus        = $this->demoStatus($select_tahun);
+        $data_demoGolongan      = $this->demoGolongan($select_tahun);
+        $data_demoPendidikan    = $this->demoPendidikan($select_tahun);
+        $demoUsia               = $this->demoUsia($select_tahun);
         $demoTahun              = $this->demoTahun();
         
         $data 	= [ 'data_group' => $data_group, 
@@ -36,7 +36,7 @@ class demografiController extends Controller
                     'session_nik'=>$session_nik,
                     'tahun'=>$demoTahun,
                     'tahun_lama'=>$tahun_lama,
-                    'select_tahun'=>$tahun
+                    'select_tahun'=>$select_tahun
         		];
         return view('sdm.demografi',$data);
     }
@@ -64,5 +64,20 @@ class demografiController extends Controller
     {
     	$data = DB::table('demografi')->select('tahun')->groupBy('tahun')->get();
     	return $data;
+    }
+    public function SelectTahun()
+    {
+        $x = DB::table('demografi')
+                ->select('tahun')
+                ->groupBy('tahun')
+                ->orderBy('tahun','desc')
+                ->get();
+        $z = '';
+        if( count($x) ){
+            $z = $x[0]->tahun;
+        }else{
+            $z = date('Y');
+        }
+        return $z;
     }
 }

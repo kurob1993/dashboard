@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-       $('#child').hide(); 
+        $('#child').hide(); 
     });
     function project(projectType) {
         $.get('{{ url('project') }}/'+projectType, function(data, textStatus, xhr) {

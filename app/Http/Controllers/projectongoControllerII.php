@@ -11,7 +11,7 @@ use App\pmo_projectType;
 use App\pmo_project;
 use App\pmo_projectPlan;
 
-class projectongoController extends Controller
+class projectongoControllerII extends Controller
 {
    public function __construct ()
 	{

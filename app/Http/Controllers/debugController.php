@@ -7,67 +7,44 @@ use Illuminate\Support\Facades\DB;
 use Sinergi\BrowserDetector\Browser;
 use Sinergi\BrowserDetector\Language;
 use Yajra\Datatables\Facades\Datatables;
+use App\rakordir;
 
 class debugController extends Controller
 {
 	public function __construct ()
     {
-       date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
     }
     public function index(Request $request)
     {
-        // for ($i=0; $i < 100; $i++) { 
-        //     echo $this->numbering()."<br>";
-        // }
-        // $username      = $request->session()->get('username');
-        // $data = DB::table('rakordir')->where('username',$username)->get();
-        // $ret = [];
-        // foreach ($data as $key => $value) {
-        //     array_push($ret,[
-        //         'username'=>$value->username,
-        //         'file_name'=>$value->file_name,
-        //         'file_path'=>explode(';',$value->file_path),
-        //         'date'=>$value->date,
-        //         'mulai'=>$value->mulai,
-        //         'keluar'=>$value->keluar,
-        //         'tempat'=>$value->tempat,
-        //         'judul'=>$value->judul,
-        //         'no_dokument'=>$value->no_dokument,
-        //         'agenda_no'=>$value->agenda_no,
-        //         'presenter'=>$value->presenter,
-        //     ]);
-        // }
+        $tests = array(
+            "42",
+            1337,
+            0x539,
+            02471,
+            0b10100111001,
+            1337e0,
+            "not numeric",
+            array(),
+            9.1,
+            null
+        );
         
-        // $data = DB::table('rakordir_file')
-        //     ->where('date','2018-10-26')
-        //     ->where('agenda_no','1')
-        //     ->get();
-        // $file = [];
-        // foreach ($data as $key => $value) {
-        //     array_push($file,$value->file_path);
-        // }
-        // return dd($file);
-        // $date           = DB::table('rakordir')->orderBy('date','desc')->limit(1)->get();
-        // dd($date);
+        foreach ($tests as $element) {
+            if (is_numeric($element)) {
+                echo var_export($element, true) . " is numeric", PHP_EOL;
+            } else {
+                echo var_export($element, true) . " is NOT numeric", PHP_EOL;
+            }
+            echo "<br>";
+        }
         
-        // var_dump(session()->get('dateLastInput'));
-        
-        // $lastDate       = DB::table('rakordir')->orderBy('date','desc')->take(1)->get();
-        // $lastDate       = isset($lastDate[0]->date) ? $lastDate[0]->date : date('Y-m-d');
-
-        // $data = DB::table('rakordir')
-        //         ->leftJoin('rakordir_file', function ($join) {
-        //             $join->on('rakordir.agenda_no', '=', 'rakordir_file.agenda_no')
-        //                 ->on('rakordir.date', '=', 'rakordir_file.date');
-        //         })
-        //         ->select('rakordir.date','rakordir.agenda_no','rakordir.mulai','rakordir.keluar','rakordir_file.file_path')
-        //         ->where('rakordir.date',$lastDate)
-        //         ->orderBy('rakordir.agenda_no','asc')
-        //         ->get();
-        // return dd($data);
-
-        echo $this->getWeekday('2018-12-05');
-        
+    }
+    public function upload(Request $request)
+    {
+        $uploadedFile = $request->file('gambar'); 
+        $path = $uploadedFile->store('public/files');
+        return $path;
     }
     public function getWeekday($date) {
         $date = date('w', strtotime($date));

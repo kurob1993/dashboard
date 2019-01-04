@@ -12,44 +12,55 @@ class inputDataSdmController extends Controller
 {
     public function __construct ()
     {
-       date_default_timezone_set('Asia/Jakarta');
+        date_default_timezone_set('Asia/Jakarta');
     }
     public function index(Request $request)
     {
-        
         $data_group = $request->get('data_group');
         $data_menu  = $request->get('data_menu');
         $data       = [ 
                         'demografi' => 'Demografi',
                         'mhl'       => 'Man Hour Loss',
                         'kpi'       => 'Pencapaian KPI'
-                      ];
+                    ];
         return view('sdm.inputDataSdm',
             [
                 'data_group' =>$data_group,
                 'data_menu'  => $data_menu,
-                'data'  => $data,
+                'data'       => $data,
             ]
         );
     }
     public function upload(Request $request)
-    {
-
-        if($request->data !== 'mhl'){
-            $rules = [
-                'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
-                'data' => 'required',
-                'tahun' => 'required',
-                'berdasarkan' => 'required',
-            ];
-        }else{
-            $rules = [
-                'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
-                'data' => 'required',
-                'tahun' => 'required',
-            ];
+    {   
+        switch ($request->data) {
+            case 'demografi':
+                $rules = [
+                    'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
+                    'data' => 'required',
+                    'tahun' => 'required',
+                    'berdasarkan' => 'required',
+                ];
+                break;
+            
+            case 'kpi':
+                $rules = [
+                    'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
+                    'data' => 'required',
+                    'tahun' => 'required',
+                    'bulan' => 'required',
+                    'berdasarkan' => 'required',
+                ];
+                break;
+            default:
+                $rules = [
+                    'file' => 'required|file|max:1000|mimes:xlsx,XLSX', // ukuran dihitung dalam KB
+                    'data' => 'required',
+                    'tahun' => 'required',
+                ];
+                break;
         }
-
+        
         $customMessages = [
             'max' => 'Ukuran File Lebih dari :max KB',
             'required' => ':attribute Tidak Boleh Kosong.',
@@ -60,11 +71,14 @@ class inputDataSdmController extends Controller
         
         $uploadedFile = $request->file('file');        
         $path = $uploadedFile->storeAs('public/files/sdm/'.$request->data.'/'.$request->tahun.'/'.$request->berdasarkan, date('Ym').'.xlsx' );
-
-        return $this->store($request->data, $request->tahun, $request->berdasarkan);
+        
+        if($request->data == 'kpi'){
+            return $this->store($request->data, $request->tahun, $request->bulan, $request->berdasarkan);
+        }
+        return $this->store($request->data, $request->tahun, NULL, $request->berdasarkan);
     }
 
-    public function store($data,$tahun,$status)
+    public function store($data,$tahun,$bulan = NULL, $status)
     {
         $inputFileName  = './public/storage/files/sdm/'.$data.'/'.$tahun.'/'.$status.'/'.date('Ym').'.xlsx';
         $spreadsheet    = IOFactory::load($inputFileName);
@@ -77,6 +91,10 @@ class inputDataSdmController extends Controller
 
             case 'mhl':
                 $msg = $this->mhl($sheetData,$tahun,$status);
+                break;
+
+            case 'kpi':
+                $msg = $this->kpi($sheetData,$tahun,$bulan,$status);
                 break;
             
             default:
@@ -230,6 +248,7 @@ class inputDataSdmController extends Controller
                 # code...
                 break;
         }
+        return $msg;
     }
     // fungsi unttuk input data demografi berdasarkan usia
     public function demografiUsia($sheetData,$tahun,$status)
@@ -342,7 +361,86 @@ class inputDataSdmController extends Controller
         }
         return $msg;
     }
-    
+
+    public function kpi($sheetData,$tahun,$bulan,$status)
+    {
+        $msg = '';
+        switch ($status) {
+            case 'pkp':
+                $msg = $this->pkp($sheetData,$tahun,$bulan,$status);
+                break;
+
+            case 'sdm&pu':
+                $msg = $this->sdmpu($sheetData,$tahun,$bulan,$status);
+                break;
+
+            case 'shcm':
+                $msg = $this->shcm($sheetData,$tahun,$bulan,$status);
+                break;
+
+            case 'dpm&c':
+                $msg = $this->dpmc($sheetData,$tahun,$bulan,$status);
+                break;
+            
+            default:
+                $msg = '';
+                break;
+        }
+        return $msg;
+    }
+    public function pkp($sheetData,$tahun,$bulan,$status)
+    {
+        $msg = '';
+        foreach ($sheetData as $key => $value) {
+            if( $key > 2){
+                $count = DB::table('kpi')
+                    ->where('tahun',$tahun)
+                    ->where('bulan',$bulan)
+                    ->where('part',$status)
+                    ->where('grup',$value['B'])
+                    ->where('kpi',$value['C'])
+                    ->count();
+                
+                if($count > 0){
+                    DB::table('kpi')->where('tahun',$tahun)
+                    ->where('bulan',$bulan)
+                    ->where('part',$status)
+                    ->where('grup',$value['B'])
+                    ->where('kpi',$value['C'])
+                    ->update(
+                        [ 
+                            'bobot'=>$value['D'],
+                            'target_tahun'=>$value['E'],
+                            'satuan'=>$value['F'],
+                            'target'=>$value['G'],
+                            'real'=>$value['H'],
+                            'capaian'=>$value['I']
+                        ]
+                    );
+                    $msg = "Data berhasil di update";
+                }else{
+                    DB::table('kpi')->insert(
+                        [ 
+                            'part'=>$status,
+                            'tahun'=>$tahun,
+                            'bulan'=>$bulan,
+                            'grup'=>$value['B'],
+                            'kpi'=>$value['C'],
+                            'bobot'=>$value['D'],
+                            'target_tahun'=>$value['E'],
+                            'satuan'=>$value['F'],
+                            'target'=>$value['G'],
+                            'real'=>$value['H'],
+                            'capaian'=>$value['I']
+                        ]
+                    );
+                    $msg = "Data berhasil di tambahkan";
+                }
+            }
+            
+        }
+        return $msg;
+    }
     public function berdasarkan($data = null)
     {
         $ret = '';
@@ -361,7 +459,7 @@ class inputDataSdmController extends Controller
             case 'kpi':
                     $ret = ['results'=>
                         [
-                            ['id'=>'kpi','text'=>'PENCAPAIAN KPI PERUSAHAAN'],
+                            ['id'=>'pkp','text'=>'PENCAPAIAN KPI PERUSAHAAN'],
                             ['id'=>'sdm&pu','text'=>'DIREKTORAT SDM & PU'],
                             ['id'=>'shcm','text'=>'SUBDIT HUMAN CAPITAL MANAGEMENT'],
                             ['id'=>'dpm&c','text'=>'DIVISI PERFORMANCE MGT & CORPORATE CULTURE'],

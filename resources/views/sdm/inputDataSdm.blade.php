@@ -21,6 +21,7 @@
     function dataBerdasarkan(data){
         $('#inputBerdasarkan').html('');
         var berdasarkan = ' @include('sdm.formBerdasarkan') ';
+        var bulan = ' @include('sdm.formBulan') ';
         var url = '';
         switch (data) {
             case 'demografi':
@@ -29,7 +30,7 @@
                 break;
         
             case 'kpi':
-                $('#inputBerdasarkan').append(berdasarkan);
+                $('#inputBerdasarkan').append(berdasarkan+bulan);
                 url = "{{ url('/sdm/input_data_sdm/berdasarkan/kpi') }}";
                 break;
 

@@ -13,9 +13,9 @@ use App\pmo_projectPlan;
 
 class projectongoController extends Controller
 {
-   public function __construct ()
+    public function __construct ()
 	{
-	   date_default_timezone_set('Asia/Jakarta');
+	    date_default_timezone_set('Asia/Jakarta');
     }
     public function index(Request $request)
     {   

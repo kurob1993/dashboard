@@ -56,7 +56,7 @@
 
             <div class="tab-content" style="">
                 <div id="bulan01" class="tab-pane fade in active">
-                  @include('sdm.tabMhlBln01')
+                    @include('sdm.tabMhlBln01')
                 </div>
                 <div id="bulan02" class="tab-pane fade">
                     @include('sdm.tabMhlBln02')

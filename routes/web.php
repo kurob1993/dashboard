@@ -108,8 +108,11 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 		// input demografi
 		Route::get('/input_data_sdm', 'inputDataSdmController@index');
 		Route::post('/input_data_sdm/upload', 'inputDataSdmController@upload');
-		Route::get('/input_data_sdm/store/{data?}/{tahun?}/{status?}', 'inputDataSdmController@store');
 		Route::get('/input_data_sdm/berdasarkan/{data?}', 'inputDataSdmController@berdasarkan');
+
+		//mhl
+		Route::get('/mhl', 'mhlController@index');
+		Route::get('/kpi', 'kpiController@index');
 	});
 	
 	// User Access
