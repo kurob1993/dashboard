@@ -362,33 +362,33 @@ class inputDataSdmController extends Controller
         return $msg;
     }
 
-    public function kpi($sheetData,$tahun,$bulan,$status)
-    {
-        $msg = '';
-        switch ($status) {
-            case 'pkp':
-                $msg = $this->pkp($sheetData,$tahun,$bulan,$status);
-                break;
+    // public function kpi($sheetData,$tahun,$bulan,$status)
+    // {
+    //     $msg = '';
+    //     switch ($status) {
+    //         case 'pkp':
+    //             $msg = $this->kpi($sheetData,$tahun,$bulan,$status);
+    //             break;
 
-            case 'sdm&pu':
-                $msg = $this->sdmpu($sheetData,$tahun,$bulan,$status);
-                break;
+    //         case 'sdm&pu':
+    //             $msg = $this->sdmpu($sheetData,$tahun,$bulan,$status);
+    //             break;
 
-            case 'shcm':
-                $msg = $this->shcm($sheetData,$tahun,$bulan,$status);
-                break;
+    //         case 'shcm':
+    //             $msg = $this->shcm($sheetData,$tahun,$bulan,$status);
+    //             break;
 
-            case 'dpm&c':
-                $msg = $this->dpmc($sheetData,$tahun,$bulan,$status);
-                break;
+    //         case 'dpm&c':
+    //             $msg = $this->dpmc($sheetData,$tahun,$bulan,$status);
+    //             break;
             
-            default:
-                $msg = '';
-                break;
-        }
-        return $msg;
-    }
-    public function pkp($sheetData,$tahun,$bulan,$status)
+    //         default:
+    //             $msg = '';
+    //             break;
+    //     }
+    //     return $msg;
+    // }
+    public function kpi($sheetData,$tahun,$bulan,$status)
     {
         $msg = '';
         foreach ($sheetData as $key => $value) {
@@ -463,6 +463,8 @@ class inputDataSdmController extends Controller
                             ['id'=>'sdm&pu','text'=>'DIREKTORAT SDM & PU'],
                             ['id'=>'shcm','text'=>'SUBDIT HUMAN CAPITAL MANAGEMENT'],
                             ['id'=>'dpm&c','text'=>'DIVISI PERFORMANCE MGT & CORPORATE CULTURE'],
+                            ['id'=>'odhcp','text'=>'DIVISI ORGANIZATION DESIGN & HCP'],
+                            ['id'=>'hcdlc','text'=>'DIVISI HC DEVELOPMENT & LEARNING CENTER'],
                         ]
                     ];
                 break;

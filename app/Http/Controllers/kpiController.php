@@ -20,7 +20,13 @@ class kpiController extends Controller
         $kpiBulan   = $this->kpiBulan();
         $data_group = $request->get('data_group');
         $data_menu  = $request->get('data_menu');
+
         $pkp        = $this->pkp($SelectBulan,$SelectTahun);
+        $SdmPu      = $this->SdmPu($SelectBulan,$SelectTahun);
+        $hcm      = $this->hcm($SelectBulan,$SelectTahun);
+        $pmcc      = $this->pmcc($SelectBulan,$SelectTahun);
+        $odhcp      = $this->odhcp($SelectBulan,$SelectTahun);
+        $hcdlc      = $this->hcdlc($SelectBulan,$SelectTahun);
 
         $ret 	= [ 
                     'data_group' => $data_group, 
@@ -29,28 +35,80 @@ class kpiController extends Controller
                     'bulan'=> $kpiBulan,
                     'select_tahun'=> $SelectTahun,
                     'select_bulan'=> $SelectBulan,
-                    'data_pkp'=> $pkp
+                    'data_pkp'=> $pkp,
+                    'data_sdmpu'=> $SdmPu,
+                    'data_hcm'=> $hcm,
+                    'data_pmcc'=> $pmcc,
+                    'data_odhcp'=> $odhcp,
+                    'data_hcdlc'=> $hcdlc
         		];
         return view('sdm.kpi',$ret)->with('ini',$this);
     }
     public function formatNumber($str)
     {   
-        if (is_numeric($str)) {
-            $str = number_format($str,2);
-        } 
-        return $str;
+        $ret = '';
+        //remove all with space adn comma [,]
+        $num = preg_replace('/[,]|\s+/', '', $str);
+        if (is_numeric( $num )) {
+            $ret =  number_format($num,2);
+        }else{
+            $ret = "<pre>".$str."</pre>";
+        }
+        return $ret;
     }
     public function pkp($bulan,$tahun)
     {
         $data   = DB::table('kpi')
+                    ->where('part','pkp')
                     ->where('bulan',$bulan)
                     ->where('tahun',$tahun)
                     ->get();
-        $ret = [];
-        foreach ($data as $key => $value) {
-            $ret[$value->grup][] = $value;
-        }
-        return $ret;
+        return $data->groupBy('grup');
+    }
+    public function SdmPu($bulan,$tahun)
+    {
+        $data   = DB::table('kpi')
+                    ->where('part','sdm&pu')
+                    ->where('bulan',$bulan)
+                    ->where('tahun',$tahun)
+                    ->get();
+        return $data->groupBy('grup');
+    }
+    public function hcm($bulan,$tahun)
+    {
+        $data   = DB::table('kpi')
+                    ->where('part','shcm')
+                    ->where('bulan',$bulan)
+                    ->where('tahun',$tahun)
+                    ->get();
+        return $data->groupBy('grup');
+    }
+    public function pmcc($bulan,$tahun)
+    {
+        $data   = DB::table('kpi')
+                    ->where('part','dpm&c')
+                    ->where('bulan',$bulan)
+                    ->where('tahun',$tahun)
+                    ->get();
+        return $data->groupBy('grup');
+    }
+    public function odhcp($bulan,$tahun)
+    {
+        $data   = DB::table('kpi')
+                    ->where('part','odhcp')
+                    ->where('bulan',$bulan)
+                    ->where('tahun',$tahun)
+                    ->get();
+        return $data->groupBy('grup');
+    }
+    public function hcdlc($bulan,$tahun)
+    {
+        $data   = DB::table('kpi')
+                    ->where('part','hcdlc')
+                    ->where('bulan',$bulan)
+                    ->where('tahun',$tahun)
+                    ->get();
+        return $data->groupBy('grup');
     }
     public function kpiTahun()
     {

@@ -28,13 +28,9 @@
                 </tr>
             </thead>
             <tbody> 
-                @php($total_bobot = 0 )
-                @foreach ($data_pkp as $grup=>$pkp)
-                    <tr>
-                        <td colspan="9" class="bg-success">{{ $grup }}</td>
-                    </tr>
+                @foreach ($data_pmcc as $grup=>$pmcc)
                     @php($bobot = 0 )
-                    @foreach ($pkp as $key=>$item)
+                    @foreach ($pmcc as $key=>$item)
                         <tr>
                             <td>{{ $key+1}}</td>
                             <td>{{ $item->kpi}}</td>
@@ -56,16 +52,8 @@
                         </td>
                         <td colspan="6"></td>
                     </tr>
-                    @php( $total_bobot = $total_bobot+$bobot )
                 @endforeach
-                <tr>
-                    <td colspan="2"></td>
-                    <td class="text-right" style="background-color: #ffc107!important;">
-                        {{ $ini->formatNumber($total_bobot) }}
-                    </td>
-                    <td colspan="6"></td>
-                </tr>
-                
+
             </tbody>
         </table>
     </div>
