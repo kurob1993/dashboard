@@ -161,7 +161,7 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 
 Route::get('/data_produk', 'homeController@data_produk');
 //auth
-Route::get('/login', 'homeController@login');
+// Route::get('/login', 'homeController@login');
 Route::get('/logout', 'homeController@logout');
 
 // Route::get('/signin/{nik?}', 'homeController@sigin');
