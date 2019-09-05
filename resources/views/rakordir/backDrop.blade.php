@@ -5,12 +5,12 @@
 @endsection
 
 @section('style')
-<link href="{{ url('public/plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
 <style type="text/css">
 
 @font-face {
     font-family: OceanSansStd;
-    src: url("{{ url('/public/fonts/OceanSansStd-BoldExt.otf') }}");
+    src: url("{{ url('/fonts/OceanSansStd-BoldExt.otf') }}");
 }
 
 @media (min-width: 768px) {
@@ -28,9 +28,9 @@
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/pdfjs/build/pdf.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/dataTables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/pdfjs/build/pdf.js') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -103,10 +103,10 @@
         var url;
         var html;
         if(ex === 'pdf' || ex === 'PDF'){
-            url = "{{ url('public/plugins/pdfjs/web/viewer.html?file=') }}"+"{{ url('/public/storage/') }}/"+file;
+            url = "{{ url('plugins/pdfjs/web/viewer.html?file=') }}"+"{{ url('/storage/') }}/"+file;
             html = "<iframe src='"+url+"' style='width: 100%; height:600px'></iframe>";
         }else{
-            url = "{{ url('/public/storage/') }}/"+file;
+            url = "{{ url('/storage/') }}/"+file;
             html = "<h5 class='text-center'><a href='"+url+"' target='_blank'>Kilik disini untuk unduh file.</a></h5>"
         }
         $('#example1').html(html);
@@ -121,7 +121,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="text-center">
-                    <img src="{{ url('public/img/krakatausteel-logo.png') }}" alt="logo ks" width="200px" >
+                    <img src="{{ url('img/krakatausteel-logo.png') }}" alt="logo ks" width="200px" >
                 </div>
                 <div class="text-center m-t-15" style="background-color : red;font-family: OceanSansStd;border-radius: 4px;">
                     <span style="color: white;font-size:18px">RAPAT KOORDINASI DIREKSI PT KRAKATAU STEEL (PERSERO) Tbk.</span>
@@ -149,9 +149,9 @@
                                         @foreach ($files as $file)
                                             @if($file->agenda_no == $item->agenda_no && $file->date == $item->date)
                                                 @if(substr($file->file_name,-3,3) == 'pdf')
-                                                <a title="{{ $file->file_name }}" href="{{ url('public/storage') }}/{{ $file->file_path }}" target="_blank" class="fa fa-file-pdf-o fa-lg m-r-5"></a>
+                                                <a title="{{ $file->file_name }}" href="{{ url('storage') }}/{{ $file->file_path }}" target="_blank" class="fa fa-file-pdf-o fa-lg m-r-5"></a>
                                                 @else
-                                                <a title="{{ $file->file_name }}" href="{{ url('public/storage') }}/{{ $file->file_path }}" target="_blank" class="fa fa-file-text-o fa-lg m-r-5"></a>
+                                                <a title="{{ $file->file_name }}" href="{{ url('storage') }}/{{ $file->file_path }}" target="_blank" class="fa fa-file-text-o fa-lg m-r-5"></a>
                                                 @endif
                                             @endif
                                         @endforeach

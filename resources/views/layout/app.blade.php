@@ -12,17 +12,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="" name="description" />
   <meta content="" name="author" />
-  <link rel="shortcut icon" href="{{ asset('') }}public/img/fav.png">
+  <link rel="shortcut icon" href="{{ asset('') }}img/fav.png">
 
   <!-- ================== BEGIN BASE CSS STYLE ================== -->
   {{-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> --}}
-  <link href="{{ asset('') }}public/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
-  <link href="{{ asset('') }}public/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="{{ asset('') }}public/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="{{ asset('') }}public/css/animate.min.css" rel="stylesheet" />
-  <link href="{{ asset('') }}public/css/style.min.css" rel="stylesheet" />
-  <link href="{{ asset('') }}public/css/style-responsive.min.css" rel="stylesheet" />
-  <link href="{{ asset('') }}public/css/theme/orange.css" rel="stylesheet" id="theme" />
+  <link href="{{ asset('') }}plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+  <link href="{{ asset('') }}plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('') }}plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="{{ asset('') }}css/animate.min.css" rel="stylesheet" />
+  <link href="{{ asset('') }}css/style.min.css" rel="stylesheet" />
+  <link href="{{ asset('') }}css/style-responsive.min.css" rel="stylesheet" />
+  <link href="{{ asset('') }}css/theme/orange.css" rel="stylesheet" id="theme" />
   <!-- ================== END BASE CSS STYLE ================== -->
   <style type="text/css">
   /* width */
@@ -68,7 +68,7 @@
   </style>
   @yield('style')
   <!-- ================== BEGIN BASE JS ================== -->
-  {{-- <script src="{{ asset('') }}public/plugins/pace/pace.min.js"></script> --}}
+  {{-- <script src="{{ asset('') }}plugins/pace/pace.min.js"></script> --}}
   <!-- ================== END BASE JS ================== -->
 </head>
 <body>
@@ -88,7 +88,7 @@
         <div class="navbar-header">
           {{-- <a href="{{ asset('') }}publicindex.html" class="navbar-brand"><span class="navbar-logo"></span> Color Admin</a> --}}
             <span>
-              <img src="{{ asset('') }}public/img/krakatausteel-logo-h.png" style="height: 45px;margin-top: 5px">
+              <img src="{{ asset('') }}img/krakatausteel-logo-h.png" style="height: 45px;margin-top: 5px">
             </span>
             {{-- <span style="font-size: 15px">Dashboard Opration Excellence</span> --}}
           <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
@@ -121,9 +121,9 @@
         <ul class="nav">
           <li class="nav-profile">
             {{-- <div class="image">
-              <a href="publicjavascript:;"><img src="{{ asset('') }}public/img/user-13.jpg" alt="" /></a>
+              <a href="publicjavascript:;"><img src="{{ asset('') }}img/user-13.jpg" alt="" /></a>
             </div> --}}
-            <img src="{{ asset('') }}public/img/ks_untung.png" alt="" class="img-circle img-rounded img-responsive center-block" 
+            <img src="{{ asset('') }}img/ks_untung.png" alt="" class="img-circle img-rounded img-responsive center-block" 
             style="width: 40%;margin-bottom: 10px" />
             <div class="info text-center">
               <strong>{{ session()->get('name') }}</strong>
@@ -196,21 +196,21 @@
   <!-- end page container -->
 
   <!-- ================== BEGIN BASE JS ================== -->
-  <script src="{{ asset('') }}public/plugins/jquery/jquery-1.9.1.min.js"></script>
-  <script src="{{ asset('') }}public/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-  <script src="{{ asset('') }}public/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-  <script src="{{ asset('') }}public/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ asset('') }}plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="{{ asset('') }}plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+  <script src="{{ asset('') }}plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+  <script src="{{ asset('') }}plugins/bootstrap/js/bootstrap.min.js"></script>
   <!--[if lt IE 9]>
-    <script src="{{ asset('') }}public/crossbrowserjs/html5shiv.js"></script>
-    <script src="{{ asset('') }}public/crossbrowserjs/respond.min.js"></script>
-    <script src="{{ asset('') }}public/crossbrowserjs/excanvas.min.js"></script>
+    <script src="{{ asset('') }}crossbrowserjs/html5shiv.js"></script>
+    <script src="{{ asset('') }}crossbrowserjs/respond.min.js"></script>
+    <script src="{{ asset('') }}crossbrowserjs/excanvas.min.js"></script>
   <![endif]-->
-  <script src="{{ asset('') }}public/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-  <script src="{{ asset('') }}public/plugins/jquery-cookie/jquery.cookie.js"></script>
+  <script src="{{ asset('') }}plugins/slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="{{ asset('') }}plugins/jquery-cookie/jquery.cookie.js"></script>
   <!-- ================== END BASE JS ================== -->
   @yield('script')
   <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-  <script src="{{ asset('') }}public/js/apps.min.js"></script>
+  <script src="{{ asset('') }}js/apps.min.js"></script>
   <!-- ================== END PAGE LEVEL JS ================== -->
  
   <script>

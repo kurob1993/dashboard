@@ -8,16 +8,16 @@
 <style type="text/css">
 	
 </style>
-<link href="{{ asset('') }}public/plugins/DataTables/css/data-table.css" rel="stylesheet" />
+<link href="{{ asset('') }}plugins/DataTables/css/data-table.css" rel="stylesheet" />
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('public/plugins/moment/moment.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.charts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/themes/fusioncharts.theme.carbon.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/moment/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.charts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/themes/fusioncharts.theme.carbon.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/dataTables.responsive.js') }}"></script>
 
 <script type="text/javascript">
 	var kemarin = moment("{{ date('Y-m-d') }}").subtract(1, 'days').format("DD-MM-YYYY");

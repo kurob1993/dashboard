@@ -551,8 +551,12 @@ class homeController extends Controller
     }
     public function help()
     {
-        $dir = '../html_loc/public/img/help/dashboard';
-        $a = scandir($dir);
+        try {
+            $dir = '../html_loc/public/img/help/dashboard';
+            $a = scandir($dir);
+        } catch (\Throwable $th) {
+            $a = [];
+        }
 
         $data = array();
         foreach ($a as $key => $value) {

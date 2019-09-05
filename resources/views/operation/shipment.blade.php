@@ -5,9 +5,9 @@
 @endsection
 
 @section('style')
-<link href="{{ asset('public/plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
-<link href="{{ asset('public/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
-{{-- <link href="{{ asset('public/plugins/bootstrap-datepicker_old/css/datepicker3.css') }}" rel="stylesheet" /> --}}
+<link href="{{ asset('plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
+<link href="{{ asset('plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
+{{-- <link href="{{ asset('plugins/bootstrap-datepicker_old/css/datepicker3.css') }}" rel="stylesheet" /> --}}
 
 <style type="text/css">
 	
@@ -16,12 +16,12 @@
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('public/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.charts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/themes/fusioncharts.theme.carbon.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.charts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/themes/fusioncharts.theme.carbon.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/dataTables.responsive.js') }}"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {

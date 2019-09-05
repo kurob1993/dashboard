@@ -14,13 +14,13 @@
 	
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	{{-- <link href="{{ asset('') }}publichttp://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"> --}}
-	<link href="{{ asset('') }}public/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
-	<link href="{{ asset('') }}public/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="{{ asset('') }}public/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-	<link href="{{ asset('') }}public/css/animate.min.css" rel="stylesheet" />
-	<link href="{{ asset('') }}public/css/style.min.css" rel="stylesheet" />
-	<link href="{{ asset('') }}public/css/style-responsive.min.css" rel="stylesheet" />
-	<link href="{{ asset('') }}public/css/theme/default.css" rel="stylesheet" id="theme" />
+	<link href="{{ asset('') }}plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+	<link href="{{ asset('') }}plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="{{ asset('') }}plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="{{ asset('') }}css/animate.min.css" rel="stylesheet" />
+	<link href="{{ asset('') }}css/style.min.css" rel="stylesheet" />
+	<link href="{{ asset('') }}css/style-responsive.min.css" rel="stylesheet" />
+	<link href="{{ asset('') }}css/theme/default.css" rel="stylesheet" id="theme" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 	<style type="text/css">
         .centered {
@@ -32,7 +32,7 @@
         }   
     </style>
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="{{ asset('') }}public/plugins/pace/pace.min.js"></script>
+	<script src="{{ asset('') }}plugins/pace/pace.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
 </head>
 <body class="pace-top">
@@ -48,7 +48,7 @@
             <div class="login-header">
                 <div class="brand">
                     <span>
-                        <img src="{{ asset('') }}public/img/krakatausteel-logo-h.png" 
+                        <img src="{{ asset('') }}img/krakatausteel-logo-h.png" 
                              class="img-responsive centered">
                     </span>
                 </div>
@@ -74,21 +74,21 @@
 	<!-- end page container -->
 	
 	<!-- ================== BEGIN BASE JS ================== -->
-	<script src="{{ asset('') }}public/plugins/jquery/jquery-1.9.1.min.js"></script>
-	<script src="{{ asset('') }}public/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
-	<script src="{{ asset('') }}public/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
-	<script src="{{ asset('') }}public/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{ asset('') }}plugins/jquery/jquery-1.9.1.min.js"></script>
+	<script src="{{ asset('') }}plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+	<script src="{{ asset('') }}plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+	<script src="{{ asset('') }}plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!--[if lt IE 9]>
-		<script src="{{ asset('') }}public/crossbrowserjs/html5shiv.js"></script>
-		<script src="{{ asset('') }}public/crossbrowserjs/respond.min.js"></script>
-		<script src="{{ asset('') }}public/crossbrowserjs/excanvas.min.js"></script>
+		<script src="{{ asset('') }}crossbrowserjs/html5shiv.js"></script>
+		<script src="{{ asset('') }}crossbrowserjs/respond.min.js"></script>
+		<script src="{{ asset('') }}crossbrowserjs/excanvas.min.js"></script>
 	<![endif]-->
-	<script src="{{ asset('') }}public/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="{{ asset('') }}public/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<script src="{{ asset('') }}plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="{{ asset('') }}plugins/jquery-cookie/jquery.cookie.js"></script>
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="{{ asset('') }}public/js/apps.min.js"></script>
+	<script src="{{ asset('') }}js/apps.min.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 	
 	<script>

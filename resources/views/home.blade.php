@@ -5,7 +5,7 @@
 @endsection
 
 @section('style')
-<link href="{{ url('public/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
 <style type="text/css">
     .bahan-baku {
         position: absolute;
@@ -281,12 +281,12 @@
 
 @section('script')
 
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.charts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/themes/fusioncharts.theme.carbon.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/number_js/numeral.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/js/html2canvas.js') }}"></script>
-<script src="{{ url('public/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.charts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/themes/fusioncharts.theme.carbon.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/number_js/numeral.js') }}"></script>
+<script type="text/javascript" src="{{ url('js/html2canvas.js') }}"></script>
+<script src="{{ url('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript">
 
 
@@ -385,7 +385,7 @@
         $('.img').find('img').remove();
         $('.gambar div').html("");
         $.get('{{ url('data_produk') }}', {produk: ks_produk, tanggal:date}, function(data, textStatus, xhr) {
-            $('.img').append('<img src="{{ asset('public/img/data_.png') }}" class="gambar2 img img-responsive">');
+            $('.img').append('<img src="{{ asset('img/data_.png') }}" class="gambar2 img img-responsive">');
 
             var last_update     = data.last_update
             var data_produk     = data.produk;
@@ -655,12 +655,12 @@
             <div class="modal-body">
                 <div class="text-center" style="margin-bottom: 10px">                   
                     @foreach($help as $key => $value )
-                        <a id="btn_help{{$key+1}}" class="btn_help btn btn-primary btn-icon btn-circle" onclick="help('{{url('/public/img/help/dashboard') }}/{{$value}}','{{$key+1}}')" >
+                        <a id="btn_help{{$key+1}}" class="btn_help btn btn-primary btn-icon btn-circle" onclick="help('{{url('/img/help/dashboard') }}/{{$value}}','{{$key+1}}')" >
                             <strong>{{$key+1}}</strong>
                         </a>
                     @endforeach
                 </div>
-                <img id="help" src="{{url('/public/img/help/dashboard/help1.png') }}" class="img img-responsive">
+                <img id="help" src="{{url('/img/help/dashboard/help1.png') }}" class="img img-responsive">
             </div>
             <div class="modal-footer">
                {{--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

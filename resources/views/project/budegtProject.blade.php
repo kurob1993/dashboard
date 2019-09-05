@@ -5,15 +5,15 @@
 @endsection
 
 @section('style')
-<link href="{{ url('public/plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
 <style type="text/css">
     
 </style>
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/dataTables.responsive.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function(){ 
     $('#example').DataTable( {

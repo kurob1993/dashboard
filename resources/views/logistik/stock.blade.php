@@ -6,13 +6,13 @@
 @endsection
 
 @section('style')
-<link href="{{ url('public/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
 <style type="text/css">
 </style>
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('public/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
         $('#date').datepicker({

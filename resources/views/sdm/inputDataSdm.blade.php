@@ -5,14 +5,14 @@
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="{{ url('/public/plugins/select2/dist/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ url('/plugins/select2/dist/css/select2.min.css') }}">
 <style type="text/css">
 
 </style>
 @endsection
 
 @section('script')
-<script src="{{ url('/public/plugins/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ url('/plugins/select2/dist/js/select2.min.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#berdasarkan').select2();

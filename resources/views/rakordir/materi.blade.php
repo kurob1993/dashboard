@@ -5,7 +5,7 @@
 @endsection
 
 @section('style')
-<link href="{{ url('public/plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/DataTables/css/data-table.css') }}" rel="stylesheet" />
 <style type="text/css">
 @media (min-width: 768px) {
   .modal-xl {
@@ -22,9 +22,9 @@
 @endsection
 
 @section('script')
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/DataTables/js/dataTables.responsive.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/pdfjs/build/pdf.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/DataTables/js/dataTables.responsive.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/pdfjs/build/pdf.js') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
@@ -93,7 +93,7 @@
                                     '</a>';
                             }else{
                                 fa = 'fa-file-text-o';
-                                url = "{{ url('/public/storage/') }}/"+data[index].file_path;
+                                url = "{{ url('/storage/') }}/"+data[index].file_path;
                                 del += '<a href="'+url+'" target="_blank" class="text-danger m-r-5" style="margin:0px 2px 2px 0px">'+
                                     '<i class="fa '+fa+' fa-2x"></i>'+
                                     '</a>';
@@ -121,10 +121,10 @@
         var url;
         var html;
         if(ex === 'pdf' || ex === 'PDF'){
-            url = "{{ url('public/plugins/pdfjs/web/viewer.html?file=') }}"+"{{ url('/public/storage/') }}/"+file;
+            url = "{{ url('plugins/pdfjs/web/viewer.html?file=') }}"+"{{ url('/storage/') }}/"+file;
             html = "<iframe src='"+url+"' style='width: 100%; height:80vh'></iframe>";
         }else{
-            url = "{{ url('/public/storage/') }}/"+file;
+            url = "{{ url('/storage/') }}/"+file;
             html = "<h5 class='text-center'><a href='"+url+"' target='_blank'>Kilik disini untuk unduh file.</a></h5>"
         }
         $('#example1').html(html);

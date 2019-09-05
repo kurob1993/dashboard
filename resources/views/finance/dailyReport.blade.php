@@ -5,7 +5,7 @@
 @endsection
 
 @section('style')
-<link href="{{ url('public/plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/bootstrap-datepicker/css/datepicker.css') }}" rel="stylesheet" />
 <style type="text/css">
 
 </style>
@@ -13,12 +13,12 @@
 
 @section('script')
 
-<script type="text/javascript" src="{{ url('public/plugins/moment/moment.min.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/number_js/numeral.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/fusioncharts.powercharts.js') }}"></script>
-<script type="text/javascript" src="{{ url('public/plugins/fusioncharts/js/themes/fusioncharts.theme.fint.js?cacheBust=56') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/moment/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/number_js/numeral.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/fusioncharts.powercharts.js') }}"></script>
+<script type="text/javascript" src="{{ url('plugins/fusioncharts/js/themes/fusioncharts.theme.fint.js?cacheBust=56') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){

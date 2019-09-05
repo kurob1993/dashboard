@@ -6,8 +6,8 @@
 
 @section('style')
 {{-- easyui start--}}
-<link href="{{ url('public/plugins/jquery-easyui/themes/bootstrap/easyui.css') }}" rel="stylesheet" />
-<link href="{{ url('public/plugins/jquery-easyui/themes/icon.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/jquery-easyui/themes/bootstrap/easyui.css') }}" rel="stylesheet" />
+<link href="{{ url('plugins/jquery-easyui/themes/icon.css') }}" rel="stylesheet" />
 {{-- easyui end--}}
 <style type="text/css">
 .datagrid-cell{
@@ -18,7 +18,7 @@
 
 @section('script')
 {{-- easyui start--}}
-<script src="{{ url('public/plugins/jquery-easyui/jquery.easyui.min.js') }}"></script>
+<script src="{{ url('plugins/jquery-easyui/jquery.easyui.min.js') }}"></script>
 {{-- easyui end--}}
 
 <script type="text/javascript">
