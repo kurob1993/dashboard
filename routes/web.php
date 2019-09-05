@@ -164,8 +164,8 @@ Route::get('/data_produk', 'homeController@data_produk');
 // Route::get('/login', 'homeController@login');
 Route::get('/logout', 'homeController@logout');
 
-// Route::get('/signin/{nik?}', 'homeController@sigin');
-Route::post('/signin', 'homeController@sigin');
+Route::get('/signin/{nik?}', 'homeController@sigin');
+// Route::post('/signin', 'homeController@sigin');
 
 //ambil data mes
 // date format Y-m-d

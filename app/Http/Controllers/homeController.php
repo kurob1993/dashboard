@@ -49,76 +49,78 @@ class homeController extends Controller
             'help'  => $help,
         ]);
     }
-    public function sigin(Request $request)
-    {
-        $user_name  = $request->input('username');
-        $pwd        = $request->input('password');
-
-        $sys_user = new sys_user();
-        $data = $sys_user::where('username',$user_name)->get();
-        $user = NULL;
-        foreach ($data as $key => $value) {
-            $user = $value->username;
-            $name = $value->name;
-            $jabatan = $value->jabatan;
-            $level = $value->level;
-            $nik = $value->nik;
-        }
-        if($user){
-            session([
-                'nik'=> $nik,
-                'username'=> $user,
-                'name'=> $name,
-                'jabatan'=> $jabatan,
-                'level'=> $level
-            ]);
-            $session = $request->session()->get('username');
-            $this->pengunjung($session);
-            if($session){
-                return redirect('/');
-            }
-        }else{
-            return redirect('/');
-        }
-
-    }
-    public function pengunjung($user_name)
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date('Y-m-d H:i:s');
-        DB::table('sys_pengunjung')->insert(['USER_NAME' => $user_name,'TANGGAL' =>  $date]);
-    }
-    // ------ LOGIN FROM SSO
-    // public function sigin(Request $request,$nik = null)
+    // public function sigin(Request $request)
     // {
+    //     $user_name  = $request->input('username');
+    //     $pwd        = $request->input('password');
+
     //     $sys_user = new sys_user();
-    //     $data = $sys_user::where('nik',$nik)->get();
+    //     $data = $sys_user::where('username',$user_name)->get();
     //     $user = NULL;
     //     foreach ($data as $key => $value) {
     //         $user = $value->username;
     //         $name = $value->name;
     //         $jabatan = $value->jabatan;
     //         $level = $value->level;
+    //         $nik = $value->nik;
     //     }
     //     if($user){
     //         session([
+    //             'nik'=> $nik,
     //             'username'=> $user,
     //             'name'=> $name,
     //             'jabatan'=> $jabatan,
-
     //             'level'=> $level
     //         ]);
     //         $session = $request->session()->get('username');
+    //         $this->pengunjung($session);
     //         if($session){
     //             return redirect('/');
     //         }
     //     }else{
-    //         $request->session()->flush();
-    //         return redirect('https://sso.krakatausteel.com');
+    //         return redirect('/');
     //     }
 
     // }
     // ------ LOGIN FROM SSO
+    public function sigin(Request $request,$nik = null)
+    {
+        $sys_user = new sys_user();
+        $data = $sys_user::where('nik',$nik)->get();
+        $user = NULL;
+        foreach ($data as $key => $value) {
+            $user = $value->username;
+            $name = $value->name;
+            $jabatan = $value->jabatan;
+            $level = $value->level;
+        }
+        if($user){
+            session([
+                'username'=> $user,
+                'name'=> $name,
+                'jabatan'=> $jabatan,
+
+                'level'=> $level
+            ]);
+            $session = $request->session()->get('username');
+            if($session){
+                return redirect('/');
+            }
+        }else{
+            $request->session()->flush();
+            return redirect('https://sso.krakatausteel.com');
+        }
+
+    }
+    // ------ LOGIN FROM SSO
+
+    public function pengunjung($user_name)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $date = date('Y-m-d H:i:s');
+        DB::table('sys_pengunjung')->insert(['USER_NAME' => $user_name,'TANGGAL' =>  $date]);
+    }
+
     public function login(Request $request)
     {
         $session = $request->session()->exists('username');

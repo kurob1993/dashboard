@@ -229,13 +229,13 @@ class dailyReportController extends Controller
     {
         $agent     = 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0';
         $client    =  new \GuzzleHttp\Client();
-        $res       =  $client->request('GET', 'https://www.bi.go.id/id/moneter/informasi-kurs/transaksi-bi',[
+        $res       =  $client->request('GET', 'https://www.bi.go.id/id/moneter/informasi-kurs/transaksi-bi/Default.aspx',[
                           'headers' => [
                               'User-Agent' => $agent
                           ]
                       ]);
         $result    = $res->getBody();
-
+        
         $data_table = explode('<div id="right-cell">', $result);
 
         $data_table = explode ('<table class="table1" cellspacing="0" rules="all" border="1" id="ctl00_PlaceHolderMain_biWebKursTransaksiBI_GridView1" style="border-collapse:collapse;">',$data_table[1]);
@@ -260,13 +260,14 @@ class dailyReportController extends Controller
                 $counter++;
             }
         }
+
         //get date kurs bi
         $data_date  = explode('<span id="ctl00_PlaceHolderMain_biWebKursTransaksiBI_lblUpdate">', $result);
         $data_date  = explode ('</span>', $data_date[1]);
         $date       = str_replace(' ','-',$data_date[0]);
         $arr        = explode('-',$date);
         $lastUpdate ='';
-
+        
         switch ($arr[1]) {
         case 'Januari':
           $lastUpdate = $arr[2].'-01-'.$arr[0];
@@ -315,11 +316,11 @@ class dailyReportController extends Controller
                     DB::table('kurs_bi')->insert(
                         [
                           'TANGGAL'   => $lastUpdate,
-                          'MATA_UANG' => $value[0],
-                          'NILAI'     => $this->toNumber($value[1]),
-                          'KURS_JULA' => $this->toNumber($value[2]),
-                          'KURS_BELI' => $this->toNumber($value[3]),
-                          'KURS_TENGAH' => ( $this->toNumber($value[2])+$this->toNumber($value[3]) )/2
+                          'MATA_UANG' => $value[1],
+                          'NILAI'     => $this->toNumber($value[2]),
+                          'KURS_JULA' => $this->toNumber($value[3]),
+                          'KURS_BELI' => $this->toNumber($value[4]),
+                          'KURS_TENGAH' => ( $this->toNumber($value[3])+$this->toNumber($value[4]) )/2
                         ]
                     );
                 }
