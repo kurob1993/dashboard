@@ -168,9 +168,11 @@ Route::get('/logout', 'homeController@logout');
 Route::post('/signin', 'homeController@sigin');
 
 //ambil data mes
+// date format Y-m-d
 Route::get('/getdatames/{tgl?}', 'datamasterController@getDataMes');
 
 //ambil data shipment dari eis
+// date format Y-m-d
 Route::get('/getshipment/{tgl?}', 'datamasterController@getshipment');
 
 //get data dari sap
