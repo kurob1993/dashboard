@@ -93,24 +93,24 @@ class homeController extends Controller
             $name = $value->name;
             $jabatan = $value->jabatan;
             $level = $value->level;
+            $nik = $value->nik;
         }
         if($user){
             session([
+                'nik'=> $nik,
                 'username'=> $user,
                 'name'=> $name,
                 'jabatan'=> $jabatan,
-
                 'level'=> $level
             ]);
             $session = $request->session()->get('username');
+            $this->pengunjung($session);
             if($session){
                 return redirect('/');
             }
         }else{
-            $request->session()->flush();
-            return redirect('https://sso.krakatausteel.com');
+            return redirect('/');
         }
-
     }
     // ------ LOGIN FROM SSO
 
