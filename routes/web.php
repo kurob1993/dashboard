@@ -85,9 +85,9 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 	
 	//Logistik
 	Route::prefix('logistic')->group(function () {
-		Route::get('/',function () {
-			return redirect('/');
-		});
+		//Route::get('/',function () {
+			//return redirect('/');
+		//});
 		Route::get('/stock', 'stockController@index');
 		Route::get('/show/{tanggal?}', 'stockController@show');
 		Route::get('/detail/{tanggal?}/{description?}', 'stockController@detail');
@@ -95,9 +95,9 @@ Route::group(['middleware' => ['checkSession','checkMenu'] ],function(){
 
 	//sdm
 	Route::prefix('sdm')->group(function ()	{
-		Route::get('/',function () {
-			return redirect('/');
-		});
+		//Route::get('/',function () {
+			//return redirect('/');
+		//});
 		//organisasi
 		Route::get('/organisasi', 'strukturOrganisasiController@index');
 		Route::get('/organisasi/show', 'strukturOrganisasiController@show');
