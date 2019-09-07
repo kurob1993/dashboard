@@ -358,12 +358,12 @@ class invoiceController extends Controller
     public function getFiles()
     {
         //server
-        // $readdir = "/mnt/winnt/";
-        // $movedir = "/mnt/winnt/archive/";
+        $readdir = "/nfs/interface/dashboard/";
+        $movedir = "/nfs/interface/dashboard/archive/";
 
         //local
-        $readdir = './public/uploads/';
-        $movedir = "./public/uploads/archive/";
+        //$readdir = './public/uploads/';
+        //$movedir = "./public/uploads/archive/";
         
         $arfile  = scandir($readdir);
         foreach ($arfile as $arsip) {
