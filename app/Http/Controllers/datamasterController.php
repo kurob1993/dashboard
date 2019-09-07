@@ -983,8 +983,8 @@ class datamasterController extends Controller
     {
         $nama;
         $tanggal;
-        $readdir = './public/uploads/';
-        // $movedir = "/mnt/winnt/archive/";
+        $readdir = '/nfs/interface/dashboard';
+        $movedir = "/nfs/interface/dashboard/archive/";
         $arfile  = scandir($readdir);
 
         foreach ($arfile as $arsip) {
@@ -1010,17 +1010,14 @@ class datamasterController extends Controller
                         $i++;
                     }
                     fclose($file_handle);
-
-
-                    //die
-                    // copy($readdir.$arsip, $movedir.$arsip);
-                    // $tr = DB::table('log_down')->insert(
-                    //     [
-                    //         'isinya'	=> 'Proses Download File '.$arsip,
-                    //         'stat'		=> '1'
-                    //     ]
-                    // );
-                    // unlink($readdir.$arsip);
+                    copy($readdir.$arsip, $movedir.$arsip);
+                    $tr = DB::table('log_down')->insert(
+                        [
+                           'isinya'	=> 'Proses Download File '.$arsip,
+                            'stat'		=> '1'
+                        ]
+                    );
+                    unlink($readdir.$arsip);
                 }
             }
         }
