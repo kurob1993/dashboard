@@ -981,8 +981,8 @@ class datamasterController extends Controller
 
     public function getdatasap()
     {
-        $nama;
-        $tanggal;
+        $nama = '';
+        $tanggal = '';
         $readdir = '/nfs/interface/dashboard';
         $movedir = "/nfs/interface/dashboard/archive/";
         $arfile  = scandir($readdir);
