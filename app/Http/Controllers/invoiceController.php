@@ -375,7 +375,9 @@ class invoiceController extends Controller
                     //arsipkan file
                     DB::table('log_down')->insert(
                         [
-                            'isinya'  => 'Proses Download File '.$arsip.' '. $_SERVER['SERVER_ADDR'].' '.exec('whoami'),
+                            'isinya'  => 'Proses Download File '.
+                                $arsip.' '. $_SERVER['SERVER_ADDR'].' '.exec('whoami').
+                                'readdir = '.$readdir.$arsip .' arsip = '.$movedir.$arsip,
                             'stat'    => '1'
                         ]
                     );
