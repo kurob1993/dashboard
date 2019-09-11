@@ -375,11 +375,11 @@ class invoiceController extends Controller
                     //arsipkan file
                     DB::table('log_down')->insert(
                         [
-                            'isinya'  => 'Proses Download File '.$arsip.' '. $_SERVER['SERVER_ADDR'],
+                            'isinya'  => 'Proses Download File '.$arsip.' '. $_SERVER['SERVER_ADDR'].' '.exec('whoami'),
                             'stat'    => '1'
                         ]
                     );
-                    
+
                     $copy = copy($readdir.$arsip, $movedir.$arsip);
                     if(!$copy){
                         die('Prosess File Gagal '.$movedir.$arsip);
