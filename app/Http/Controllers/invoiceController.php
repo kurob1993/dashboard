@@ -373,7 +373,13 @@ class invoiceController extends Controller
                 if (in_array(strtolower($prefix[0]), $kode)) {
 
                     //arsipkan file
-                    echo $_SERVER['SERVER_ADDR'];
+                    DB::table('log_down')->insert(
+                        [
+                            'isinya'  => 'Proses Download File '.$arsip.' '. $_SERVER['SERVER_ADDR'],
+                            'stat'    => '1'
+                        ]
+                    );
+                    
                     $copy = copy($readdir.$arsip, $movedir.$arsip);
                     if(!$copy){
                         die('Prosess File Gagal '.$movedir.$arsip);
@@ -393,12 +399,6 @@ class invoiceController extends Controller
                     }
                     fclose($file_handle);
                     // copy($readdir.$arsip, $movedir.$arsip);
-                    DB::table('log_down')->insert(
-                        [
-                            'isinya'  => 'Proses Download File '.$arsip.' '. $_SERVER['SERVER_ADDR'],
-                            'stat'    => '1'
-                        ]
-                    );
                     unlink($readdir.$arsip);
                 }
             }
