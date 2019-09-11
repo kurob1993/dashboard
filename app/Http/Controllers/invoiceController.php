@@ -385,14 +385,15 @@ class invoiceController extends Controller
                         $i++;
                     }
                     fclose($file_handle);
-                    copy($readdir.$arsip, $movedir.$arsip);
+                    // copy($readdir.$arsip, $movedir.$arsip);
+                    rename($readdir.$arsip, $movedir.$arsip);
                     $tr = DB::table('log_down')->insert(
                         [
                             'isinya'  => 'Proses Download File '.$arsip,
                             'stat'    => '1'
                         ]
                     );
-                    unlink($readdir.$arsip);
+                    // unlink($readdir.$arsip);
                 }
             }
         }
