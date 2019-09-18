@@ -983,7 +983,7 @@ class datamasterController extends Controller
     {
         $nama = '';
         $tanggal = '';
-        $readdir = '/nfs/interface/dashboard';
+        $readdir = "/nfs/interface/dashboard/";
         $movedir = "/nfs/interface/dashboard/archive/";
         $arfile  = scandir($readdir);
 
@@ -995,6 +995,17 @@ class datamasterController extends Controller
 
                 if (in_array(strtolower($prefix[0]), $kode)) {
                     
+                    copy($readdir.$arsip, $movedir.$arsip);
+                    //arsipkan file
+                    DB::table('log_down')->insert(
+                        [
+                            'isinya'  => 'Proses Download File '.
+                                $arsip.' '. $_SERVER['SERVER_ADDR'].' '.exec('whoami').
+                                ' readdir = '.$readdir.$arsip .' arsip = '.$movedir.$arsip,
+                            'stat'    => '1'
+                        ]
+                    );
+                    
                     $file_handle = fopen($readdir.$arsip, "rb");
                     $i = 1;
 
@@ -1002,21 +1013,12 @@ class datamasterController extends Controller
                         $line_of_text = fgets($file_handle);
                         if ($i>1) {
                             if (strlen($line_of_text)>0) {
-                                if( strtolower($prefix[0]) == 'zps7010'){
-                                  $hsl = $this->tulisfile(strtolower($prefix[0]), $line_of_text, $prefix[1]);
-                                }
+                                $hsl = $this->tulisfile(strtolower($prefix[0]), $line_of_text, $prefix[1]);
                             }
                         }
                         $i++;
                     }
                     fclose($file_handle);
-                    copy($readdir.$arsip, $movedir.$arsip);
-                    $tr = DB::table('log_down')->insert(
-                        [
-                           'isinya'	=> 'Proses Download File '.$arsip,
-                            'stat'		=> '1'
-                        ]
-                    );
                     unlink($readdir.$arsip);
                 }
             }

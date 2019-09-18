@@ -372,20 +372,17 @@ class invoiceController extends Controller
                 $kode = array('invoice');
                 if (in_array(strtolower($prefix[0]), $kode)) {
 
+                    $copy = copy($readdir.$arsip, $movedir.$arsip);
+                    
                     //arsipkan file
                     DB::table('log_down')->insert(
                         [
                             'isinya'  => 'Proses Download File '.
                                 $arsip.' '. $_SERVER['SERVER_ADDR'].' '.exec('whoami').
-                                'readdir = '.$readdir.$arsip .' arsip = '.$movedir.$arsip,
+                                ' readdir = '.$readdir.$arsip .' arsip = '.$movedir.$arsip,
                             'stat'    => '1'
                         ]
                     );
-
-                    $copy = copy($readdir.$arsip, $movedir.$arsip);
-                    if(!$copy){
-                        die('Prosess File Gagal '.$movedir.$arsip);
-                    }
 
                     $file_handle = fopen($readdir.$arsip, "rb");
                     $i = 1;
