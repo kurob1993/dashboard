@@ -36,8 +36,8 @@ class budgetProjectController extends Controller
         // $movedir = "/mnt/winnt/archive/";
 
         //local
-        $readdir = './public/uploads/';
-        $movedir = "./public/uploads/archive/";
+        $readdir = "/nfs/interface/dashboard/";
+        $movedir = "/nfs/interface/dashboard/archive/";
         
         $arfile  = scandir($readdir);
         foreach ($arfile as $arsip) {
