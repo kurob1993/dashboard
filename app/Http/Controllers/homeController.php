@@ -112,6 +112,37 @@ class homeController extends Controller
             return redirect('/');
         }
     }
+
+    public function sso(Request $request,$username = null)
+    {
+        $username = base64_decode(base64_decode(base64_decode($username)));
+        $sys_user = new sys_user();
+        $data = $sys_user::where('username',$username)->get();
+        $user = NULL;
+        foreach ($data as $key => $value) {
+            $user = $value->username;
+            $name = $value->name;
+            $jabatan = $value->jabatan;
+            $level = $value->level;
+            $nik = $value->nik;
+        }
+        if($user){
+            session([
+                'nik'=> $nik,
+                'username'=> $user,
+                'name'=> $name,
+                'jabatan'=> $jabatan,
+                'level'=> $level
+            ]);
+            $session = $request->session()->get('username');
+            $this->pengunjung($session);
+            if($session){
+                return redirect('/');
+            }
+        }else{
+            return redirect('/');
+        }
+    }
     // ------ LOGIN FROM SSO
 
     public function pengunjung($user_name)

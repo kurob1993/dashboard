@@ -165,6 +165,7 @@ Route::get('/data_produk', 'homeController@data_produk');
 Route::get('/logout', 'homeController@logout');
 
 Route::get('/signin/{nik?}', 'homeController@sigin');
+Route::get('/sso/{username?}', 'homeController@sso');
 // Route::post('/signin', 'homeController@sigin');
 
 //ambil data mes
